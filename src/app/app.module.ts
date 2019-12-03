@@ -7,8 +7,7 @@ import { RegisterComponent } from './register/register.component'
 
 /* modules */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule, MatButtonModule } from '@angular/material/';
+import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import { MatIconModule, MatButtonModule } from '@angular/material/';
     BrowserAnimationsModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
