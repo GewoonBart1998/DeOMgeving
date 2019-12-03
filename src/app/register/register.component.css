@@ -1,0 +1,38 @@
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #57cc73;
+}
+.container h1::after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    background-color: red;;
+    width: 50px;
+    bottom: 2px;
+    left: 45%;
+    border-bottom: 1px solid lightgray;
+}
+.container h1 {
+    position: relative;
+    text-align: center;;
+    padding: 15px 0;
+}
+.form-body {
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    width: 470px;
+    padding: 20px;
+    margin: auto auto;
+}
+
+.form-body mat-form-field {
+    width: 100%;
+}
+
+button:last-child {
+    width: 150px;
+    margin: 0 5px;
+    float: right;
+}
