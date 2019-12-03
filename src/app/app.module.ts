@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule, MatButtonModule } from '@angular/material/';
+
 @NgModule({
   declarations: [
     AppComponent,
