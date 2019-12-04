@@ -13,16 +13,21 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.modules';
+import { DasboardComponent } from './dasboard/dasboard.component';
 
 /* providers */
 import { UserService } from 'shared/user.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ChangePasswordComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    DasboardComponent
+
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,9 @@ import { UserService } from 'shared/user.service';
     MatButtonModule,
     MatFormFieldModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
+
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
