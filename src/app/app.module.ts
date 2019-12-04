@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 /* components */
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 /* modules */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,7 +14,8 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } fr
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent
+    RegisterComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
