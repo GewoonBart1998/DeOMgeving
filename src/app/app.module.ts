@@ -10,12 +10,17 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 /* modules */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
+import { AppRoutingModule } from './app-routing.modules';
+import { LoginComponent } from './login/login.component';
+import { DasboardComponent } from './dasboard/dasboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    LoginComponent,
+    DasboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,8 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } fr
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
