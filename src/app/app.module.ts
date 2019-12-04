@@ -3,19 +3,26 @@ import { NgModule } from '@angular/core';
 
 /* components */
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 /* modules */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+/* providers */
+import { UserService } from 'shared/user.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserLoginComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +30,11 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } fr
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
