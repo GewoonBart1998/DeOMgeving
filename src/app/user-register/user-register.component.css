@@ -1,8 +1,10 @@
 .container {
+    max-width: none;
     height: 100vh;
     display: flex;
     align-items: center;
     background-color: #4bb194;
+
 }
 .container h1::after {
     /* content: ' ';
@@ -33,8 +35,22 @@
     padding-bottom: 10px;
 }
 
-a:last-child {
+.Terug{
+    color: blue;
+    background-color: white;
+    border: none;
+    float: left;
+}
+
+.Registreer{
+    width: 100px;
+    float: right;
+    background-color: #ed6c05;
+    color: #FFF;
+    border: none; 
+}
+/* a:last-child {
     width: 100px;
     float: right;
     background-color: #ed6c05
-}
+} */
