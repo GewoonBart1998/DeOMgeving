@@ -21,18 +21,24 @@
 <div class="container">
     <article class="form-body mat-elevation-z1">
         <h1 :afther >Inloggen</h1>
-            <div>
+
+            <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()">
+
                 <div class="textfields">
                   <mat-form-field matInput appearance="outline">
                     <mat-label>E-mail adres</mat-label>
-                    <input type="email" matInput placeholder="E-mail">
+                    <input formControlName="email" type="email" matInput placeholder="E-mail" required>
+                    <mat-error>error</mat-error>
                   </mat-form-field>
+
                   <mat-form-field matInput appearance="outline">
                     <mat-label>Wachtwoord</mat-label>
-                    <input type="password" matInput placeholder="Wachtwoord">
+                    <input formControlName="password" type="password" matInput placeholder="Wachtwoord" required>
                     <mat-icon matSuffix>remove_red_eye</mat-icon>
                   </mat-form-field>
+
                 </div>
+
                 <div class="buttongroep">
                     <div class="buttonsleft">
                         <button class='Registreer' routerLink='/register' mat-flat-button color="primary">Registreer</button>
@@ -41,9 +47,9 @@
                         <!-- <a routerLink='/reset-password' mat-stroked-button color="primary">Wijzig wachtwoord</a> -->
                     </div>
                     <div class="buttonsright">
-                        <button class="Login" type="submit" mat-flat-button color="primary">Login</button>
+                        <button [disabled]="!userLoginForm.valid" class="Login" type="submit" mat-flat-button color="primary" autofocus>Login</button>
                     </div>
                 </div>
-            </div>
+              </form>
     </article>
 </div>

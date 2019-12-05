@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '../../../shared/user.service';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-login',
@@ -8,23 +8,19 @@ import { UserService } from '../../../shared/user.service';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
-  userForm: FormGroup;
-  userArr: any = [];
-
-  constructor(
-    public fb: FormBuilder,
-    public userService: UserService
-  ){ }
+  userLoginForm = new FormGroup({
+    email: new FormControl('', [
+      Validators.email
+    ]),
+    password: new FormControl('')
+  }, [Validators.required, Validators.maxLength(255)]);
 
   ngOnInit() {
+
   }
 
-  LoginUser(){
-    this.userForm = this.fb.group({
-      user_Email: [''],
-      user_name: [''],
-      user_password: ['']
-    })
+  onLogin() {
+    
   }
 
 }
