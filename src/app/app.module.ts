@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.modules';
 import { DasboardComponent } from './dasboard/dasboard.component';
@@ -36,7 +36,7 @@ import { UserService } from 'shared/user.service';
     MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    HttpClientModule,
+    // HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule
 

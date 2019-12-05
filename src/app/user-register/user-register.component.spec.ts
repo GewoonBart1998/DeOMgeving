@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserRegisterComponent } from './user-register.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('UserRegisterComponent', () => {
   let component: UserRegisterComponent;
@@ -8,6 +12,8 @@ describe('UserRegisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, HttpClientTestingModule,
+        BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule],
       declarations: [ UserRegisterComponent ]
     })
     .compileComponents();
