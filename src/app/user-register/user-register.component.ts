@@ -1,6 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { UserService } from '../../../shared/user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Component, OnInit, NgZone} from '@angular/core';
+import {UserService} from '../../../shared/user.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-user-register',
@@ -12,28 +12,28 @@ export class UserRegisterComponent implements OnInit {
   userArr: any = [];
 
 
-
   ngOnInit() {
-    this.addUser()
+    this.addUser();
   }
 
   constructor(
     public fb: FormBuilder,
     public userService: UserService
-  ){ }
+  ) {
+  }
 
-  addUser(){
+  addUser() {
     this.userForm = this.fb.group({
       user_Email: [''],
       user_name: [''],
       user_password: ['']
-    })
+    });
   }
 
-  registerUser(){
+  registerUser() {
     console.log(this.userForm.value);
-    this.userService.CreateUser(this.userForm.value)
-    
+    this.userService.CreateUser(this.userForm.value);
+
   }
 
 }
