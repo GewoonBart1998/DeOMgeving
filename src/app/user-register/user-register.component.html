@@ -4,15 +4,15 @@
         <form [formGroup]="userForm" (ngSubmit)="registerUser()" novalidate>
             <mat-form-field matInput appearance="outline">
                 <mat-label>Volledige naam</mat-label>
-                <input type="naam" formControlName="user_name" matInput placeholder="Volledinge naam">
+                <input type="naam" formControlName="name" matInput placeholder="Volledinge naam">
               </mat-form-field>
               <mat-form-field matInput appearance="outline">
                 <mat-label>E-mail adres</mat-label>
-                <input type="email" formControlName="user_Email" matInput placeholder="E-mail">
+                <input type="email" formControlName="email" matInput placeholder="E-mail">
               </mat-form-field>
               <mat-form-field matInput appearance="outline">
                 <mat-label>Wachtwoord</mat-label>
-                <input type="password" formControlName="user_password" matInput placeholder="Wachtwoord">
+                <input type="password" formControlName="password" matInput placeholder="Wachtwoord">
                 <mat-icon matSuffix>remove_red_eye</mat-icon>
               </mat-form-field>
               <button class="Terug" routerLink='/login' mat-flat-button color="primary">Terug</button>
