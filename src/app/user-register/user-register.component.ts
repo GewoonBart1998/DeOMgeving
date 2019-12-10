@@ -2,6 +2,7 @@ import {Component, OnInit, NgZone} from '@angular/core';
 // import {UserService} from '../../../shared/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -20,12 +21,9 @@ export class UserRegisterComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-<<<<<<< HEAD
-=======
     public userService: UserService,
     private ngZone: NgZone,
     private router: Router
->>>>>>> e0d2f68693a673b8b419b71d0260ac571d93f138
   ) {
   }
 
@@ -38,9 +36,6 @@ export class UserRegisterComponent implements OnInit {
   }
 
   registerUser() {
-<<<<<<< HEAD
-    console.log(this.userForm.value);
-=======
     // console.log(this.userForm.value);
     // console.log("hallo");
     this.userService.CreateUser(this.userForm.value).subscribe(res => {
@@ -48,7 +43,6 @@ export class UserRegisterComponent implements OnInit {
       this.ngZone.run(() => this.router.navigateByUrl('/user-list'))
     });
 
->>>>>>> e0d2f68693a673b8b419b71d0260ac571d93f138
   }
 
 }
