@@ -12,12 +12,12 @@ import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } fr
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.modules';
 import { DasboardComponent } from './dasboard/dasboard.component';
 
 /* providers */
-import { UserService } from 'shared/user.service';
+import { UserService } from 'src/app/shared/user.service';
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { UserService } from 'shared/user.service';
     MatFormFieldModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule
 
   ],

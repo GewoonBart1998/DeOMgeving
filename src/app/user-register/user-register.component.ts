@@ -1,5 +1,5 @@
 import {Component, OnInit, NgZone} from '@angular/core';
-import {UserService} from '../../../shared/user.service';
+// import {UserService} from '../../../shared/user.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -18,7 +18,6 @@ export class UserRegisterComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    public userService: UserService
   ) {
   }
 
@@ -32,8 +31,6 @@ export class UserRegisterComponent implements OnInit {
 
   registerUser() {
     console.log(this.userForm.value);
-    this.userService.CreateUser(this.userForm.value);
-
   }
 
 }
