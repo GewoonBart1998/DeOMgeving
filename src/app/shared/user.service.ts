@@ -11,7 +11,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class UserService {
 
   // Base url
-  baseurl = 'http://localhost:3000';
+  baseurl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +24,9 @@ export class UserService {
 
     // POST
     CreateUser(data): Observable<User> {
-      return this.http.post<User>(this.baseurl + '/account/', JSON.stringify(data), this.httpOptions)
+      console.log(data);
+      return this.http.post<User>(this.baseurl + '/register', JSON.stringify(data), this.httpOptions)
+      
       .pipe(
         retry(1),
         catchError(this.errorHandl)
