@@ -30,25 +30,13 @@ export class UserRegisterComponent implements OnInit {
   ) {
   }
 
-  addUser() {
-    this.userForm = this.fb.group({
-      email: [''],
-      name: [''],
-      password: ['']
-    });
-  }
   onSubmit() {
     console.warn(this.userRegisterForm.value);
-  }
-
-  registerUser() {
-    // console.log(this.userForm.value);
-    // console.log("hallo");
-    this.userService.CreateUser(this.userForm.value).subscribe(res => {
-      console.log('User added!')
-      this.ngZone.run(() => this.router.navigateByUrl('/user-list'))
+    this.userService.CreateUser(this.userRegisterForm.value).subscribe(res => {
+      console.log('User added!');
+      this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
-
   }
+
 
 }
