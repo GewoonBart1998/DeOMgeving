@@ -33,8 +33,11 @@
 
                   <mat-form-field matInput appearance="outline">
                     <mat-label>Wachtwoord</mat-label>
-                    <input formControlName="password" type="password" matInput placeholder="Wachtwoord" required>
-                    <mat-icon matSuffix>remove_red_eye</mat-icon>
+                    <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hide ? 'password' : 'text'" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error>error</mat-error>
                   </mat-form-field>
 
                 </div>
