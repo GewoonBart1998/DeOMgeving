@@ -1,0 +1,63 @@
+.container {
+    max-width: none;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-color: #4bb194;
+}
+.container h1::after {
+    background-color: red;;
+    width: 50px;
+    bottom: 2px;
+    left: 45%;
+    border-bottom: 1px solid lightgray;
+}
+.container h1 {
+    position: relative;
+    padding: 15px 0;
+    color: #001b36;
+}
+.form-body {
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    width: 470px;
+    padding: 20px;
+    margin: auto auto;
+}
+
+.form-body mat-form-field {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.Registreer{
+    color: blue;
+    background-color: white;
+    border: none;
+    float: left;
+    
+}
+
+.Reset{
+    color: blue;
+    background-color: white;
+    border: none;
+    float: left;
+
+}
+
+.Login {
+    width: 50px;
+    float: right;
+    background-color: #ed6c05;
+    color: #FFF;
+    border: none; 
+}
+/* a:last-child {
+    width: 150px;
+    float: right;
+    background-color: #ed6c05;
+    color: #FFF;
+    border: none;   
+} */

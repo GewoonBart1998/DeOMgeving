@@ -1,11 +1,26 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.modules';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {UserLoginComponent} from './user-login/user-login.component';
+import {UserRegisterComponent} from './user-register/user-register.component';
+import {DasboardComponent} from './dasboard/dasboard.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, BrowserAnimationsModule, MatFormFieldModule,
+        MatInputModule, MatIconModule, MatButtonModule, AppRoutingModule
+      ],
       declarations: [
-        AppComponent
+        AppComponent,
+        ChangePasswordComponent,
+        UserLoginComponent,
+        UserRegisterComponent,
+        DasboardComponent
       ],
     }).compileComponents();
   }));
@@ -26,6 +41,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('DeOMgeving app is running!');
+    expect(compiled.querySelector('router-outlet')).not.toBe(null);
   });
 });
