@@ -15,9 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.modules';
 import { DasboardComponent } from './dasboard/dasboard.component';
+import { MatCardModule } from '@angular/material/card';
 
 /* providers */
 import { UserService } from 'src/app/shared/user.service';
+import { HomeComponent } from './home/home.component';
+import { ExperimentCardComponent } from './experiment-card/experiment-card.component';
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import { UserService } from 'src/app/shared/user.service';
     ChangePasswordComponent,
     UserLoginComponent,
     UserRegisterComponent,
-    DasboardComponent
+    DasboardComponent,
+    HomeComponent,
+    ExperimentCardComponent
 
   ],
   imports: [
@@ -39,7 +44,8 @@ import { UserService } from 'src/app/shared/user.service';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule
 
   ],
   providers: [UserService],

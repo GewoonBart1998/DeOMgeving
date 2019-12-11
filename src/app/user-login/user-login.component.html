@@ -19,12 +19,12 @@
 </div> -->
 
 <div class="container">
-    <article class="form-body mat-elevation-z1">
-        <h1 :afther >Inloggen</h1>
-
+    <mat-card>
             <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()">
 
-                <div class="textfields">
+              <img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
+
+              <div class="textfields">
                   <mat-form-field matInput appearance="outline">
                     <mat-label>E-mail adres</mat-label>
                     <input formControlName="email" type="email" matInput placeholder="E-mail" required>
@@ -40,19 +40,17 @@
                     <mat-error>error</mat-error>
                   </mat-form-field>
 
-                </div>
+              </div>
 
-                <div class="buttongroep">
-                    <div class="buttonsleft">
-                        <button class='Registreer' routerLink='/register' mat-flat-button color="primary">Registreer</button>
-                        <button class='Reset' routerLink='/reset-password' mat-flat-button color="primary">Reset wachtwoord</button>
-                        <!-- <a routerLink='/register' mat-stroked-button color="primary">Registreer</a> -->
+                <div class="button-groep">
+                        <ul class="float-left">
+                          <li><button class='link' routerLink='/register' mat-flat-button color="primary">Account aanmaken</button></li>
+                          <li><button class='link' routerLink='/reset-password' mat-flat-button color="primary">Wachtwoord wijzigen</button></li>
+                        </ul>
+                         <!-- <a routerLink='/register' mat-stroked-button color="primary">Registreer</a> -->
                         <!-- <a routerLink='/reset-password' mat-stroked-button color="primary">Wijzig wachtwoord</a> -->
-                    </div>
-                    <div class="buttonsright">
-                        <button [disabled]="!userLoginForm.valid" class="Login" type="submit" mat-flat-button color="primary" autofocus>Login</button>
-                    </div>
+                        <button [disabled]="!userLoginForm.valid" class="Login float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
                 </div>
               </form>
-    </article>
+    </mat-card>
 </div>

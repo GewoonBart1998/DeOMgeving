@@ -4,13 +4,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { DasboardComponent } from './dasboard/dasboard.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes =  [
-    {path:'', redirectTo: 'login', pathMatch: 'full'},
-    {path:'login', component: UserLoginComponent},
-    {path:'register', component: UserRegisterComponent },
-    {path:'reset-password', component: ChangePasswordComponent },
-    {path:'dashboard', component: DasboardComponent },
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: 'login', component: UserLoginComponent},
+    {path: 'register', component: UserRegisterComponent },
+    {path: 'reset-password', component: ChangePasswordComponent },
+    {path: 'home', component: HomeComponent},
+    {path: 'dashboard', component: DasboardComponent },
 ];
 
 @NgModule({
