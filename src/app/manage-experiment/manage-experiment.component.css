@@ -1,0 +1,28 @@
+.ribbon {
+  width: 100%;
+  height: 75px;
+  padding: 25px 70px;
+  background-color: #E6E5E5;
+}
+
+.logo {
+  float: right;
+  width: 200px;
+}
+
+.experiment-info {
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 1000px;
+}
+
+.textfields {
+  margin-left: 50px;
+}
+
+h2 {
+  color: #4bb194;
+  margin-left: 50px;
+}
+
+

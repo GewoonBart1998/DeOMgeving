@@ -8,7 +8,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 
 /* modules */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
+import {MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, MatSelectModule} from '@angular/material/';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +21,10 @@ import { MatCardModule } from '@angular/material/card';
 import { UserService } from 'src/app/shared/user.service';
 import { HomeComponent } from './home/home.component';
 import { ExperimentCardComponent } from './experiment-card/experiment-card.component';
+import {ManageExperimentComponent} from './manage-experiment/manage-experiment.component';
+import { MatInputComponent } from './mat-input/mat-input.component';
+import { MatSelectComponent } from './mat-select/mat-select.component';
+import { MatTextareaComponent } from './mat-textarea/mat-textarea.component';
 
 
 @NgModule({
@@ -31,8 +35,11 @@ import { ExperimentCardComponent } from './experiment-card/experiment-card.compo
     UserRegisterComponent,
     DasboardComponent,
     HomeComponent,
-    ExperimentCardComponent
-
+    ExperimentCardComponent,
+    ManageExperimentComponent,
+    MatInputComponent,
+    MatSelectComponent,
+    MatTextareaComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,8 @@ import { ExperimentCardComponent } from './experiment-card/experiment-card.compo
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
 
   ],
   providers: [UserService],

@@ -1,0 +1,59 @@
+<div class="ribbon">
+  <img class="logo" src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
+</div>
+<div class="experiment-info">
+  <h2>Experiment</h2>
+  <div class="textfields">
+    <app-mat-input [label]="'Experiment naam'"></app-mat-input>
+    <br>
+    <app-mat-select [label]="'Primaire experiment leider'"
+                    [values]="[{text: 'stoof', value: '1'},
+    {text: 'niet-coole-guus', value: '2'},
+    {text: 'bert', value: '3'},
+    {text: 'lëàndér', value: '4'},
+    {text: 'weeb-maarten', value: '5'},
+    {text: 'ash na', value: '6'}]">
+    </app-mat-select>
+
+    <app-mat-select [label]="'Secundaire experiment leider'"
+                    [values]="[{text: 'stoof', value: '1'},
+      {text: 'niet-coole-guus', value: '2'},
+      {text: 'bert', value: '3'},
+      {text: 'lëàndér', value: '4'},
+      {text: 'weeb-maarten', value: '5'},
+      {text: 'ash na', value: '6'}]">
+    </app-mat-select>
+    <br>
+
+    <app-mat-select [label]="'Fase'"
+                    [values]="[{text: 'stoof', value: '1'},
+      {text: 'Lab in', value: 'Lab in'},
+      {text: 'Lab uit', value: 'Lab uit'},
+      {text: 'Idee', value: 'Idee'}]">
+    </app-mat-select>
+  </div>
+  <hr>
+  <h2>Experiment details</h2>
+  <div class="textfields">
+    <app-mat-textarea [label]="'Netwerk'">
+    </app-mat-textarea>
+    <br>
+    <app-mat-textarea [label]="'Status'">
+    </app-mat-textarea>
+    <br>
+    <app-mat-select [label]="'Fase'"
+                    [values]="[{text: 'Rood', value: 'Rood'},
+      {text: 'Rood', value: 'Rood'},
+      {text: 'Oranje', value: 'Oranje'},
+      {text: 'Groen', value: 'Groen'}]">
+    </app-mat-select>
+    <br>
+
+    <app-mat-textarea [label]="'Kosten innovatie'">
+    </app-mat-textarea>
+    <app-mat-textarea [label]="'Kosten anders'">
+    </app-mat-textarea>
+    <br>
+
+  </div>
+</div>
