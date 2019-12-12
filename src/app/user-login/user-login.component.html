@@ -20,7 +20,7 @@
 
 <div class="container">
     <mat-card>
-            <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()">
+            <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()" (keydown.enter)="$event.preventDefault()">
 
               <img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
 

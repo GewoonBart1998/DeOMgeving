@@ -1,7 +1,7 @@
 <div class="container">
     <article class="form-body mat-elevation-z1">
         <h1 :afther >Registreren</h1>
-        <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()" novalidate>
+        <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()" novalidate (keydown.enter)="$event.preventDefault()">
             <mat-form-field matInput appearance="outline">
                 <mat-label>Volledige naam</mat-label>
                 <input type="naam" formControlName="name" matInput placeholder="Volledinge naam" required>
@@ -12,9 +12,9 @@
                 <input type="email" formControlName="email" matInput placeholder="E-mail" required>
                 <mat-error>error</mat-error>
               </mat-form-field>
-              <mat-form-field matInput appearance="outline">
+              <mat-form-field matInput appearance="outline" class="password-box">
                 <mat-label>Wachtwoord</mat-label>
-                <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hide ? 'password' : 'text'" required>
+                <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>

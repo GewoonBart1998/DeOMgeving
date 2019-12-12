@@ -1,4 +1,4 @@
-import {Component, OnInit, NgZone} from '@angular/core';
+import {Component, OnInit, NgZone, HostListener, Directive} from '@angular/core';
 // import {UserService} from '../../../shared/user.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,7 +11,6 @@ import { UserService } from '../shared/user.service';
 })
 export class UserRegisterComponent implements OnInit {
   hide = true;
-
 
   userRegisterForm = new FormGroup({
     name: new FormControl(''),
