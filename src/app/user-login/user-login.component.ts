@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
-import {Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -9,18 +10,40 @@ import {Validators} from '@angular/forms';
 })
 export class UserLoginComponent implements OnInit {
   hide = true;
+  userLoginData: any;
+  loginboolean: boolean;
 
   userLoginForm = new FormGroup({
-    email: new FormControl('', [Validators.email]),
-    password: new FormControl('')
+    password: new FormControl(''),
+    email: new FormControl('', [Validators.email])
   }, [Validators.required, Validators.maxLength(255)]);
 
   ngOnInit() {
 
   }
 
-  onLogin() {
+  constructor(
+    public fb: FormBuilder,
+    public userService: UserService,
+    private router: Router
+  ) {
+  }
 
+  checkLogin(res: any) {
+    if(res.email == this.userLoginForm.value.email){
+      this.loginboolean = true;
+      console.log(this.router.navigate(['/home']));
+    }else{
+
+    }
+    
+  }
+
+  onLogin() {
+    this.userService.loginUser(this.userLoginForm.value).subscribe(res => {
+      this.checkLogin(res)
+      
+    });
   }
 
 }
