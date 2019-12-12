@@ -33,6 +33,18 @@ export class UserService {
       )
     } 
 
+    loginUser(data): Observable<User>{
+      console.log(data)
+      return this.http.post<User>(this.baseurl + '/login', JSON.stringify(data), this.httpOptions)
+      
+      .pipe(
+        retry(1),
+        catchError(this.errorHandl)
+      )
+    }
+
+ 
+
   // Error handling
   errorHandl(error) {
      let errorMessage = '';
