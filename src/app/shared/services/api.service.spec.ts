@@ -1,24 +1,18 @@
-import { TestBed } from '@angular/core/testing';
-import { ApiService } from './api.service';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from 'src/environments/environment';
+import {TestBed} from '@angular/core/testing';
+import {ApiService} from './api.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from 'src/environments/environment';
 
 describe('ApiService', () => {
-  let service: ApiService,
-    httpMock: HttpTestingController;
-
-  TestBed.initTestEnvironment(BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting());
+  let service: ApiService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService]
     });
 
     httpMock = TestBed.get(HttpTestingController);
-    service = TestBed.get(ApiService);
   });
 
   afterEach(() => {
@@ -26,7 +20,7 @@ describe('ApiService', () => {
   });
 
   it('should create valid query string', () => {
-    let queryString = service.createQueryString({
+    const queryString = service.createQueryString({
       name: 'Bart',
       prefix: 'isSmart'
     });
@@ -35,12 +29,12 @@ describe('ApiService', () => {
   });
 
   it('should create valid url', () => {
-    let url = service.createURL('/user', {
+    const url = service.createURL('/user', {
       name: 'bob',
       age: '2'
     });
 
-    let expectedURL = environment.APIEndpoint + "/user?name=bob&age=2"
+    const expectedURL = environment.APIEndpoint + '/user?name=bob&age=2';
     expect(url).toBe(expectedURL);
   });
 
@@ -53,7 +47,7 @@ describe('ApiService', () => {
       query: string;
     }
 
-    service.get<Response>('/user', { name: 'bob' }).subscribe(
+    service.get<Response>('/user', {name: 'bob'}).subscribe(
       response => {
         expect(response.status).toBe(200);
         expect(response.message).toBe('OK');
@@ -66,8 +60,8 @@ describe('ApiService', () => {
       query: 'bob'
     };
 
-    const req = httpMock.expectOne(environment.APIEndpoint+'/user?name=bob');
-    expect(req.request.method).toBe("GET");
+    const req = httpMock.expectOne(environment.APIEndpoint + '/user?name=bob');
+    expect(req.request.method).toBe('GET');
     req.flush(dummyResponse);
 
   });
@@ -79,9 +73,9 @@ describe('ApiService', () => {
       name: number;
     }
 
-    service.post('/user', { name: 'bob' }).subscribe(
+    service.post('/user', {name: 'bob'}).subscribe(
       response => {
-        
+
       },
       error => {
         fail();
@@ -93,7 +87,7 @@ describe('ApiService', () => {
       query: 'bob'
     };
 
-    const req = httpMock.expectOne(environment.APIEndpoint+'/user');
+    const req = httpMock.expectOne(environment.APIEndpoint + '/user');
     expect(req.request.method).toBe('POST');
     expect(req.request.body.name).toBe('bob');
   });
@@ -105,9 +99,9 @@ describe('ApiService', () => {
       name: number;
     }
 
-    service.put('/user', { name: 'bob' }).subscribe(
+    service.put('/user', {name: 'bob'}).subscribe(
       response => {
-        
+
       },
       error => {
         fail();
@@ -119,7 +113,7 @@ describe('ApiService', () => {
       query: 'bob'
     };
 
-    const req = httpMock.expectOne(environment.APIEndpoint+'/user');
+    const req = httpMock.expectOne(environment.APIEndpoint + '/user');
     expect(req.request.method).toBe('PUT');
     expect(req.request.body.name).toBe('bob');
   });
@@ -131,9 +125,9 @@ describe('ApiService', () => {
       name: number;
     }
 
-    service.put('/user', { name: 'bob' }).subscribe(
+    service.put('/user', {name: 'bob'}).subscribe(
       response => {
-        
+
       },
       error => {
         fail();
@@ -145,7 +139,7 @@ describe('ApiService', () => {
       query: 'bob'
     };
 
-    const req = httpMock.expectOne(environment.APIEndpoint+'/user');
+    const req = httpMock.expectOne(environment.APIEndpoint + '/user');
     expect(req.request.method).toBe('PUT');
     expect(req.request.body.name).toBe('bob');
   });

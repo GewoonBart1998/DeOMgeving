@@ -1,48 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 /* components */
-import { AppComponent } from './app.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-
-
+import {AppComponent} from './app.component';
 /* modules */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { UserRegisterComponent } from './user-register/user-register.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.modules';
-import { DasboardComponent } from './dasboard/dasboard.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 /* providers */
-import { UserService } from 'src/app/shared/user.service';
+import {UserModule} from './user/user.module';
+import {DasboardComponent} from './dasboard/dasboard.component';
+import {AppRoutingModule} from './app-routing.modules';
+
+// import {AppRoutingModule} from './app-routing.modules';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChangePasswordComponent,
-    UserLoginComponent,
-    UserRegisterComponent,
     DasboardComponent
-
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    AppRoutingModule
-
+    UserModule,
+    AppRoutingModule,
   ],
-  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
