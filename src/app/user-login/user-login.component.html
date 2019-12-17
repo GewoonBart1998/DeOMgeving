@@ -28,7 +28,7 @@
                   <mat-form-field matInput appearance="outline">
                     <mat-label>E-mail adres</mat-label>
                     <input formControlName="email" type="email" matInput placeholder="E-mail" required>
-                    <mat-error>error</mat-error>
+                    <mat-error>E-mail incorrect</mat-error>
                   </mat-form-field>
 
                   <mat-form-field matInput appearance="outline">
@@ -37,7 +37,7 @@
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error>error</mat-error>
+                    <mat-error>Wachtwoord incorrect</mat-error>
                   </mat-form-field>
 
               </div>
@@ -49,7 +49,7 @@
                         </ul>
                          <!-- <a routerLink='/register' mat-stroked-button color="primary">Registreer</a> -->
                         <!-- <a routerLink='/reset-password' mat-stroked-button color="primary">Wijzig wachtwoord</a> -->
-                        <button [disabled]="!userLoginForm.valid" class="Login float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
+                        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
                 </div>
               </form>
     </mat-card>
