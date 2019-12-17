@@ -30,19 +30,15 @@ export class UserLoginComponent implements OnInit {
   }
 
   checkLogin(res: any) {
-    if(res.email == this.userLoginForm.value.email){
+    if (res.email === this.userLoginForm.value.email) {
       this.loginboolean = true;
       console.log(this.router.navigate(['/home']));
-    }else{
-
     }
-    
   }
 
   onLogin() {
     this.userService.loginUser(this.userLoginForm.value).subscribe(res => {
-      this.checkLogin(res)
-      
+      this.checkLogin(res);
     });
   }
 

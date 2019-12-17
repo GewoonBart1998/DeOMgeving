@@ -5,6 +5,7 @@ import { DasboardComponent } from './dasboard/dasboard.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { HomeComponent } from './home/home.component';
+import {ManageExperimentComponent} from './manage-experiment/manage-experiment.component';
 
 const appRoutes: Routes =  [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -12,7 +13,7 @@ const appRoutes: Routes =  [
     {path: 'register', component: UserRegisterComponent },
     {path: 'reset-password', component: ChangePasswordComponent },
     {path: 'home', component: HomeComponent},
-    {path: 'dashboard', component: DasboardComponent },
+    {path: 'manage-experiment', component: ManageExperimentComponent },
 ];
 
 @NgModule({

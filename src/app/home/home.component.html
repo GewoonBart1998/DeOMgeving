@@ -9,10 +9,19 @@
       </div>
 
       <div class="buttons">
-        <a class="selected" href="/home"><img src="/assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
-        <a href="#"><img src="/assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
-        <a href="#"><img src="/assets/img/icons/User_management.png" alt="users">User management</a>
-        <a href="#"><img src="/assets/img/icons/Export_experiment.png" alt="export">Export experiment</a>
+        <a (click)="loadedScreen = 'experiments'" [ngClass]="{'selected' : loadedScreen == 'experiments'}"
+           href="javascript:">
+          <img src="/assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
+        <a (click)="loadedScreen = 'addExperiment'" [ngClass]="{'selected' : loadedScreen == 'addExperiment'}"
+           href="javascript:">
+          <img src="/assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
+        <a (click)="loadedScreen = 'userManagement'" [ngClass]="{'selected' : loadedScreen == 'userManagement'}"
+           href="javascript:"><img
+          src="/assets/img/icons/User_management.png" alt="users">User management</a>
+        <a (click)="loadedScreen = 'exportExperiment'" [ngClass]="{'selected' : loadedScreen == 'exportExperiment'}"
+           href="javascript:">
+          <img src="/assets/img/icons/Export_experiment.png" alt="export">Export experiment
+        </a>
       </div>
       <div class="bottom-button">
         <a class="logout" href=""><img src="/assets/img/icons/Log_out.png" alt="log-out">Log out</a>
@@ -21,7 +30,13 @@
   </header>
   <main>
     <div class="main-screen">
-      <app-dasboard></app-dasboard>
+      <div *ngIf="loadedScreen == 'experiments'">
+        <app-dasboard></app-dasboard>
+      </div>
+
+      <div *ngIf="loadedScreen == 'addExperiment'">
+        <app-manage-experiment></app-manage-experiment>
+      </div>
     </div>
   </main>
 </div>
