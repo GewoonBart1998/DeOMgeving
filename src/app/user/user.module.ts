@@ -18,7 +18,8 @@ import {UserRoutingModule} from './user-routing.modules';
     ReactiveFormsModule,
     SharedModule,
     UserRoutingModule,
-  ]
+  ],
+  exports: [UserRoutingModule]
 })
 export class UserModule {
 }
