@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 /* modules */
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material/';
+import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material/';
 import {UserLoginComponent} from './user-login/user-login.component';
 import {UserRegisterComponent} from './user-register/user-register.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -52,6 +52,8 @@ import { MatTextareaComponent } from './mat-textarea/mat-textarea.component';
     MatCardModule,
     MatSnackBarModule,
     MatCardModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
