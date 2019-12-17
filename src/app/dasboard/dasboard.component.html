@@ -1,1 +1,33 @@
-<p>dasboard works!</p>
+<div class="ribbon">
+  <a class="logo" href="/home"><img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo"></a>
+
+  <input type="text" name="search" placeholder="search">
+  <button class="search-button">Zoek</button>
+  <br>
+
+  <select>
+    <option value="" selected>No task</option>
+    <option value="1">Task1</option>
+  </select>
+
+  <select>
+    <option value="" selected>No Category</option>
+    <option value="1">Category1</option>
+  </select>
+
+  <select>
+    <option value="" selected>No Milestone</option>
+    <option value="1">Milestone1</option>
+  </select>
+
+  <button class="sort-by">Experiment Naam</button>
+  <button class="sort-by">Auteur Naam</button>
+  <button class="sort-by">Laatst Gewijzigd</button>
+
+
+</div>
+
+<div class="experiment-list">
+  <app-experiment-card *ngFor="let experiment of experimentList" [experiment]="experiment"></app-experiment-card>
+
+</div>

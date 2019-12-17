@@ -1,6 +1,8 @@
-import {Component, OnInit, NgZone} from '@angular/core';
-import {UserService} from '../../../shared/user.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Component, OnInit, NgZone, HostListener, Directive} from '@angular/core';
+// import {UserService} from '../../../shared/user.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -8,32 +10,32 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit {
-  userForm: FormGroup;
-  userArr: any = [];
+  hide = true;
 
+  userRegisterForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl('')
+  }, [Validators.required, Validators.maxLength(255)]);
 
   ngOnInit() {
-    this.addUser();
   }
 
   constructor(
     public fb: FormBuilder,
-    public userService: UserService
+    public userService: UserService,
+    private ngZone: NgZone,
+    private router: Router
   ) {
   }
 
-  addUser() {
-    this.userForm = this.fb.group({
-      user_Email: [''],
-      user_name: [''],
-      user_password: ['']
+  onSubmit() {
+    console.warn(this.userRegisterForm.value);
+    this.userService.CreateUser(this.userRegisterForm.value).subscribe(res => {
+      console.log('User added!');
+      // this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
   }
 
-  registerUser() {
-    console.log(this.userForm.value);
-    this.userService.CreateUser(this.userForm.value);
-
-  }
 
 }
