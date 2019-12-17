@@ -8,11 +8,14 @@ describe('ApiService', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
 
     httpMock = TestBed.get(HttpTestingController);
+    service = TestBed.get(ApiService);
+
   });
 
   afterEach(() => {
@@ -29,36 +32,34 @@ describe('ApiService', () => {
   });
 
   it('should create valid url', () => {
+    const expectedURL = environment.APIEndpoint + '/user?name=bob&age=2';
     const url = service.createURL('/user', {
       name: 'bob',
       age: '2'
     });
 
-    const expectedURL = environment.APIEndpoint + '/user?name=bob&age=2';
     expect(url).toBe(expectedURL);
   });
 
   it('should execute GET request', () => {
-    service = TestBed.get(ApiService);
-
-    class Response {
+    class MockResponse {
       status: number;
       message: string;
       query: string;
     }
 
-    service.get<Response>('/user', {name: 'bob'}).subscribe(
+    const dummyResponse = {
+      status: 200,
+      message: 'OK',
+      query: 'bob'
+    } as MockResponse;
+
+    service.get<MockResponse>('/user', {name: 'bob'}).subscribe(
       response => {
         expect(response.status).toBe(200);
         expect(response.message).toBe('OK');
         expect(response.query).toBe('bob');
       });
-
-    const dummyResponse = {
-      status: 200,
-      message: 'OK',
-      query: 'bob'
-    };
 
     const req = httpMock.expectOne(environment.APIEndpoint + '/user?name=bob');
     expect(req.request.method).toBe('GET');
@@ -67,13 +68,8 @@ describe('ApiService', () => {
   });
 
   it('should execute POST request', () => {
-    service = TestBed.get(ApiService);
-
-    class Response {
-      name: number;
-    }
-
-    service.post('/user', {name: 'bob'}).subscribe(
+    const requestBody = {name: 'bob'};
+    service.post('/user', requestBody).subscribe(
       response => {
 
       },
@@ -81,11 +77,6 @@ describe('ApiService', () => {
         fail();
       });
 
-    const dummyResponse = {
-      status: 200,
-      message: 'OK',
-      query: 'bob'
-    };
 
     const req = httpMock.expectOne(environment.APIEndpoint + '/user');
     expect(req.request.method).toBe('POST');
@@ -93,25 +84,14 @@ describe('ApiService', () => {
   });
 
   it('should execute PUT request', () => {
-    service = TestBed.get(ApiService);
-
-    class Response {
-      name: number;
-    }
-
-    service.put('/user', {name: 'bob'}).subscribe(
-      response => {
-
+    const requestBody = {name: 'bob'};
+    service.put('/user', requestBody).subscribe(
+      response => { /*request was successful*/
       },
       error => {
         fail();
       });
 
-    const dummyResponse = {
-      status: 200,
-      message: 'OK',
-      query: 'bob'
-    };
 
     const req = httpMock.expectOne(environment.APIEndpoint + '/user');
     expect(req.request.method).toBe('PUT');
@@ -119,29 +99,15 @@ describe('ApiService', () => {
   });
 
   it('should execute DELETE request', () => {
-    service = TestBed.get(ApiService);
-
-    class Response {
-      name: number;
-    }
-
-    service.put('/user', {name: 'bob'}).subscribe(
-      response => {
-
+    const requestBody = {name: 'bob'};
+    service.delete('/user/1').subscribe(
+      response => { /*request was successful*/
       },
       error => {
         fail();
       });
 
-    const dummyResponse = {
-      status: 200,
-      message: 'OK',
-      query: 'bob'
-    };
-
-    const req = httpMock.expectOne(environment.APIEndpoint + '/user');
-    expect(req.request.method).toBe('PUT');
-    expect(req.request.body.name).toBe('bob');
+    httpMock.expectOne(environment.APIEndpoint + '/user/1');
   });
 
 });
