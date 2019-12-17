@@ -55,20 +55,20 @@ li {
 }
 
 .link {
-    padding: 0;
-    margin-bottom: 5px;
-    color: blue;
-    background-color: white;
-    border: none;
-    float: left;
-    line-height: unset;
+  padding: 0;
+  margin-bottom: 5px;
+  color: blue;
+  background-color: white;
+  border: none;
+  float: left;
+  line-height: unset;
 }
 
 .link:hover {
   text-decoration: underline;
 }
 
-.Login {
+.form-button{
   margin: 0;
   padding: 0 37px;
   background-color: #ED6C05;
@@ -78,7 +78,7 @@ li {
   cursor: pointer;
 }
 
-.Login:hover:enabled {
+.form-button:hover:enabled {
   background-color: #FE7D16;
 }
 

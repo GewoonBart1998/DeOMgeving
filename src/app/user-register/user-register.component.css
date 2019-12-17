@@ -35,11 +35,18 @@
     padding-bottom: 10px;
 }
 
-.Terug{
-    color: blue;
-    background-color: white;
-    border: none;
-    float: left;
+.link {
+  padding: 0;
+  margin-bottom: 5px;
+  color: blue;
+  background-color: white;
+  border: none;
+  float: left;
+  line-height: unset;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .Registreer{
@@ -50,8 +57,6 @@
     border: none;
 }
 
-/* a:last-child {
-    width: 100px;
-    float: right;
-    background-color: #ed6c05
-} */
+.form-button:hover:enabled {
+  background-color: #FE7D16;
+}
