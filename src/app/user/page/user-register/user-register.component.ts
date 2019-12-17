@@ -1,8 +1,7 @@
-import {Component, OnInit, NgZone, HostListener, Directive} from '@angular/core';
-// import {UserService} from '../../../shared/user.service';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../shared/user.service';
+import {Router} from '@angular/router';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -11,6 +10,7 @@ import { UserService } from '../shared/user.service';
 })
 export class UserRegisterComponent implements OnInit {
   hide = true;
+
 
   userRegisterForm = new FormGroup({
     name: new FormControl(''),
@@ -33,9 +33,7 @@ export class UserRegisterComponent implements OnInit {
     console.warn(this.userRegisterForm.value);
     this.userService.CreateUser(this.userRegisterForm.value).subscribe(res => {
       console.log('User added!');
-      // this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
+      this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
   }
-
-
 }

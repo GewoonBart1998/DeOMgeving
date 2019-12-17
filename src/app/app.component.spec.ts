@@ -1,13 +1,13 @@
-import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule } from '@angular/material/';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.modules';
-import {ChangePasswordComponent} from './change-password/change-password.component';
-import {UserLoginComponent} from './user-login/user-login.component';
-import {UserRegisterComponent} from './user-register/user-register.component';
+import {async, TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material/';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.modules';
+import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
 import {DasboardComponent} from './dasboard/dasboard.component';
+import {UserLoginComponent} from './user/page/user-login/user-login.component';
+import {UserRegisterComponent} from './user/page/user-register/user-register.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -25,7 +25,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('should user-create-form the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();

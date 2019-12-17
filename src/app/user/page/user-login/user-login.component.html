@@ -1,0 +1,40 @@
+<div class="container">
+  <article class="form-body mat-elevation-z1">
+    <h1 :afther>Inloggen</h1>
+
+    <form (ngSubmit)="onLogin()" [formGroup]="userLoginForm">
+
+      <div class="textfields">
+        <mat-form-field appearance="outline" matInput>
+          <mat-label>E-mail adres</mat-label>
+          <input formControlName="email" matInput placeholder="E-mail" required type="email">
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" matInput>
+          <mat-label>Wachtwoord</mat-label>
+          <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput placeholder="Wachtwoord"
+                 required type="password">
+          <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" mat-icon-button
+                  matSuffix>
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="buttongroep">
+        <div class="buttonsleft">
+          <button class='Registreer' color="primary" mat-flat-button routerLink='/register'>Registreer</button>
+          <button class='Reset' color="primary" mat-flat-button routerLink='/reset-password'>Reset wachtwoord</button>
+        </div>
+        <div class="buttonsright">
+          <button [disabled]="!userLoginForm.valid" autofocus class="Login" color="primary" mat-flat-button
+                  type="submit">Login
+          </button>
+        </div>
+      </div>
+    </form>
+  </article>
+</div>

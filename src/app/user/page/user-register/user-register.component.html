@@ -1,0 +1,39 @@
+<div class="container">
+
+  <article class="form-body mat-elevation-z1">
+
+    <h1 :afther>Registreren</h1>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="userRegisterForm" novalidate>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Volledige naam</mat-label>
+        <input formControlName="name" matInput placeholder="Volledinge naam" required type="naam">
+        <mat-error>error</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail adres</mat-label>
+        <input formControlName="email" matInput placeholder="E-mail" required type="email">
+        <mat-error>error</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Wachtwoord</mat-label>
+        <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput placeholder="Wachtwoord"
+               required type="password">
+        <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" mat-icon-button
+                matSuffix>
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error>error</mat-error>
+      </mat-form-field>
+
+      <button class="Terug" color="primary" mat-flat-button routerLink='/login'>Terug</button>
+      <button class="Registreer" color="primary" mat-flat-button type="submit">Registreer</button>
+
+    </form>
+
+  </article>
+
+</div>
