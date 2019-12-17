@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   {path: 'login', component: UserLoginComponent},
   {path: 'register', component: UserRegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'user/:token/reset-password', component: ChangePasswordComponent },
+  {path: 'user/reset-password/:token', component: ChangePasswordComponent },
   {path: 'home', component: HomeComponent},
   {path: 'manage-experiment', component: ManageExperimentComponent},
 ];

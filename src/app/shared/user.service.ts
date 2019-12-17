@@ -4,7 +4,7 @@ import {User} from './user';
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
 import {ApiService} from '../services/api.service';
-import {ChangePasswordModel} from '../change-password/model/password-change-model';
+import {ChangePasswordModel} from '../change-password/model/change-password-model';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +66,7 @@ export class UserService {
     return this.api.post(`${this.resourcePath}/${email}`, email);
   }
 
-  changePassword(changePasswordModel: ChangePasswordModel) {
+  changePassword(changePasswordModel: object) {
     return this.api.post(`${this.resourcePath}/change-password`, changePasswordModel);
   }
 }
