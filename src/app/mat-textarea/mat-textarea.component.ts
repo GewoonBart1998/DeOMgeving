@@ -6,6 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./mat-textarea.component.css']
 })
 export class MatTextareaComponent implements OnInit {
+  @Input() required = false;
   @Input() label: string;
   @Input() type = 'input';
   @Input() inputValue: string;

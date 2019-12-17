@@ -82,4 +82,5 @@ header {
   top: 0;
   height: 100%;
   width: calc(100% - 250px);
+  overflow-y: scroll;
 }
