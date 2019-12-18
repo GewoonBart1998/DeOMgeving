@@ -2,7 +2,7 @@ import {Component, OnInit, NgZone, HostListener, Directive} from '@angular/core'
 // import {UserService} from '../../../shared/user.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-register',
@@ -31,7 +31,7 @@ export class UserRegisterComponent implements OnInit {
 
   onSubmit() {
     console.warn(this.userRegisterForm.value);
-    this.userService.CreateUser(this.userRegisterForm.value).subscribe(res => {
+    this.userService.createUser(this.userRegisterForm.value).subscribe(res => {
       console.log('User added!');
       // this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
