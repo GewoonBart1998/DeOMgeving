@@ -3,6 +3,7 @@
 </div>
 <div class="experiment-info scroll-container">
   <h2>Experiment</h2>
+  <br>
   <div class="textfields">
     <app-mat-input [label]="'Experiment naam'" [required]="true"></app-mat-input>
     <br>
@@ -26,7 +27,7 @@
     <br>
 
     <app-mat-select [required]="true" [label]="'Fase'"
-                    [values]="[{text: 'stoof', value: '1'},
+                    [values]="[
       {text: 'Lab in', value: 'Lab in'},
       {text: 'Lab uit', value: 'Lab uit'},
       {text: 'Idee', value: 'Idee'}]">
@@ -34,6 +35,7 @@
   </div>
   <hr>
   <h2>Experiment details</h2>
+  <br>
   <div class="textfields">
     <app-mat-textarea [label]="'Beschrijving'">
     </app-mat-textarea>
