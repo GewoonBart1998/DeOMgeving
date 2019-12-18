@@ -23,26 +23,26 @@ export class UserService {
     })
   };
 
-  // POST
-  CreateUser(data): Observable<User> {
-    console.log(data);
-    return this.http.post<User>(this.baseurl + '/register', JSON.stringify(data), this.httpOptions)
+  // // POST
+  // CreateUser(data): Observable<User> {
+  //   console.log(data);
+  //   return this.http.post<User>(this.baseurl + '/register', JSON.stringify(data), this.httpOptions)
 
-      .pipe(
-        retry(1),
-        catchError(this.errorHandl)
-      );
-  }
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.errorHandl)
+  //     );
+  // }
 
-  loginUser(data): Observable<User> {
-    console.log(data);
-    return this.http.post<User>(this.baseurl + '/login', JSON.stringify(data), this.httpOptions)
+  // loginUser(data): Observable<User> {
+  //   console.log(data);
+  //   return this.http.post<User>(this.baseurl + '/login', JSON.stringify(data), this.httpOptions)
 
-      .pipe(
-        retry(1),
-        catchError(this.errorHandl)
-      );
-  }
+  //     .pipe(
+  //       retry(1),
+  //       catchError(this.errorHandl)
+  //     );
+  // }
 
 
   // Error handling
