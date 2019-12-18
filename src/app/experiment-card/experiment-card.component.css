@@ -14,6 +14,13 @@
   transition: 0.3s;
 }
 
+.card .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 1.2em;
+  white-space: nowrap;
+}
+
 .card:hover {
   transform: scale(1.05)
 }
@@ -45,6 +52,9 @@
 .card-content p {
   font-size: 1.1rem;
   font-weight: 500;
+  text-overflow: ellipsis;
+  max-height: 50px;
+  overflow: hidden;
 }
 
 .author-div {
