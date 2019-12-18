@@ -1,14 +1,20 @@
 {
-    "accounts": [
-      {
-        "user_name": "Bart",
-        "user_Email": "ditiseene-mail@gmail.com",
-        "password": "123456789"
-      },
-      {
-        "user_name": "user2",
-        "user_Email": "e-mial2@gmail.com",
-        "password": "987654321"
-      }
-    ]
-  }
+  "accounts": [
+    {
+      "issue_name": "Table Improvement",
+      "issue_message": "Issue tracking is awesome because of collaboration",
+      "id": 1
+    },
+    {
+      "issue_name": "Tooltip Issue",
+      "issue_message": "Issue tracking is awesome because of collaboration",
+      "id": 2
+    },
+    {
+      "user_Email": "sds",
+      "user_name": "dds",
+      "user_password": "sds",
+      "id": 3
+    }
+  ]
+}
