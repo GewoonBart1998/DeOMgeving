@@ -1,0 +1,86 @@
+header {
+  width: 250px;
+}
+
+.menu {
+  position: relative;
+  height: 100vh; /* 100% Full-height */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  background-color: #4BB194;
+  color: #ffffff;
+}
+
+.welcome {
+  height: 150px;
+}
+
+.menu h1 {
+  margin: 0;
+  padding-left: 12px;
+  font-weight: 400;
+}
+
+.menu .user {
+  font-size: 20px;
+}
+
+.menu .vertical-align {
+  position: absolute;
+  top: 75px;
+  transform: translateY(-50%);
+}
+
+.buttons {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+}
+
+.bottom-button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.menu a {
+  padding: 15px 0;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  display: block;
+  transition: 0.3s;
+  color: #ffffff;
+}
+
+.menu a:hover {
+  color: #ffffff;
+  background-color: #97D8C5;
+}
+
+.menu .selected {
+  background-color: #F7F5F5;
+  color: #4BB194;
+}
+
+.menu a img {
+  height: 30px;
+  margin: 0 10px;
+}
+
+.logout {
+  background-color: #388F76;
+  cursor: pointer;
+}
+
+.main-screen {
+  position: fixed;
+  left: 250px;
+  top: 0;
+  height: 100%;
+  width: calc(100% - 250px);
+  overflow-y: scroll;
+}
