@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExperimentCardComponent } from './experiment-card.component';
+import {ExperimentCardComponent} from './experiment-card.component';
+import {UserModule} from '../../../user/user.module';
+import {HomeModule} from '../../home.module';
 
 describe('ExperimentCardComponent', () => {
   let component: ExperimentCardComponent;
@@ -8,14 +10,23 @@ describe('ExperimentCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExperimentCardComponent ]
+      imports: [UserModule, HomeModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ExperimentCardComponent);
+    const testExperiment = {
+      experimentId: 0,
+      experiment_naam: '',
+      wijziging_datum: new Date(),
+      fase: '',
+      color: '',
+      experiment_leider: '',
+    };
     component = fixture.componentInstance;
+    component.experiment = testExperiment;
     fixture.detectChanges();
   });
 

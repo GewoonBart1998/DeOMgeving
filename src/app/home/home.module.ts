@@ -19,12 +19,22 @@ import {FormsModule} from '@angular/forms';
     ManageExperimentComponent,
     MatInputComponent,
     MatSelectComponent,
-    MatTextareaComponent],
+    MatTextareaComponent,
+    HomeComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule
-  ]
+  ],
+  exports: [SharedModule, FormsModule, DasboardComponent,
+    HomeComponent,
+    ExperimentCardComponent,
+    ManageExperimentComponent,
+    MatInputComponent,
+    MatSelectComponent,
+    MatTextareaComponent,
+    HomeComponent]
 })
 export class HomeModule {
 }
