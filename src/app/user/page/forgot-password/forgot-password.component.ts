@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../shared/user.service';
 import {MatSnackBar} from '@angular/material';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-forgot-password',

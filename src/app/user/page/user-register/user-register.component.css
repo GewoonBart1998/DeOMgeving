@@ -6,7 +6,6 @@
   background-color: #4bb194;
 
 }
-
 .container h1::after {
   /* content: ' ';
   position: absolute;
@@ -17,13 +16,11 @@
   left: 45%;
   border-bottom: 1px solid lightgray;
 }
-
 .container h1 {
   position: relative;
   padding: 15px 0;
   color: #001b36;
 }
-
 .form-body {
   border-radius: 5px;
   background-color: #ffffff;
@@ -38,14 +35,21 @@
   padding-bottom: 10px;
 }
 
-.Terug {
+.link {
+  padding: 0;
+  margin-bottom: 5px;
   color: blue;
   background-color: white;
   border: none;
   float: left;
+  line-height: unset;
 }
 
-.Registreer {
+.link:hover {
+  text-decoration: underline;
+}
+
+.Registreer{
   width: 100px;
   float: right;
   background-color: #ed6c05;
@@ -53,8 +57,6 @@
   border: none;
 }
 
-/* a:last-child {
-    width: 100px;
-    float: right;
-    background-color: #ed6c05
-} */
+.form-button:hover:enabled {
+  background-color: #FE7D16;
+}

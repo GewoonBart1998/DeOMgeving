@@ -5,7 +5,7 @@ import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from
 import {ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.modules';
 import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
-import {DasboardComponent} from './dasboard/dasboard.component';
+import {DasboardComponent} from './home/components/dasboard/dasboard.component';
 import {UserLoginComponent} from './user/page/user-login/user-login.component';
 import {UserRegisterComponent} from './user/page/user-register/user-register.component';
 

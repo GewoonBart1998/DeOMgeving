@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExperimentService} from '../services/experiment.service';
+import {ExperimentService} from '../../experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
 

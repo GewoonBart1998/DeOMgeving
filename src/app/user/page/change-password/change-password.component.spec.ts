@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ChangePasswordComponent} from './change-password.component';
 import {UserModule} from '../../user.module';
-import {DasboardComponent} from '../../../dasboard/dasboard.component';
+import {DasboardComponent} from '../../../home/components/dasboard/dasboard.component';
 
 describe('ChangePasswordComponent', () => {
   let component: ChangePasswordComponent;

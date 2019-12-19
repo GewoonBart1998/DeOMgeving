@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {Experiment} from '../experiment-card/experiment';
+import {Experiment} from './components/experiment-card/experiment';
+import {ApiService} from '../shared/services/api.service';
 
 @Injectable({
   providedIn: 'root'

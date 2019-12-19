@@ -6,12 +6,15 @@ import {UserRegisterComponent} from './page/user-register/user-register.componen
 import {ChangePasswordComponent} from './page/change-password/change-password.component';
 import {SharedModule} from '../shared/shared.module';
 import {UserRoutingModule} from './user-routing.modules';
+import {ForgotPasswordComponent} from './page/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     UserLoginComponent,
     UserRegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ForgotPasswordComponent
+
   ],
   imports: [
     CommonModule,

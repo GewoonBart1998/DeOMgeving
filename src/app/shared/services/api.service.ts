@@ -13,12 +13,12 @@ export class ApiService {
   }
 
   createQueryString(queryParameters: object) {
-    let queryString = '';
 
     if (typeof queryParameters !== 'object') {
-      return queryString;
-
+      return '';
     }
+
+    let queryString = '';
 
     for (const key of Object.keys(queryParameters)) {
       const value = queryParameters[key];
@@ -30,29 +30,27 @@ export class ApiService {
     return queryString;
   }
 
-  createURL(path: string, queryParameters?: object) {
+  createURL(path: string, queryParameters: object) {
     const queryString = this.createQueryString(queryParameters);
     return `${this.endpoint}${path}${queryString}`;
   }
 
   get<T>(path: string, queryParameters?: object) {
     const url = this.createURL(path, queryParameters);
+    console.log(url);
     return this.httpClient.get<T>(url);
   }
 
-  post(resourcePath: string, requestBody: object) {
-    const url = this.createURL(resourcePath);
-    return this.httpClient.post(url, requestBody);
+  post(path: string, body: object) {
+    return this.httpClient.post(this.endpoint + path, body);
   }
 
-  put(resourcePath: string, requestBody: object) {
-    const url = this.createURL(resourcePath);
-    return this.httpClient.put(url, requestBody);
+  put(path: string, body: object) {
+    return this.httpClient.put(this.endpoint + path, body);
   }
 
-  delete(resourcePath: string) {
-    const url = this.createURL(resourcePath);
-    return this.httpClient.delete(url);
+  delete(path: string) {
+    return this.httpClient.delete(this.endpoint + path);
   }
 
 }

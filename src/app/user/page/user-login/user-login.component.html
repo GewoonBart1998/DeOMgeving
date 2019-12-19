@@ -1,40 +1,34 @@
 <div class="container">
-  <article class="form-body mat-elevation-z1">
-    <h1 :afther>Inloggen</h1>
+  <mat-card>
+    <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()" (keydown.enter)="$event.preventDefault()">
 
-    <form (ngSubmit)="onLogin()" [formGroup]="userLoginForm">
+      <img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
 
       <div class="textfields">
-        <mat-form-field appearance="outline" matInput>
+        <mat-form-field matInput appearance="outline">
           <mat-label>E-mail adres</mat-label>
-          <input formControlName="email" matInput placeholder="E-mail" required type="email">
-          <mat-error>error</mat-error>
+          <input formControlName="email" type="email" matInput placeholder="E-mail" required>
+          <mat-error>E-mail incorrect</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" matInput>
+        <mat-form-field matInput appearance="outline">
           <mat-label>Wachtwoord</mat-label>
-          <input [type]="hide ? 'password' : 'text'" formControlName="password" matInput placeholder="Wachtwoord"
-                 required type="password">
-          <button (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" mat-icon-button
-                  matSuffix>
+          <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hide ? 'password' : 'text'" required>
+          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <mat-error>error</mat-error>
+          <mat-error>Wachtwoord incorrect</mat-error>
         </mat-form-field>
 
       </div>
 
-      <div class="buttongroep">
-        <div class="buttonsleft">
-          <button class='Registreer' color="primary" mat-flat-button routerLink='/register'>Registreer</button>
-          <button class='Reset' color="primary" mat-flat-button routerLink='/reset-password'>Reset wachtwoord</button>
-        </div>
-        <div class="buttonsright">
-          <button [disabled]="!userLoginForm.valid" autofocus class="Login" color="primary" mat-flat-button
-                  type="submit">Login
-          </button>
-        </div>
+      <div class="button-groep">
+        <ul class="float-left">
+          <li><button type="button" class='link' routerLink='/register' mat-flat-button color="primary">Account aanmaken</button></li>
+          <li><button type="button" class='link' routerLink='/forgot-password' mat-flat-button color="primary">Wachtwoord wijzigen</button></li>
+        </ul>
+        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
       </div>
     </form>
-  </article>
+  </mat-card>
 </div>
