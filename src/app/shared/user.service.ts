@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from './user';
 import {Observable, throwError} from 'rxjs';
 import {retry, catchError} from 'rxjs/operators';
+import {ApiService} from '../services/api.service';
+import {ChangePasswordModel} from '../change-password/model/change-password-model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,9 @@ export class UserService {
 
   // Base url
   baseurl = 'http://localhost:8080';
+  private resourcePath = '/users';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private api: ApiService) {
   }
 
   // Http Headers
@@ -59,4 +62,11 @@ export class UserService {
     return throwError(errorMessage);
   }
 
+  forgetPassword(email: object) {
+    return this.api.post(`${this.resourcePath}/${email}`, email);
+  }
+
+  changePassword(changePasswordModel: object) {
+    return this.api.post(`${this.resourcePath}/change-password`, changePasswordModel);
+  }
 }
