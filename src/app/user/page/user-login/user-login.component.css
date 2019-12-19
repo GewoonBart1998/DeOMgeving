@@ -1,21 +1,21 @@
 .container {
-    max-width: none;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: #4bb194;
+  max-width: none;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #4bb194;
 }
 .container h1::after {
-    background-color: red;;
-    width: 50px;
-    bottom: 2px;
-    left: 45%;
-    border-bottom: 1px solid lightgray;
+  background-color: red;;
+  width: 50px;
+  bottom: 2px;
+  left: 45%;
+  border-bottom: 1px solid lightgray;
 }
 .container h1 {
-    position: relative;
-    padding: 15px 0;
-    color: #001b36;
+  position: relative;
+  padding: 15px 0;
+  color: #001b36;
 }
 mat-card {
   width: 500px;
@@ -28,7 +28,7 @@ mat-card {
 }
 
 mat-form-field {
-    width: 100%;
+  width: 100%;
 }
 
 .mat-form-field-outline div {

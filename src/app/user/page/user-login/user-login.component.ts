@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-user-login',
@@ -32,7 +32,7 @@ export class UserLoginComponent implements OnInit {
   checkLogin(res: any) {
     if (res.email === this.userLoginForm.value.email) {
       this.loginboolean = true;
-      console.log(this.router.navigate(['/home']));
+      this.router.navigate(['/home'])
     }
   }
 

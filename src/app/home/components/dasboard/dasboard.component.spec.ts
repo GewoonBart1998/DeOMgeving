@@ -1,5 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DasboardComponent } from './dasboard.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {DasboardComponent} from './dasboard.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
@@ -22,7 +22,7 @@ describe('DasboardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should user-create-form', () => {
     expect(component).toBeTruthy();
   });
 });
