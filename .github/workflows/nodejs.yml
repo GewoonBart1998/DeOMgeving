@@ -29,6 +29,6 @@ jobs:
       run: |
         npm ci
         npm run build --if-present
-        npm test
+        npm run test_once_no_browser
       env:
         CI: true
