@@ -32,7 +32,7 @@ export class UserLoginComponent implements OnInit {
   checkLogin(res: any) {
     if (res.email === this.userLoginForm.value.email) {
       this.loginboolean = true;
-      console.log(this.router.navigate(['/home']));
+      this.router.navigate(['/home'])
     }
   }
 
