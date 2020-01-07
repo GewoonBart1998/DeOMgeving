@@ -31,11 +31,11 @@
   <main>
     <div class="main-screen">
       <div *ngIf="loadedScreen == 'experiments'">
-        <app-dasboard></app-dasboard>
+        <app-dasboard (experimentClick)="onExperimentClick($event);"></app-dasboard>
       </div>
 
-      <div *ngIf="loadedScreen == 'addExperiment'">
-        <app-manage-experiment></app-manage-experiment>
+      <div *ngIf="loadedScreen == 'addExperiment' || loadedScreen == 'showExperiment'">
+        <app-manage-experiment [experiment]="getClickedExperiment()"></app-manage-experiment>
       </div>
     </div>
   </main>

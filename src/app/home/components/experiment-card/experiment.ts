@@ -5,4 +5,5 @@ export interface Experiment {
   fase: string;
   color: string;
   experiment_leider: string;
+  experiment_leider_secundair: string;
 }

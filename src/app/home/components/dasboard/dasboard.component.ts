@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {EventEmitter} from '@angular/core';
 import {ExperimentService} from '../../experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dasboard',
@@ -9,9 +11,13 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./dasboard.component.css']
 })
 export class DasboardComponent implements OnInit {
+  @Output() experimentClick: EventEmitter<Experiment> = new EventEmitter<Experiment>();
+
   private experimentList: Array<Experiment>;
 
-  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar) {
+  constructor(private experimentService: ExperimentService,
+              private snackbar: MatSnackBar,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -28,5 +34,7 @@ export class DasboardComponent implements OnInit {
       });
   }
 
-
+  onExperimentClick(experiment: Experiment) {
+    this.experimentClick.emit(experiment);
+  }
 }

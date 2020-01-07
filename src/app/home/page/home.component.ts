@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Experiment} from '../components/experiment-card/experiment';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,30 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   loadedScreen = 'experiments';
+  private selectedExperiment: Experiment = null;
 
-  constructor() { }
+  constructor(private cdRef: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
   }
 
+  onExperimentClick(experiment) {
+    this.cdRef.detectChanges();
+    this.selectedExperiment = experiment;
+    this.loadedScreen = 'showExperiment';
+  }
+
+  getClickedExperiment() {
+    this.clearSelectedExperimentAftherDelay();
+    if (this.selectedExperiment != null) {
+      return this.selectedExperiment;
+    }
+  }
+
+  private clearSelectedExperimentAftherDelay() {
+    setTimeout(() => {
+      this.selectedExperiment = null;
+    }, 4000);
+  }
 }

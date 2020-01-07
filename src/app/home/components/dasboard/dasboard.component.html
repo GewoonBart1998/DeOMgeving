@@ -28,6 +28,9 @@
 </div>
 
 <div class="experiment-list">
-  <app-experiment-card *ngFor="let experiment of experimentList" [experiment]="experiment"></app-experiment-card>
+  <app-experiment-card
+    *ngFor="let experiment of experimentList"
+    [experiment]="experiment"
+    (click)="onExperimentClick(experiment)"></app-experiment-card>
 
 </div>

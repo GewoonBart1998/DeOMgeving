@@ -9,5 +9,8 @@
     <div class="author-div">
       <p class="author">{{experiment.experiment_leider}}</p>
     </div>
+    <div class="author-div" *ngIf="experiment.experiment_leider_secundair">
+      <p class="author">{{experiment.experiment_leider_secundair}}</p>
+    </div>
   </div>
 </div>

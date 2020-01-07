@@ -28,7 +28,7 @@ export class ExperimentService {
   }
 
   delete(experimentId: number) {
-    return this.api.delete(`${this.reourcePath}/${experimentId}`);
+    return this.api.delete(`${this.reourcePath}/delete/${experimentId}`);
   }
 
 }

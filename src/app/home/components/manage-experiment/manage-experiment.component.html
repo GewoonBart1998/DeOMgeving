@@ -5,28 +5,34 @@
   <h2>Experiment</h2>
   <br>
   <div class="textfields">
-    <app-mat-input [label]="'Experiment naam'" [required]="true"></app-mat-input>
+    <app-mat-input [inputValue]="getExperimentAttribute('experiment_naam')" [label]="'Experiment naam'"
+                   [required]="true"></app-mat-input>
     <br>
-    <app-mat-select  [required]="true" [label]="'Primaire experiment leider'"
+    <app-mat-select [required]="true" [label]="'Primaire experiment leider'"
+                    [inputValue]="getExperimentAttribute('experiment_leider')"
                     [values]="[{text: 'stoof', value: '1'},
-    {text: 'niet-coole-guus', value: '2'},
+    {text: 'niet-coole-guus', value: '2', selected: true},
     {text: 'bert', value: '3'},
     {text: 'lëàndér', value: '4'},
     {text: 'weeb-maarten', value: '5'},
-    {text: 'ash na', value: '6'}]">
+    {text: getExperimentAttribute('experiment_leider'), value: getExperimentAttribute('experiment_leider')}]">
     </app-mat-select>
 
-    <app-mat-select [label]="'Secundaire experiment leider'"
-                    [values]="[{text: 'stoof', value: '1'},
+    <app-mat-select
+      [label]="'Secundaire experiment leider'"
+      [inputValue]="getExperimentAttribute('experiment_leider_secundair')"
+      [values]="[{text: 'stoof', value: '1'},
       {text: 'niet-coole-guus', value: '2'},
       {text: 'bert', value: '3'},
       {text: 'lëàndér', value: '4'},
       {text: 'weeb-maarten', value: '5'},
-      {text: 'ash na', value: '6'}]">
+      {text: getExperimentAttribute('experiment_leider_secundair'), value: getExperimentAttribute('experiment_leider_secundair')}]">
     </app-mat-select>
     <br>
 
-    <app-mat-select [required]="true" [label]="'Fase'"
+    <app-mat-select [required]="true"
+                    [label]="'Fase'"
+                    [inputValue]="getExperimentAttribute('fase')"
                     [values]="[
       {text: 'Lab in', value: 'Lab in'},
       {text: 'Lab uit', value: 'Lab uit'},
@@ -75,7 +81,7 @@
     </app-mat-select>
     <br>
 
-    <button
+    <button>Opslaan/Aanmaken</button>
 
   </div>
 </div>
