@@ -1,28 +1,14 @@
 import {async, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material/';
-import {ReactiveFormsModule} from '@angular/forms';
-import {AppRoutingModule} from './app-routing.modules';
-import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
-import {DasboardComponent} from './home/components/dasboard/dasboard.component';
-import {UserLoginComponent} from './user/page/user-login/user-login.component';
-import {UserRegisterComponent} from './user/page/user-register/user-register.component';
+import {HomeModule} from './home/home.module';
+import {UserModule} from './user/user.module';
 
 describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, BrowserAnimationsModule, MatFormFieldModule,
-        MatInputModule, MatIconModule, MatButtonModule, AppRoutingModule
-      ],
-      declarations: [
-        AppComponent,
-        ChangePasswordComponent,
-        UserLoginComponent,
-        UserRegisterComponent,
-        DasboardComponent
-      ],
+      imports: [HomeModule, UserModule],
+      declarations: [AppComponent]
     }).compileComponents();
 
   }));

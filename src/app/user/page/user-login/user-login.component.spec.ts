@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {UserLoginComponent} from './user-login.component';
 import {UserModule} from '../../user.module';
-import {DasboardComponent} from '../../../home/components/dasboard/dasboard.component';
+import {HomeModule} from '../../../home/home.module';
 
 describe('UserLoginComponent', () => {
   let component: UserLoginComponent;
@@ -10,8 +10,7 @@ describe('UserLoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DasboardComponent],
-      imports: [UserModule]
+      imports: [UserModule, HomeModule]
     })
     .compileComponents();
   }));
