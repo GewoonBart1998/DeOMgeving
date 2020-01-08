@@ -10,10 +10,11 @@ export class MatSelectComponent implements OnInit {
   inputValue: string;
   @Input() label: string;
   @Input() values: Array<{value: string, text: string}>;
+  @Input() default: string;
   constructor() { }
 
   ngOnInit() {
-    console.log(this.values);
+    this.inputValue = this.default;
   }
 
 }

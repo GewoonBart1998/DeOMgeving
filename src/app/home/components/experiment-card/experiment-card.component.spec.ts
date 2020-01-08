@@ -23,7 +23,8 @@ describe('ExperimentCardComponent', () => {
       wijziging_datum: new Date(),
       fase: '',
       color: '',
-      experiment_leider: '',
+      experiment_leider_primair: '',
+      experiment_leider_secundair: '',
     };
     component = fixture.componentInstance;
     component.experiment = testExperiment;
