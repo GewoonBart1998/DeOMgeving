@@ -28,5 +28,23 @@ export class DasboardComponent implements OnInit {
       });
   }
 
+  changeFase(event) {
+    this.experimentService.filterBy(event.target.value).subscribe(
+      res => {
+
+      });
+    
+  }
+
+
+  onSearch(searchvalue: string){
+    this.experimentService.searchBy(searchvalue).subscribe(
+      res => {
+
+      });
+  }
+
+  
+
 
 }

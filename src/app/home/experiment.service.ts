@@ -19,6 +19,14 @@ export class ExperimentService {
     return this.api.get<Experiment>(`${this.reourcePath}${experimentId}`);
   }
 
+  filterBy(filterBy: string){
+    return this.api.get<Array<Experiment>>(this.reourcePath + "/" +filterBy)
+  }
+
+  searchBy(searchBy: string){
+    return this.api.get<Array<Experiment>>(this.reourcePath + "/search/" +searchBy)
+  }
+
   create(experiment: Experiment) {
     return this.api.post(this.reourcePath, experiment);
   }
