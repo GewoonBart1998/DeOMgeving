@@ -17,9 +17,9 @@ export class ApiService {
     if(typeof queryParameters !== 'object'){
       return '';
     }
-    
+
     let queryString = '';
-    
+
     for(let key in queryParameters){
       let value = queryParameters[key];
       let prefix = queryString.length === 0 ? '?' : '&';
@@ -42,7 +42,7 @@ export class ApiService {
   }
 
   post(path: string, body: object){
-    return this.httpClient.post(this.endpoint + path, body)
+    return this.httpClient.post(this.endpoint + path, body);
   }
 
   put(path: string, body: object){
