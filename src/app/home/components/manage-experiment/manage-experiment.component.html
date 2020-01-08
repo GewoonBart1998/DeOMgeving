@@ -5,7 +5,7 @@
   <h2>Experiment</h2>
   <br>
   <div class="textfields">
-    <app-mat-input [label]="'Experiment naam'" [required]="true"></app-mat-input>
+    <app-mat-input [label]="'Experiment naam'" [required]="true" #name></app-mat-input>
     <br>
     <app-mat-select  [required]="true" [label]="'Primaire experiment leider'"
                     [values]="[{text: 'stoof', value: '1'},
@@ -13,7 +13,8 @@
     {text: 'bert', value: '3'},
     {text: 'lëàndér', value: '4'},
     {text: 'weeb-maarten', value: '5'},
-    {text: 'ash na', value: '6'}]">
+    {text: 'ash na', value: '6'}]"
+    #leader1>
     </app-mat-select>
 
     <app-mat-select [label]="'Secundaire experiment leider'"
@@ -22,7 +23,8 @@
       {text: 'bert', value: '3'},
       {text: 'lëàndér', value: '4'},
       {text: 'weeb-maarten', value: '5'},
-      {text: 'ash na', value: '6'}]">
+      {text: 'ash na', value: '6'}]"
+      #leader2>
     </app-mat-select>
     <br>
 
@@ -30,52 +32,62 @@
                     [values]="[
       {text: 'Lab in', value: 'Lab in'},
       {text: 'Lab uit', value: 'Lab uit'},
-      {text: 'Idee', value: 'Idee'}]">
+      {text: 'Idee', value: 'Idee'}]"
+    #fase>
     </app-mat-select>
   </div>
   <hr>
   <h2>Experiment details</h2>
   <br>
   <div class="textfields">
-    <app-mat-textarea [label]="'Beschrijving'">
+    <app-mat-textarea [label]="'Beschrijving'"
+    #description>
     </app-mat-textarea>
     <br>
 
-    <app-mat-textarea [label]="'Netwerk'">
+    <app-mat-textarea [label]="'Netwerk'"
+    #network>
     </app-mat-textarea>
     <br>
-    <app-mat-textarea [label]="'Status'">
+    <app-mat-textarea [label]="'Status'" #status>
     </app-mat-textarea>
     <app-mat-select [required]="true" [label]="'Status kleur'"
                     [values]="[
       {text: 'Rood', value: 'Rood'},
       {text: 'Oranje', value: 'Oranje'},
-      {text: 'Groen', value: 'Groen'}]">
+      {text: 'Groen', value: 'Groen'}]"
+    #statusColor>
     </app-mat-select>
     <br>
 
-    <app-mat-textarea [label]="'Kosten innovatie'">
+    <app-mat-textarea [label]="'Kosten innovatie'"
+    #kostenInnovatie>
     </app-mat-textarea>
-    <app-mat-textarea [label]="'Kosten anders'">
-    </app-mat-textarea>
-    <br>
-
-    <app-mat-textarea [label]="'Doorlooptijd'">
+    <app-mat-textarea [label]="'Kosten anders'"
+    #kostenAnders>
     </app-mat-textarea>
     <br>
 
-    <app-mat-textarea [label]="'Voortgang'">
+    <app-mat-textarea [label]="'Doorlooptijd'"
+    #doorlooptijd>
+    </app-mat-textarea>
+    <br>
+
+    <app-mat-textarea [label]="'Voortgang'"
+    #voortgang>
     </app-mat-textarea>
     <br>
 
     <app-mat-select [label]="'Archief'"
+                    [default]="'null'"
                     [values]="[{text: 'Niet gearchiveerd', value: 'null'},
       {text: 'Hall of Fame', value: 'HoF'},
-      {text: 'Graveyard', value: 'GY'}]">
+      {text: 'Graveyard', value: 'GY'}]"
+    #archrived>
     </app-mat-select>
     <br>
 
-    <button
+    <button (click)="addExperiment()" class="form-button add-experiment" type="submit" mat-flat-button color="primary" autofocus>Experiment toevoegen</button>
 
   </div>
 </div>

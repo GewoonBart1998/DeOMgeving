@@ -11,10 +11,10 @@
 }
 
 .experiment-info {
-  margin-left: 50px;
-  margin-top: 50px;
-  width: 1000px;
-
+  padding-left: 50px;
+  padding-top: 50px;
+  padding-bottom: 100px;
+  background-color: #F7F5F5;
 }
 
 .textfields {
@@ -26,4 +26,13 @@ h2 {
   margin-left: 50px;
 }
 
-
+.add-experiment {
+  font-size: 1.2em;
+  margin-top: 25px;
+  padding: 7px 10px;
+  background-color: #ED6C05;
+  border: none;
+  border-radius: 3px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
