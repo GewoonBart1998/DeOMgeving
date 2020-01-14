@@ -15,11 +15,13 @@ import {HomeModule} from './home/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DasboardComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    UserModule,
     AppRoutingModule,
     UserModule,
     HomeModule

@@ -10,12 +10,10 @@ import {UserService} from '../../shared/user.service';
 })
 export class UserLoginComponent implements OnInit {
   hide = true;
-  userLoginData: any;
-  loginboolean: boolean;
 
   userLoginForm = new FormGroup({
-    password: new FormControl(''),
-    email: new FormControl('', [Validators.email])
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl('')
   }, [Validators.required, Validators.maxLength(255)]);
 
   ngOnInit() {

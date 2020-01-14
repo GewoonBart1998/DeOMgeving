@@ -24,4 +24,15 @@ describe('UserRegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have text block enabled', () => {
+    expect(component.hide).toEqual(true);
+  });
+
+  it('should have text blocked', () => {
+    fixture = TestBed.createComponent(UserRegisterComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('input')).toBeTruthy();
+  });
 });

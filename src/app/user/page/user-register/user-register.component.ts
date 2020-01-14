@@ -12,6 +12,7 @@ import {UserService} from '../../shared/user.service';
 export class UserRegisterComponent implements OnInit {
   hide = true;
 
+
   userRegisterForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl('', [Validators.email]),
@@ -34,7 +35,7 @@ export class UserRegisterComponent implements OnInit {
     this.userService.createUser(this.userRegisterForm.value).subscribe(res => {
       this.router.navigate(['/login'])
       console.log('User added!');
-      // this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
+      this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
   }
 }
