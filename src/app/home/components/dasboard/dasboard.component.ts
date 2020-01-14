@@ -22,20 +22,23 @@ export class DasboardComponent implements OnInit {
         this.snackbar.open('Kon experimenten niet inladen', '', {
           duration: 2000,
           // here specify the position
+          //TODO snackbar call method maken
           verticalPosition: 'top',
           horizontalPosition: 'right'
         });
       });
   }
 
-  changeFase(event) {
+  changePhase(event) {
+    
+
+
     this.experimentService.filterBy(event.target.value).subscribe(
       res => {
 
       });
     
   }
-
 
   onSearch(searchvalue: string){
     this.experimentService.searchBy(searchvalue).subscribe(

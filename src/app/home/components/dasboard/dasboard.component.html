@@ -5,33 +5,33 @@
   <button (click)="onSearch(search_value.value)" class="search-button">Zoek</button>
   <br>
 
-  <select (change)="changeFase($event)">
-    <option value="" selected>Filter/ oder</option>
+  <select (change)="changePhase($event)">
+    <option selected>Filter/ oder</option>
     <p>Fase:</p>
-    <option value="LabIn">Lab in</option>
-    <option value="Idee">Lab uit</option>
-    <option value="LabUit">Idee</option>
+    <option value="filter/fase/Lab in">Lab in</option>
+    <option value="filter/fase/Idee">Lab uit</option>
+    <option value="filter/fase/Lab uit">Idee</option>
     <hr>
     <p>Status:</p>
-    <option value="Green">Groen</option>
-    <option value="Red">Rood</option>
-    <option value="Orange">Oranje</option>
+    <option value="filter/status_kleur/Green">Groen</option>
+    <option value="filter/status_kleur/Red">Rood</option>
+    <option value="filter/status_kleur/Orange">Oranje</option>
     <hr>
     <p>Archief:</p>
-    <option value="filterHoF">Hall of fame</option>
-    <option value="filterGY">Graveyard</option>
+    <option value="filter/archive/HoF">Hall of fame</option>
+    <option value="filter/archive/GY">Graveyard</option>
     <hr>
     <p>Experiment naam:</p>
-    <option value="orderNameAsc">Experiment Naam ↑</option>
-    <option value="orderNameDesc">Experiment Naam ↓</option>
+    <option value="order/experiment_naam/ASC">Experiment Naam ↑</option>
+    <option value="order/experiment_naam/DESC">Experiment Naam ↓</option>
     <hr>
     <p>Experiment leider:</p>
-    <option value="orderLiederAsc">Leider Naam ↑</option>
-    <option value="orderLiederDesc">Leider Naam ↓</option>
+    <option value="order/experiment_leider_primair/ASC">Leider Naam ↑</option>
+    <option value="order/experiment_leider_primair/DESC">Leider Naam ↓</option>
     <hr>
     <p>Laatst gewijzigd:</p>
-    <option value="orderEditedAsc">Gewijzigd ↑</option>
-    <option value="orderEditedDesc">Gewijzigd ↓</option>
+    <option value="order/wijziging_datum/ASC">Gewijzigd ↑</option>
+    <option value="order/wijziging_datum/DESC">Gewijzigd ↓</option>
   </select>
 
 </div>
