@@ -9,6 +9,9 @@ import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {HomeComponent} from './page/home.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule} from '@angular/forms';
+import { UserManagementComponent } from './components/user-management/user-management.component';
+import { UserComponent } from './components/user-management/user/user.component';
+import { UserListComponent } from './components/user-management/user/user-list/user-list.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import {FormsModule} from '@angular/forms';
     MatInputComponent,
     MatSelectComponent,
     MatTextareaComponent,
-    HomeComponent
+    HomeComponent,
+    UserManagementComponent,
+    UserComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
