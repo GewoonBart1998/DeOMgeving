@@ -7,3 +7,4 @@ export class Experiment {
   experiment_leider_primair: string;
   experiment_leider_secundair: string;
 }
+
