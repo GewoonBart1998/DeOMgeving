@@ -16,7 +16,7 @@ export class ExperimentService {
   }
 
   getById(experimentId: number) {
-    return this.api.get<Experiment>(`${this.reourcePath}${experimentId}`);
+    return this.api.get<Experiment>(`${this.reourcePath}/${experimentId}`);
   }
 
   create(experiment: Experiment) {
