@@ -1,29 +1,38 @@
 <div class="ribbon">
   <a class="logo" href="/home"><img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo"></a>
 
-  <input type="text" name="search" placeholder="search">
-  <button class="search-button">Zoek</button>
+  <input #search_value type="text" name="search" placeholder="search">
+  <button (click)="onSearch(search_value.value)" class="search-button">Zoek</button>
   <br>
 
-  <select>
-    <option value="" selected>No task</option>
-    <option value="1">Task1</option>
+  <select (change)="changePhase($event)">
+    <option selected>Filter/ oder</option>
+    <p>Fase:</p>
+    <option value="filter/fase/Lab in">Lab in</option>
+    <option value="filter/fase/Idee">Lab uit</option>
+    <option value="filter/fase/Lab uit">Idee</option>
+    <hr>
+    <p>Status:</p>
+    <option value="filter/status_kleur/Green">Groen</option>
+    <option value="filter/status_kleur/Red">Rood</option>
+    <option value="filter/status_kleur/Orange">Oranje</option>
+    <hr>
+    <p>Archief:</p>
+    <option value="filter/archive/HoF">Hall of fame</option>
+    <option value="filter/archive/GY">Graveyard</option>
+    <hr>
+    <p>Experiment naam:</p>
+    <option value="order/experiment_naam/ASC">Experiment Naam ↑</option>
+    <option value="order/experiment_naam/DESC">Experiment Naam ↓</option>
+    <hr>
+    <p>Experiment leider:</p>
+    <option value="order/experiment_leider_primair/ASC">Leider Naam ↑</option>
+    <option value="order/experiment_leider_primair/DESC">Leider Naam ↓</option>
+    <hr>
+    <p>Laatst gewijzigd:</p>
+    <option value="order/wijziging_datum/ASC">Gewijzigd ↑</option>
+    <option value="order/wijziging_datum/DESC">Gewijzigd ↓</option>
   </select>
-
-  <select>
-    <option value="" selected>No Category</option>
-    <option value="1">Category1</option>
-  </select>
-
-  <select>
-    <option value="" selected>No Milestone</option>
-    <option value="1">Milestone1</option>
-  </select>
-
-  <button class="sort-by">Experiment Naam</button>
-  <button class="sort-by">Auteur Naam</button>
-  <button class="sort-by">Laatst Gewijzigd</button>
-
 
 </div>
 

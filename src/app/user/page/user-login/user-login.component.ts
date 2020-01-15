@@ -30,12 +30,16 @@ export class UserLoginComponent implements OnInit {
   }
 
   checkLogin(res: any) {
+   
     if (res.email === this.userLoginForm.value.email) {
       this.loginboolean = true;
       this.router.navigate(['/home'])
     }
   }
 
+
+   // 200 ok en on error
+    // snackbar wachtwoord verkeerd
   onLogin() {
     this.userService.login(this.userLoginForm.value).subscribe(res => {
       this.checkLogin(res);
