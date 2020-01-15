@@ -62,7 +62,8 @@ export class UserService {
 
   /*https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library */
   private decodeJWT(jwtToken: string) {
-    if (jwtToken == null || jwtToken.length === 0) {
+
+    if (jwtToken === null || jwtToken.length === 0) {
       return '';
     }
 
