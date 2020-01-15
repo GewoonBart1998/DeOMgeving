@@ -40,5 +40,8 @@ export class UserService {
     return this.api.post('/updateUser', user);
   }
 
+  removeUser(id: object) {
+    return this.api.post('/user/{id}', id);
+  }
 
 }
