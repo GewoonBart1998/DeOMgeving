@@ -59,6 +59,13 @@ header {
 .menu a:hover {
   color: #ffffff;
   background-color: #97D8C5;
+  filter: none;
+  -webkit-filter: none;
+}
+
+.menu a:hover img {
+  filter: grayscale(100%) brightness(900%) contrast(500%);
+  -webkit-filter: grayscale(100%) brightness(900%) contrast(500%);
 }
 
 .menu .selected {
@@ -69,6 +76,12 @@ header {
 .menu a img {
   height: 30px;
   margin: 0 10px;
+  filter: grayscale(100%) brightness(900%) contrast(500%);
+  -webkit-filter: grayscale(100%) brightness(900%) contrast(500%);
+}
+
+.menu .selected img {
+  filter: none;
 }
 
 .logout {
