@@ -1,7 +1,12 @@
+enum userRole {
+  GEBRUIKER, ADMIN
+}
+
 export class User {
+  role: userRole;
   id: number;
-  email: string;
   name: string;
+  email: string;
   role: string;
   password: string;
 }

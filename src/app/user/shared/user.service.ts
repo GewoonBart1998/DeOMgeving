@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../shared/services/api.service';
 import {User} from './user';
-import {Experiment} from '../../home/components/experiment-card/experiment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
   private resourcePath: string;
+
   constructor(private api: ApiService) {
     this.resourcePath = '/user';
   }
@@ -32,6 +33,21 @@ export class UserService {
     return this.api.get<Array<User>>(`${this.resourcePath}/usersByRole/` + role);
   }
 
+  isUserLoggedIn() {
+    return localStorage.getItem('jwtToken') != null;
+  }
+
+  logout() {
+    localStorage.removeItem('jwtToken');
+  }
+
+  getCurrentUser() {
+    return this.decodeJWT(this.getJwtToken());
+  }
+
+  getJwtToken() {
+    return localStorage.getItem('jwtToken');
+  }
   getAllUsers() {
     return this.api.get<Array<User>>(`${this.resourcePath}/getAllUsers`);
   }
@@ -44,4 +60,14 @@ export class UserService {
     return this.api.post('/user/{id}', id);
   }
 
+  /*https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library */
+  private decodeJWT(jwtToken: string) {
+    const base64Url = jwtToken.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+  }
 }
