@@ -9,7 +9,7 @@ export class MatTextareaComponent implements OnInit {
   @Input() required = false;
   @Input() label: string;
   @Input() type = 'input';
-  @Input() inputValue: string;
+  @Input() inputValue: string = '';
   constructor() { }
 
   ngOnInit() {

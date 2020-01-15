@@ -1,5 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Experiment} from '../components/experiment-card/experiment';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../user/shared/user.service';
+import {User} from '../../user/shared/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,32 +9,26 @@ import {Experiment} from '../components/experiment-card/experiment';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  private user: User;
 
-  loadedScreen = 'experiments';
-  private selectedExperiment: Experiment = null;
-
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
+    this.user = this.userService.getCurrentUser();
+    console.log(this.user);
   }
 
-  onExperimentClick(experiment) {
-    this.cdRef.detectChanges();
-    this.selectedExperiment = experiment;
-    this.loadedScreen = 'showExperiment';
-  }
-
-  getClickedExperiment() {
-    this.clearSelectedExperimentAftherDelay();
-    if (this.selectedExperiment != null) {
-      return this.selectedExperiment;
+  getLoggedUserame() {
+    if (this.user) {
+      return this.user.name;
     }
+
+    return 'onbekend';
   }
 
-  private clearSelectedExperimentAftherDelay() {
-    setTimeout(() => {
-      this.selectedExperiment = null;
-    }, 4000);
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
   }
 }
