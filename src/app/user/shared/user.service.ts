@@ -32,5 +32,13 @@ export class UserService {
     return this.api.get<Array<User>>(`${this.resourcePath}/usersByRole/` + role);
   }
 
+  getAllUsers() {
+    return this.api.get<Array<User>>(`${this.resourcePath}/getAllUsers`);
+  }
+
+  updateUser(user: User) {
+    return this.api.post('/updateUser', user);
+  }
+
 
 }

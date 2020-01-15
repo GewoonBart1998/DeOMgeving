@@ -1,1 +1,22 @@
-<p>user works!</p>
+<li class="mdc-list-item" tabindex="0" *ngFor="let user of users">
+  <label class="name" style="display:none">
+    <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required [(ngModel)]="id" >
+  </label>
+  <label class="name" style="display:none">
+    <input type="id" placeholder="{{user.email}}" name="id" value="{{user.email}}" required [(ngModel)]="email" >
+  </label>
+  <label class="name">
+    <input type="name" placeholder="{{user.name}}" name="Naam" value="{{user.name}}" required [(ngModel)]="name">
+  </label>
+
+  <app-mat-select class="rol" [(ngModel)]="role" label="{{user.role | lowercase}}"
+                  [values]="[
+      {text: 'gebruiker', value: '1'},
+      {text: 'medewerker', value: '2'},
+      {text: 'admin', value: '3'}]"
+  >
+  </app-mat-select>
+
+  <button class="delete-button" type="submit">Delete</button>
+
+</li>

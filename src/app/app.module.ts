@@ -15,8 +15,7 @@ import {HomeModule} from './home/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DasboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
