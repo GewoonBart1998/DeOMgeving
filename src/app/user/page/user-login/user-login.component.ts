@@ -20,6 +20,8 @@ export class UserLoginComponent {
   constructor(public userService: UserService, private router: Router) {
   }
 
+   // 200 ok en on error
+    // snackbar wachtwoord verkeerd
   onLogin() {
     this.userService.login(this.userLoginForm.value).subscribe(res => {
       this.handleLoginResponse(res);
