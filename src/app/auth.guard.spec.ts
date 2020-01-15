@@ -1,11 +1,17 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import {TestBed, async, inject} from '@angular/core/testing';
 
-import { AuthGuard } from './auth.guard';
+import {AuthGuard} from './auth.guard';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AppRoutingModule} from './app-routing.modules';
+import {RouterTestingModule} from '@angular/router/testing';
+import {UserModule} from './user/user.module';
+import {HomeModule} from './home/home.module';
 
 describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthGuard]
+      imports: [HttpClientTestingModule, AppRoutingModule, RouterTestingModule, UserModule, HomeModule],
+      providers: [AuthGuard],
     });
   });
 
