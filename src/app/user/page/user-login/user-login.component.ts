@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {UserService} from '../../shared/user.service';
 
 @Component({
@@ -8,35 +8,29 @@ import {UserService} from '../../shared/user.service';
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent implements OnInit {
+export class UserLoginComponent {
+  hidePassword = true;
   hide = true;
 
   userLoginForm = new FormGroup({
-    email: new FormControl('', [Validators.email]),
-    password: new FormControl('')
+    password: new FormControl(''),
+    email: new FormControl('', [Validators.email])
   }, [Validators.required, Validators.maxLength(255)]);
 
-  ngOnInit() {
-
+  constructor(public userService: UserService, private router: Router) {
   }
 
-  constructor(
-    public fb: FormBuilder,
-    public userService: UserService,
-    private router: Router
-  ) {
-  }
-
-  checkLogin(res: any) {
-    if (res.email === this.userLoginForm.value.email) {
-      this.router.navigate(['/home']);
-    }
-  }
-
+   // 200 ok en on error
+    // snackbar wachtwoord verkeerd
   onLogin() {
     this.userService.login(this.userLoginForm.value).subscribe(res => {
-      this.checkLogin(res);
+      this.handleLoginResponse(res);
     });
   }
 
+  handleLoginResponse(response) {
+    const jwtToken = response.jwtToken;
+    localStorage.setItem('jwtToken', jwtToken);
+    this.router.navigate(['/home']);
+  }
 }

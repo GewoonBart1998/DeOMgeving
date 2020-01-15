@@ -4,43 +4,29 @@
       <div class="welcome">
         <div class="vertical-align">
           <h1>Welkom</h1>
-          <h1 class="user">user</h1>
+          <h1 class="user">{{ getLoggedUserame()}}</h1>
         </div>
       </div>
 
       <div class="buttons">
-        <a (click)="loadedScreen = 'experiments'" [ngClass]="{'selected' : loadedScreen == 'experiments'}"
-           href="javascript:">
+        <a routerLink='/home/dashboard' routerLinkActive='selected'>
           <img src="/assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
-        <a (click)="loadedScreen = 'addExperiment'" [ngClass]="{'selected' : loadedScreen == 'addExperiment'}"
-           href="javascript:">
+        <a routerLink='/home/experiment' routerLinkActive='selected'>
           <img src="/assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
-        <a (click)="loadedScreen = 'userManagement'" [ngClass]="{'selected' : loadedScreen == 'userManagement'}"
-           href="javascript:"><img
-          src="/assets/img/icons/User_management.png" alt="users">User management</a>
-        <a (click)="loadedScreen = 'exportExperiment'" [ngClass]="{'selected' : loadedScreen == 'exportExperiment'}"
-           href="javascript:">
+        <a routerLink='/home/user' routerLinkActive='selected'>
+          <img src="/assets/img/icons/User_management.png" alt="users">User management</a>
+        <a routerLink='/home/export' routerLinkActive='selected'>
           <img src="/assets/img/icons/Export_experiment.png" alt="export">Export experiment
         </a>
       </div>
       <div class="bottom-button">
-        <a class="logout" href=""><img src="/assets/img/icons/Log_out.png" alt="log-out">Log out</a>
+        <a class="logout" (click)="logout()" ><img src="/assets/img/icons/Log_out.png" alt="log-out">Log out</a>
       </div>
     </div>
   </header>
   <main>
     <div class="main-screen">
-      <div *ngIf="loadedScreen == 'experiments'">
-        <app-dasboard></app-dasboard>
-      </div>
-
-      <div *ngIf="loadedScreen == 'addExperiment'">
-        <app-manage-experiment></app-manage-experiment>
-      </div>
-
-      <div *ngIf="loadedScreen == 'userManagement'">
-        <app-user-management></app-user-management>
-      </div>
+      <router-outlet></router-outlet>
     </div>
   </main>
 </div>

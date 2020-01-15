@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../experiment.service';
 import {Experiment} from '../experiment-card/experiment';
-import {MatInputComponent} from '../mat-input/mat-input.component';
-import {MatSelectComponent} from '../mat-select/mat-select.component';
-import {MatTextareaComponent} from '../mat-textarea/mat-textarea.component';
-import {MatSnackBar} from '@angular/material';
 import {UserService} from '../../../user/shared/user.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ExperimentDetails} from './experimentDetails';
+import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
 import {User} from '../../../user/shared/user';
 
 @Component({
@@ -13,34 +12,52 @@ import {User} from '../../../user/shared/user';
   templateUrl: './manage-experiment.component.html',
   styleUrls: ['./manage-experiment.component.css']
 })
-export class ManageExperimentComponent implements OnInit {
-  @ViewChild('name', {static: false}) name: MatInputComponent;
-  @ViewChild('leader1', {static: false}) leader1: MatSelectComponent;
-  @ViewChild('leader2', {static: false}) leader2: MatSelectComponent;
-  @ViewChild('fase', {static: false}) fase: MatSelectComponent;
-  @ViewChild('description', {static: false}) description: MatTextareaComponent;
-  @ViewChild('network', {static: false}) network: MatTextareaComponent;
-  @ViewChild('status', {static: false}) status: MatTextareaComponent;
-  @ViewChild('statusColor', {static: false}) statusColor: MatSelectComponent;
-  @ViewChild('kostenInnovatie', {static: false}) kostenInnovatie: MatTextareaComponent;
-  @ViewChild('kostenAnders', {static: false}) kostenAnders: MatTextareaComponent;
-  @ViewChild('doorlooptijd', {static: false}) doorlooptijd: MatTextareaComponent;
-  @ViewChild('voortgang', {static: false}) voortgang: MatTextareaComponent;
-  @ViewChild('archrived', {static: false}) archrived: MatSelectComponent;
 
-  constructor(private experimentService: ExperimentService, private userService: UserService, private snackbar: MatSnackBar) {
+//TODO: split this into two components (no time)
+export class ManageExperimentComponent implements OnInit {
+
+  experimentForm: FormGroup;
+  experimentDetailsForm: FormGroup;
+  private experiment: Experiment;
+  private experimentDetails: ExperimentDetails;
+
+  private leaders: Array<string> = [];
+
+  private isEditingExperimen: boolean = false;
+  private fieldsEditable = !this.isEditingExperimen;
+
+  constructor(
+    private experimentService: ExperimentService,
+    private userService: UserService,
+    private snackbar: MatSnackBar
+  ) {
 
   }
 
   ngOnInit() {
-    this.userService.getUsersByRole("MEDEWERKER").subscribe(users=> {
-        this.leader1.values = [];
-        this.leader2.values = [];
-        for (let user of users) {
-          this.leader1.values.push({value: user.name, text: user.name});
-          this.leader2.values.push({value: user.name, text: user.name});
-        }
+    this.experiment = new Experiment();
+    this.experimentDetails = new ExperimentDetails();
+    this.buildFormExperimentDetails();
+    this.buildFormExperiment();
 
+    if (this.isEditingExperimen) {
+      this.getExperiment();
+      this.getExperimentDetails();
+    } else {
+      this.buildFormExperiment();
+      this.buildFormExperimentDetails();
+    }
+
+    this.fillLeaders();
+    this.updateAllInputs();
+  }
+
+
+  private fillLeaders() {
+    this.userService.getUsersByRole("MEDEWERKER").subscribe(users=> {
+        for(let leader of users) {
+          this.leaders.push(leader.name);
+        }
       },
       error => {
         this.snackbar.open('Kon experiment leiders niet inladen', '', {
@@ -51,27 +68,85 @@ export class ManageExperimentComponent implements OnInit {
       });
   }
 
-  addExperiment() {
-    const newExperiment = new Experiment();
-    newExperiment.experiment_naam = this.name.inputValue;
-    newExperiment.fase = this.fase.inputValue;
-    newExperiment.color = this.statusColor.inputValue;
-    newExperiment.experiment_leider_primair = this.leader1.inputValue;
-    newExperiment.experiment_leider_secundair = this.leader2.inputValue;
+  private getExperiment() {
+    //todo: CORRECT EXPERIMENT ID
+    this.experimentService.getById(1).subscribe(response => {
+      this.experiment = response;
+      this.buildFormExperiment();
+      this.buildFormExperimentDetails();
+      this.updateAllInputs();
+    });
+  }
 
-    console.log(newExperiment);
 
-    this.experimentService.create(newExperiment).subscribe(res => {
-        console.log(res);
-      },
-      error => {
-        this.snackbar.open('Kon experimenten niet toevoegen', '', {
-          duration: 2000,
-          // here specify the position
-          verticalPosition: 'top',
-          horizontalPosition: 'right'
-        });
-      });
+  private getExperimentDetails() {
+    this.updateAllInputs();
+  }
 
+  submitForm() {
+    if (this.isEditingExperimen) {
+      //todo: CORRECT EXPERIMENT ID
+      this.experimentService.update(1, this.experiment);
+    } else {
+      this.experimentService.create(this.experiment);
+    }
+  }
+
+  private buildFormExperiment() {
+    this.experimentForm = new FormGroup({
+        experiment_naam: new FormControl(this.experiment.experiment_naam),
+        experiment_leider_primair: new FormControl(this.experiment.experiment_leider_primair),
+        experiment_leider_secundair: new FormControl(this.experiment.experiment_leider_secundair),
+        fase: new FormControl(this.experiment.fase),
+        color: new FormControl(this.experiment.color),
+      }, [Validators.required, Validators.maxLength(255)]
+    );
+  }
+  private buildFormExperimentDetails() {
+    this.experimentDetailsForm = new FormGroup({
+      beschrijving: new FormControl(this.experimentDetails.beschrijving),
+      netwerk: new FormControl(this.experimentDetails.netwerk),
+      status: new FormControl(this.experimentDetails.status),
+      kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+      kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
+      doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
+      voortgang: new FormControl(this.experimentDetails.voortgang),
+      archief_type: new FormControl(this.experimentDetails.archief_type),
+      }, [Validators.required, Validators.maxLength(255)]
+    );
+  }
+
+  editExperiment() {
+    this.fieldsEditable = !this.fieldsEditable;
+    this.updateAllInputs();
+  }
+
+  updateAllInputs() {
+    this.disableOrEnableAllInputs(!this.fieldsEditable)
+  }
+
+  disableOrEnableAllInputs(disable) {
+    for(let input of Object.keys(this.experimentForm.controls)) {
+      if(disable){
+        this.experimentForm.get(input).disable();
+        console.log("DISABLE " + input);
+      } else {
+        this.experimentForm.get(input).enable();
+      }
+    }
+
+    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if(disable){
+        this.experimentDetailsForm.get(input).disable();
+      } else {
+        this.experimentDetailsForm.get(input).enable();
+      }
+    }
+  }
+  disablAllInputs() {
+    this.disableOrEnableAllInputs(true);
+  }
+  enableAllInputs() {
+    this.disableOrEnableAllInputs(false);
   }
 }
