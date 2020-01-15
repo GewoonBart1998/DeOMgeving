@@ -30,6 +30,7 @@ export class UserLoginComponent {
 
   handleLoginResponse(response) {
     const jwtToken = response.jwtToken;
+    console.log(jwtToken);
     localStorage.setItem('jwtToken', jwtToken);
     this.router.navigate(['/home']);
   }
