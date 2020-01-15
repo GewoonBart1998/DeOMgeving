@@ -6,14 +6,32 @@ import {ForgotPasswordComponent} from './user/page/forgot-password/forgot-passwo
 import {UserRegisterComponent} from './user/page/user-register/user-register.component';
 import {UserLoginComponent} from './user/page/user-login/user-login.component';
 import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
+import {DasboardComponent} from './home/components/dasboard/dasboard.component';
+import {AuthGuard} from './auth.guard';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: UserLoginComponent},
   {path: 'register', component: UserRegisterComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'user/reset-password/:token', component: ChangePasswordComponent },
-  {path: 'home', component: HomeComponent},
+  {path: 'user/reset-password/:token', component: ChangePasswordComponent},
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        canActivateChild: [AuthGuard],
+        children: [
+          {path: 'dashboard', component: DasboardComponent},
+          {path: 'experiment', component: ManageExperimentComponent},
+          {path: '', component: DasboardComponent},
+        ]
+      },
+
+    ]
+  },
   {path: 'manage-experiment', component: ManageExperimentComponent},
 ];
 
