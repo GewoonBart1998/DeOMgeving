@@ -26,6 +26,7 @@ const appRoutes: Routes = [
         children: [
           {path: 'dashboard', component: DasboardComponent},
           {path: 'experiment', component: ManageExperimentComponent},
+          {path: 'experiment/:id', component: ManageExperimentComponent},
           {path: '', component: DasboardComponent},
         ]
       },
