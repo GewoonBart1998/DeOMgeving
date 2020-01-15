@@ -6,39 +6,29 @@ import {ApiService} from '../shared/services/api.service';
   providedIn: 'root'
 })
 export class ExperimentService {
-  private resourcePath = '/experimenten';
+  private reourcePath = '/experimenten';
 
   constructor(private api: ApiService) {
   }
 
   list() {
-    return this.api.get<Array<Experiment>>(this.resourcePath);
+    return this.api.get<Array<Experiment>>(this.reourcePath);
   }
 
-  //TODO clean method names
   getById(experimentId: number) {
-    return this.api.get<Experiment>(`${this.resourcePath}${experimentId}`);
+    return this.api.get<Experiment>(`${this.reourcePath}/${experimentId}`);
   }
 
   create(experiment: Experiment) {
-    return this.api.post(this.resourcePath, experiment);
+    return this.api.post(this.reourcePath, experiment);
   }
 
   update(experimentId: number, experiment: Experiment) {
-    return this.api.put(`${this.resourcePath}/${experimentId}`, experiment);
+    return this.api.put(`${this.reourcePath}/${experimentId}`, experiment);
   }
 
   delete(experimentId: number) {
-    return this.api.delete(`${this.resourcePath}/${experimentId}`);
-  }
-
-  
-  filterBy(value: string){
-    return this.api.get<Array<Experiment>>(this.resourcePath + "/" + value)
-  }
-
-  searchBy(searchBy: string){
-    return this.api.get<Array<Experiment>>(this.resourcePath + "/search/" +searchBy)
+    return this.api.delete(`${this.reourcePath}/${experimentId}`);
   }
 
 }

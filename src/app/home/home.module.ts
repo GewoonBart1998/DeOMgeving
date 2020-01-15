@@ -8,7 +8,7 @@ import {ExperimentCardComponent} from './components/experiment-card/experiment-c
 import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {HomeComponent} from './page/home.component';
 import {SharedModule} from '../shared/shared.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -22,11 +22,12 @@ import {FormsModule} from '@angular/forms';
     MatTextareaComponent,
     HomeComponent
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
   exports: [SharedModule, FormsModule, DasboardComponent,
     HomeComponent,
     ExperimentCardComponent,
