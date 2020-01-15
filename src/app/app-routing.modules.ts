@@ -28,13 +28,14 @@ const appRoutes: Routes = [
           {path: 'dashboard', component: DasboardComponent},
           {path: 'experiment', component: ManageExperimentComponent},
           {path: '', component: DasboardComponent},
+          {path: 'user', component: UserManagementComponent},
+
         ]
       },
 
     ]
   },
   {path: 'manage-experiment', component: ManageExperimentComponent},
-  {path: 'user-management', component: UserManagementComponent},
 
 ];
 
