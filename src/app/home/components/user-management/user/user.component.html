@@ -1,15 +1,16 @@
 <li class="mdc-list-item" tabindex="0" *ngFor="let user of users">
   <label class="name" style="display:none">
-    <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required [(ngModel)]="id" >
+    <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required>
   </label>
   <label class="name" style="display:none">
-    <input type="id" placeholder="{{user.email}}" name="id" value="{{user.email}}" required [(ngModel)]="email" >
+    <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required>
   </label>
   <label class="name">
-    <input type="name" placeholder="{{user.name}}" name="Naam" value="{{user.name}}" required [(ngModel)]="name">
+    <input (change)="onSubmit(user.id, user.email, user.name, user.role)" name="Naam" placeholder="{{user.name}}" required type="name"
+           value="{{user.name}}">
   </label>
 
-  <app-mat-select class="rol" [(ngModel)]="role" label="{{user.role | lowercase}}"
+  <app-mat-select class="rol" label="{{user.role | lowercase}}"
                   [values]="[
       {text: 'gebruiker', value: '1'},
       {text: 'medewerker', value: '2'},
@@ -18,5 +19,4 @@
   </app-mat-select>
 
   <button class="delete-button" type="submit">Delete</button>
-
 </li>

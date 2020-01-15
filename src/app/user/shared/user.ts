@@ -1,5 +1,5 @@
 enum userRole {
-  GEBRUIKER, ADMIN
+  GEBRUIKER, ADMIN, MEDEWERKER
 }
 
 export class User {

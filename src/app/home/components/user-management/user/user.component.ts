@@ -10,20 +10,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  name: string;
-  role: string;
-  email: string;
-  id: number;
-
-
   users: Array<User>;
-
-  userUpdateForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl('', [Validators.email]),
-    role: new FormControl(''),
-    id: new FormControl('')
-  }, [Validators.required, Validators.maxLength(255)]);
 
   constructor(
     public fb: FormBuilder,
@@ -35,19 +22,16 @@ export class UserComponent implements OnInit {
     this.userService.getAllUsers().subscribe(response => {
       this.users = response;
     });
-
 }
 
-
-  // onSubmit() {
-    // console.warn(this.userUpdateForm.value);
-    // let user = new User();
-    // this.email = user.email;
-    // this.name = user.name;
-    // this.role = user.role;
-    // this.id = user.id;
-    // this.userService.updateUser(user).subscribe(res => {
-  //   //   console.log('User updated!');
-  //   });
-//   // }
+  onSubmit(id, email, name, role) {
+    let user = new User();
+    user.email = email;
+    user.name = name;
+    user.role = role;
+    user.id = id;
+    this.userService.updateUser(user).subscribe(res => {
+       console.log('User updated!');
+    });
+   }
 }

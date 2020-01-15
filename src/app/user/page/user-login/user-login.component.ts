@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 import {UserService} from '../../shared/user.service';
 
 @Component({
@@ -9,8 +9,8 @@ import {UserService} from '../../shared/user.service';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent {
-
   hidePassword = true;
+  hide = true;
 
   userLoginForm = new FormGroup({
     password: new FormControl(''),
@@ -30,7 +30,6 @@ export class UserLoginComponent {
 
   handleLoginResponse(response) {
     const jwtToken = response.jwtToken;
-    console.log(jwtToken);
     localStorage.setItem('jwtToken', jwtToken);
     this.router.navigate(['/home']);
   }
