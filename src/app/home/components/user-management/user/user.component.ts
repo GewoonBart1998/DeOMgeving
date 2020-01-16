@@ -1,8 +1,7 @@
-import {Component, OnInit, Type} from '@angular/core';
+import {Component, Input, OnInit, Type} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../../user/shared/user.service';
 import {User} from '../../../../user/shared/user';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -10,28 +9,28 @@ import {Observable} from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  users: Array<User>;
+  @Input() user: User;
+  userForm: FormGroup;
 
-  constructor(
-    public fb: FormBuilder,
-    public userService: UserService
-  ) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe(response => {
-      this.users = response;
-    });
-}
+    this.userForm = new FormGroup({
+        id: new FormControl(this.user.id),
+        email: new FormControl(this.user.email),
+        name: new FormControl(this.user.name),
+        role: new FormControl(this.user.role.toString()),
+      }, [Validators.required, Validators.maxLength(255)]
+    );
+  }
 
-  onSubmit(id, email, name, role) {
-    let user = new User();
-    user.email = email;
-    user.name = name;
-    user.role = role;
-    user.id = id;
-    this.userService.updateUser(user).subscribe(res => {
-       console.log('User updated!');
+
+
+  onSubmit() {
+    this.userService.updateUser(this.userForm.value).subscribe(res => {
+
+      console.log('User updated!');
     });
-   }
+  }
 }
