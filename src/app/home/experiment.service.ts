@@ -17,7 +17,7 @@ export class ExperimentService {
 
   //TODO clean method names
   getById(experimentId: number) {
-    return this.api.get<Experiment>(`${this.resourcePath}${experimentId}`);
+    return this.api.get<Experiment>(`${this.resourcePath}/${experimentId}`);
   }
 
   create(experiment: Experiment) {
@@ -32,7 +32,7 @@ export class ExperimentService {
     return this.api.delete(`${this.resourcePath}/${experimentId}`);
   }
 
-  
+
   filterBy(value: string){
     return this.api.get<Array<Experiment>>(this.resourcePath + "/" + value)
   }

@@ -116,6 +116,12 @@ export class ManageExperimentComponent implements OnInit {
     );
   }
 
+  pushEditButton() {
+    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   editExperiment() {
     this.fieldsEditable = !this.fieldsEditable;
     this.updateAllInputs();
@@ -129,7 +135,6 @@ export class ManageExperimentComponent implements OnInit {
     for(let input of Object.keys(this.experimentForm.controls)) {
       if(disable){
         this.experimentForm.get(input).disable();
-        console.log("DISABLE " + input);
       } else {
         this.experimentForm.get(input).enable();
       }
@@ -146,6 +151,7 @@ export class ManageExperimentComponent implements OnInit {
   disablAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
+
   enableAllInputs() {
     this.disableOrEnableAllInputs(false);
   }

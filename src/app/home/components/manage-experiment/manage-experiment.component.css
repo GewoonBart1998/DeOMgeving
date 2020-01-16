@@ -51,6 +51,13 @@ h2 {
   cursor: pointer;
 }
 
+.push-edit-experiment {
+  background-color: #ED6C05;
+  margin-left: 50px;
+  font-size: 1.2em;
+  padding: 7px 10px;
+}
+
 .export-experiment {
   margin-left: 50px;
   font-size: 1.2em;
