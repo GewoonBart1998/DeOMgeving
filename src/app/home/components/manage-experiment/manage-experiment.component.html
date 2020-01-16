@@ -1,8 +1,12 @@
 <div class="ribbon">
   <img class="logo" src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
   <div class="buttons">
-    <button *ngIf="isEditingExperimen" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
-            color="primary" autofocus>Experiment bewerken
+    <button *ngIf="isEditingExperimen && !fieldsEditable" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
+            color="primary" autofocuas>Experiment bewerken
+    </button>
+
+    <button *ngIf="isEditingExperimen && fieldsEditable" (click)="pushEditButton()" class="form-button push-edit-experiment" mat-flat-button
+            color="primary" autofocus>Wijzigingen doorvoeren
     </button>
 
     <button *ngIf="!isEditingExperimen" (click)="submitForm()" class="form-button add-experiment" type="submit" mat-flat-button

@@ -32,7 +32,7 @@ export class ExperimentService {
     return this.api.delete(`${this.resourcePath}/${experimentId}`);
   }
 
-  
+
   filterBy(value: string){
     return this.api.get<Array<Experiment>>(this.resourcePath + "/" + value)
   }

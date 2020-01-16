@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatSnackBar} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
+import {User} from '../../../user/shared/user';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -29,11 +29,8 @@ export class ManageExperimentComponent implements OnInit {
   constructor(
     private experimentService: ExperimentService,
     private userService: UserService,
-    private snackbar: MatSnackBar,
-    private route: ActivatedRoute
+    private snackbar: MatSnackBar
   ) {
-
-    this.getExperiment();
 
   }
 
@@ -57,8 +54,8 @@ export class ManageExperimentComponent implements OnInit {
 
 
   private fillLeaders() {
-    this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
-        for (let leader of users) {
+    this.userService.getUsersByRole("MEDEWERKER").subscribe(users=> {
+        for(let leader of users) {
           this.leaders.push(leader.name);
         }
       },
@@ -72,36 +69,15 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getExperiment() {
-
-    const experimentId = this.getExperimentIdFromPath();
-
-    if (!experimentId) {
-      this.experiment = new Experiment();
-      this.experimentDetails = new ExperimentDetails();
-      this.buildFormExperiment();
-      this.buildFormExperimentDetails();
-    }
-
-
-    this.experimentService.getById(experimentId).subscribe(response => {
+    //todo: CORRECT EXPERIMENT ID
+    this.experimentService.getById(1).subscribe(response => {
       this.experiment = response;
-      this.experimentDetails = new ExperimentDetails();
       this.buildFormExperiment();
       this.buildFormExperimentDetails();
       this.updateAllInputs();
     });
   }
 
-  private getExperimentIdFromPath() {
-    const experimentId = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (isNaN(experimentId)) {
-      return false;
-    }
-
-    return experimentId;
-
-  }
 
   private getExperimentDetails() {
     this.updateAllInputs();
@@ -126,19 +102,24 @@ export class ManageExperimentComponent implements OnInit {
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
-
   private buildFormExperimentDetails() {
     this.experimentDetailsForm = new FormGroup({
-        beschrijving: new FormControl(this.experimentDetails.beschrijving),
-        netwerk: new FormControl(this.experimentDetails.netwerk),
-        status: new FormControl(this.experimentDetails.status),
-        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
-        kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
-        doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-        voortgang: new FormControl(this.experimentDetails.voortgang),
-        archief_type: new FormControl(this.experimentDetails.archief_type),
+      beschrijving: new FormControl(this.experimentDetails.beschrijving),
+      netwerk: new FormControl(this.experimentDetails.netwerk),
+      status: new FormControl(this.experimentDetails.status),
+      kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+      kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
+      doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
+      voortgang: new FormControl(this.experimentDetails.voortgang),
+      archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
+  }
+
+  pushEditButton() {
+    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
+      console.log(response);
+    });
   }
 
   editExperiment() {
@@ -147,28 +128,26 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   updateAllInputs() {
-    this.disableOrEnableAllInputs(!this.fieldsEditable);
+    this.disableOrEnableAllInputs(!this.fieldsEditable)
   }
 
   disableOrEnableAllInputs(disable) {
-    for (let input of Object.keys(this.experimentForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentForm.controls)) {
+      if(disable){
         this.experimentForm.get(input).disable();
-        console.log('DISABLE ' + input);
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if(disable){
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();
       }
     }
   }
-
   disablAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
@@ -176,5 +155,4 @@ export class ManageExperimentComponent implements OnInit {
   enableAllInputs() {
     this.disableOrEnableAllInputs(false);
   }
-
 }

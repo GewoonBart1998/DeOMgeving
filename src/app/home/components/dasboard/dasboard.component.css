@@ -87,7 +87,7 @@ select {
   background-color: #F7F5F5;
   overflow-y: hidden;
   overflow-x: hidden;
-  display: flex;
+  /*display: flex;*/
   min-height: 100%;
   flex-wrap: wrap;
 }
