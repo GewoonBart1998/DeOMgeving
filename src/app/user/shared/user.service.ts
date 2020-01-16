@@ -56,13 +56,6 @@ export class UserService {
   getJwtToken() {
     return localStorage.getItem('jwtToken');
   }
-  getAllUsers() {
-    return this.api.get<Array<User>>(`${this.resourcePath}/getAllUsers`);
-  }
-
-  updateUser(user: User) {
-    return this.api.post('/updateUser', user);
-  }
 
   removeUser(id: object) {
     return this.api.post('/user/{id}', id);
