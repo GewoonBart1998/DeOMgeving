@@ -18,4 +18,22 @@ export class ExperimentCardComponent implements OnInit {
   public setExperiment(experiment: Experiment) {
     this.experiment = experiment;
   }
+
+  getStatusKleur() {
+    switch(this.experiment.color) {
+      case "Rood":
+        return "red";
+        break;
+
+      case "Groen":
+        return "green";
+        break;
+
+      case "Oranje":
+        return "orange";
+        break;
+
+
+    }
+  }
 }

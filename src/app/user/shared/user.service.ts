@@ -38,7 +38,7 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.api.post('/updateUser', user);
+    return this.api.put(`${this.resourcePath}`, user);
   }
 
   isUserLoggedIn() {
