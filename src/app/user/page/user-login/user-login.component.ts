@@ -9,8 +9,8 @@ import {UserService} from '../../shared/user.service';
   styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent {
-
   hidePassword = true;
+  hide = true;
 
   userLoginForm = new FormGroup({
     password: new FormControl(''),
