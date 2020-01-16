@@ -1,11 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExperimentService} from '../../experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
-import {User} from '../../../user/shared/user';
+import {MatSnackBar} from '@angular/material';
+import {ExperimentDetailsService} from '../../experimentDetails.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -23,24 +24,33 @@ export class ManageExperimentComponent implements OnInit {
 
   private leaders: Array<string> = [];
 
-  private isEditingExperimen: boolean = false;
-  private fieldsEditable = !this.isEditingExperimen;
+  private existingExperiment = false;
+  private isEditingExperiment = true;
+  private experimentId;
 
   constructor(
     private experimentService: ExperimentService,
+    private experimentDetailsService: ExperimentDetailsService,
     private userService: UserService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
 
   }
 
+
   ngOnInit() {
+    this.experimentId = this.getExperimentIdFromPath();
+    this.existingExperiment = this.experimentId !== null;
     this.experiment = new Experiment();
     this.experimentDetails = new ExperimentDetails();
     this.buildFormExperimentDetails();
     this.buildFormExperiment();
 
-    if (this.isEditingExperimen) {
+    console.log(this.experimentId);
+
+    if (this.existingExperiment) {
       this.getExperiment();
       this.getExperimentDetails();
     } else {
@@ -54,8 +64,8 @@ export class ManageExperimentComponent implements OnInit {
 
 
   private fillLeaders() {
-    this.userService.getUsersByRole("MEDEWERKER").subscribe(users=> {
-        for(let leader of users) {
+    this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
+        for (const leader of users) {
           this.leaders.push(leader.name);
         }
       },
@@ -70,7 +80,7 @@ export class ManageExperimentComponent implements OnInit {
 
   private getExperiment() {
     //todo: CORRECT EXPERIMENT ID
-    this.experimentService.getById(1).subscribe(response => {
+    this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
       this.buildFormExperimentDetails();
@@ -80,15 +90,34 @@ export class ManageExperimentComponent implements OnInit {
 
 
   private getExperimentDetails() {
-    this.updateAllInputs();
+    this.experimentDetailsService.getByExperimentId(this.experimentId).subscribe(response => {
+      this.experimentDetails = response;
+      this.buildFormExperimentDetails();
+      this.updateAllInputs();
+    });
   }
 
   submitForm() {
-    if (this.isEditingExperimen) {
-      //todo: CORRECT EXPERIMENT ID
-      this.experimentService.update(1, this.experiment);
+    if (this.existingExperiment) {
+      this.experimentService.update(this.experimentId, this.experiment);
+      this.experimentDetailsService.update(this.experimentId, this.experimentDetailsForm.value);
     } else {
-      this.experimentService.create(this.experiment);
+      this.experimentService.create(this.experimentForm.value).subscribe(res => {
+        const experimentDetails = this.experimentDetailsForm.value;
+        experimentDetails.experimentId = res.id;
+        this.experimentDetailsService.create(experimentDetails).subscribe(
+          res1 => {
+            this.snackbar.open('Experiment aangemaakt!', '', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'right'
+            });
+
+          }
+        );
+
+
+      });
     }
   }
 
@@ -102,16 +131,17 @@ export class ManageExperimentComponent implements OnInit {
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
+
   private buildFormExperimentDetails() {
     this.experimentDetailsForm = new FormGroup({
-      beschrijving: new FormControl(this.experimentDetails.beschrijving),
-      netwerk: new FormControl(this.experimentDetails.netwerk),
-      status: new FormControl(this.experimentDetails.status),
-      kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
-      kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
-      doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-      voortgang: new FormControl(this.experimentDetails.voortgang),
-      archief_type: new FormControl(this.experimentDetails.archief_type),
+        beschrijving: new FormControl(this.experimentDetails.beschrijving),
+        netwerk: new FormControl(this.experimentDetails.netwerk),
+        status: new FormControl(this.experimentDetails.status),
+        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+        kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
+        doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
+        voortgang: new FormControl(this.experimentDetails.voortgang),
+        archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
@@ -120,39 +150,111 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
       console.log(response);
     });
+    this.experimentService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
+      console.log(response);
+    });
   }
 
   editExperiment() {
-    this.fieldsEditable = !this.fieldsEditable;
+    this.isEditingExperiment = !this.isEditingExperiment;
     this.updateAllInputs();
   }
 
   updateAllInputs() {
-    this.disableOrEnableAllInputs(!this.fieldsEditable)
+    this.disableOrEnableAllInputs(!this.isEditingExperiment);
   }
 
   disableOrEnableAllInputs(disable) {
-    for(let input of Object.keys(this.experimentForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentForm.controls)) {
+      if (disable) {
         this.experimentForm.get(input).disable();
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if (disable) {
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();
       }
     }
   }
+
   disablAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
 
   enableAllInputs() {
     this.disableOrEnableAllInputs(false);
+  }
+
+  private setupForm() {
+
+    const experimentId = this.getExperimentIdFromPath();
+
+    if (experimentId == null) {
+      return;
+    }
+
+    // this.getExperiment(experimentId);
+    // this.getExperimentDetails(experimentId);
+  }
+
+  private getExperimentIdFromPath() {
+    const experimentId = this.route.snapshot.paramMap.get('id');
+
+    if (experimentId == null) {
+      return null;
+    }
+
+    return Number(experimentId);
+  }
+
+  //
+  // private getExperiment(experimentId) {
+  //   this.experimentService.getById(experimentId).subscribe(response => {
+  //     this.experiment = response;
+  //     this.buildFormExperiment();
+  //     this.buildFormExperimentDetails();
+  //   });
+  // }
+  //
+  // private getExperimentDetails(experimentId) {
+  //   this.experimentDetailsService.getByExperimentId(experimentId).subscribe(response => {
+  //     this.experimentDetails = response;
+  //     this.buildFormExperimentDetails();
+  //   });
+  // }
+
+  deleteExperiment() {
+    this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
+      console.log('success');
+    });
+    this.experimentService.delete(this.experimentId).subscribe(res => {
+      console.log('success');
+    });
+
+    this.snackbar.open('Experiment verwijderd!', '', {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right'
+    });
+    this.router.navigate(['/home']);
+  }
+
+  private createEmptyForm() {
+    this.experiment = new Experiment();
+    this.experimentDetails = new ExperimentDetails();
+    this.buildFormExperiment();
+    this.buildFormExperimentDetails();
+    this.enableAllInputs();
+  }
+
+  private delayNaviagate() {
+    setTimeout(() => {
+
+    }, 900);
   }
 }
