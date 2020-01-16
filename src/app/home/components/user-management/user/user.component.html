@@ -1,0 +1,32 @@
+<li class="mdc-list-item" tabindex="0">
+  <form [formGroup]="userForm">
+  <label class="name" style="display:none">
+    <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required  formControlName="id">
+  </label>
+  <label class="name" style="display:none">
+    <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required formControlName="email">
+  </label>
+  <label class="name">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput (change)="onSubmit()" name="Naam" placeholder="{{user.name}}" required
+             value="{{user.name}}" formControlName="name">
+      <mat-error>error</mat-error>
+    </mat-form-field>
+
+
+  </label>
+
+    <mat-form-field>
+      <mat-label>{{ user.role }}</mat-label>
+      <mat-error>error</mat-error>
+      <mat-select (ngModelChange)="onSubmit()" formControlName="role" (change)="onSubmit()">
+        <mat-option [value]="'GEBRUIKER'">GEBRUIKER</mat-option>
+        <mat-option [value]="'MEDEWERKER'">MEDEWERKER</mat-option>
+        <mat-option [value]="'ADMIN'">ADMIN</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <button class="delete-button" type="submit">Delete</button>
+  </form>
+</li>
