@@ -1,5 +1,5 @@
 <li class="mdc-list-item" tabindex="0">
-  <form [formGroup]="userForm" (change)="onSubmit()">
+  <form [formGroup]="userForm">
   <label class="name" style="display:none">
     <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required  formControlName="id">
   </label>
@@ -7,8 +7,14 @@
     <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required formControlName="email">
   </label>
   <label class="name">
-    <input (change)="onSubmit()" name="Naam" placeholder="{{user.name}}" required
-           value="{{user.name}}" formControlName="name">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput (change)="onSubmit()" name="Naam" placeholder="{{user.name}}" required
+             value="{{user.name}}" formControlName="name">
+      <mat-error>error</mat-error>
+    </mat-form-field>
+
+
   </label>
 
     <mat-form-field>
