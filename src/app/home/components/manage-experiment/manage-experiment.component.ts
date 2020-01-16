@@ -1,11 +1,20 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ExperimentService} from '../../experiment.service';
+import {ExperimentService} from '../../service/experiment.service';
+import {PdfService} from '../../service/pdf.service';
+
+
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
 import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
 import {User} from '../../../user/shared/user';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 
 @Component({
   selector: 'app-manage-experiment',
@@ -16,6 +25,8 @@ import {User} from '../../../user/shared/user';
 //TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
 
+
+
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
   private experiment: Experiment;
@@ -23,13 +34,14 @@ export class ManageExperimentComponent implements OnInit {
 
   private leaders: Array<string> = [];
 
-  private isEditingExperimen: boolean = false;
+  private isEditingExperimen: boolean = true;
   private fieldsEditable = !this.isEditingExperimen;
 
   constructor(
     private experimentService: ExperimentService,
     private userService: UserService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private pdfService: PdfService
   ) {
 
   }
@@ -81,6 +93,11 @@ export class ManageExperimentComponent implements OnInit {
 
   private getExperimentDetails() {
     this.updateAllInputs();
+  }
+
+  generatePdf(){
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails);
+    pdfMake.createPdf(documentDefinition).download();
   }
 
   submitForm() {

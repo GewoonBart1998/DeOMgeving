@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExperimentService} from '../../experiment.service';
+import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
 
@@ -29,16 +29,14 @@ export class DasboardComponent implements OnInit {
       });
   }
 
-  changePhase(event) {
-    
-
-
+  changePhase(event){
     this.experimentService.filterBy(event.target.value).subscribe(
       res => {
 
       });
-    
   }
+
+    
 
   onSearch(searchvalue: string){
     this.experimentService.searchBy(searchvalue).subscribe(
@@ -46,8 +44,7 @@ export class DasboardComponent implements OnInit {
 
       });
   }
-
-  
-
-
 }
+
+
+
