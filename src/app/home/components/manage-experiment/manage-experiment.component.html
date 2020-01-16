@@ -1,7 +1,7 @@
 <div class="ribbon">
   <img class="logo" src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
   <div class="buttons">
-    <button *ngIf="existingExperiment" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
+    <button *ngIf="!(existingExperiment && isEditingExperiment)" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
             color="primary" autofocus>Experiment bewerken
     </button>
 

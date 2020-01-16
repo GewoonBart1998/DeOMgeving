@@ -35,7 +35,7 @@ export class DasboardComponent implements OnInit {
 
     this.experimentService.filterBy(event.target.value).subscribe(
       res => {
-
+        this.experimentList = res;
       });
 
   }

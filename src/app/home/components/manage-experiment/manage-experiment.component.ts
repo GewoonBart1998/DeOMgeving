@@ -51,6 +51,7 @@ export class ManageExperimentComponent implements OnInit {
     console.log(this.experimentId);
 
     if (this.existingExperiment) {
+      this.isEditingExperiment = false;
       this.getExperiment();
       this.getExperimentDetails();
     } else {
@@ -104,7 +105,8 @@ export class ManageExperimentComponent implements OnInit {
     } else {
       this.experimentService.create(this.experimentForm.value).subscribe(res => {
         const experimentDetails = this.experimentDetailsForm.value;
-        experimentDetails.experimentId = res.id;
+        // experimentDetails.netwerk = "";
+        experimentDetails.experimentId = <number>res;
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
             this.snackbar.open('Experiment aangemaakt!', '', {
@@ -112,6 +114,8 @@ export class ManageExperimentComponent implements OnInit {
               verticalPosition: 'top',
               horizontalPosition: 'right'
             });
+
+            this.router.navigate(['/home']);
 
           }
         );
@@ -150,9 +154,11 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
       console.log(response);
     });
-    this.experimentService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
+    this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
       console.log(response);
     });
+    this.isEditingExperiment = false;
+    this.updateAllInputs();
   }
 
   editExperiment() {
