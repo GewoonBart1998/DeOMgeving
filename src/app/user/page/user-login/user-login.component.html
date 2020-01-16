@@ -13,9 +13,9 @@
 
         <mat-form-field matInput appearance="outline">
           <mat-label>Wachtwoord</mat-label>
-          <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hide ? 'password' : 'text'" required>
-          <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <input type="password" formControlName="password" matInput placeholder="Wachtwoord" [type]="hidePassword ? 'password' : 'text'" required>
+          <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error>Wachtwoord incorrect</mat-error>
         </mat-form-field>

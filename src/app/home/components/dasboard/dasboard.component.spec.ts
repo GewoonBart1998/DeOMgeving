@@ -1,8 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {DasboardComponent} from './dasboard.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {UserModule} from '../../../user/user.module';
+import {HomeComponent} from '../../page/home.component';
+import {HomeModule} from '../../home.module';
 
 describe('DasboardComponent', () => {
   let component: DasboardComponent;
@@ -10,10 +10,9 @@ describe('DasboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule],
-      declarations: [ DasboardComponent ]
+      imports: [UserModule, HomeModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

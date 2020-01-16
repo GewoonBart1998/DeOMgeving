@@ -15,4 +15,7 @@ export class ExperimentCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  public setExperiment(experiment: Experiment) {
+    this.experiment = experiment;
+  }
 }
