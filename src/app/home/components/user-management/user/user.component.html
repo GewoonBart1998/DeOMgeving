@@ -3,8 +3,14 @@
   <label class="name" style="display:none">
     <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required  formControlName="id">
   </label>
-  <label class="name" style="display:none">
-    <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required formControlName="email">
+  <label class="name">
+<!--    <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required formControlName="email">-->
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput (change)="onSubmit()" name="email" placeholder="{{user.email}}" required
+             value="{{user.email}}" formControlName="email">
+      <mat-error>error</mat-error>
+    </mat-form-field>
   </label>
   <label class="name">
     <mat-form-field>
@@ -26,7 +32,9 @@
       </mat-select>
     </mat-form-field>
 
-  <button class="delete-button" type="submit">Delete</button>
+  <button class="delete-button" (click)="onSubmit()">Delete</button>
+  <button *ngIf="userrole" class="identify-button" (click)="upgradeRole()">Identify</button>
+
   </form>
 </li>
 
