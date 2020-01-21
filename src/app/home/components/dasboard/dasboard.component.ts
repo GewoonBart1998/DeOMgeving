@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dasboard',
@@ -11,7 +12,7 @@ import {MatSnackBar} from '@angular/material';
 export class DasboardComponent implements OnInit {
   private experimentList: Array<Experiment>;
 
-  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar) {
+  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
@@ -32,19 +33,22 @@ export class DasboardComponent implements OnInit {
   changePhase(event){
     this.experimentService.filterBy(event.target.value).subscribe(
       res => {
-
+        this.experimentList = res;
       });
   }
 
-    
 
-  onSearch(searchvalue: string){
+
+  onSearch(searchvalue: string) {
     this.experimentService.searchBy(searchvalue).subscribe(
       res => {
 
       });
   }
+
+
+
+  onExperimentClick(experiment: Experiment) {
+    this.router.navigate([`/home/experiment/${experiment.experimentId}`]);
+  }
 }
-
-
-

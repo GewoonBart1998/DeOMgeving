@@ -2,7 +2,7 @@
   <mat-label>{{ label }}</mat-label>
   <mat-error>error</mat-error>
   <mat-select [(ngModel)]="inputValue" [required]="required">
-    <mat-option *ngFor="let option of values" [value]="option.value">
+    <mat-option *ngFor="let option of values" [value]="option.value" >
       {{ option.text }}
     </mat-option>
   </mat-select>

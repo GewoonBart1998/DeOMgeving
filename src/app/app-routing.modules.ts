@@ -8,6 +8,7 @@ import {UserLoginComponent} from './user/page/user-login/user-login.component';
 import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
 import {DasboardComponent} from './home/components/dasboard/dasboard.component';
 import {AuthGuard} from './auth.guard';
+import {UserManagementComponent} from './home/components/user-management/user-management.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -26,13 +27,17 @@ const appRoutes: Routes = [
         children: [
           {path: 'dashboard', component: DasboardComponent},
           {path: 'experiment', component: ManageExperimentComponent},
+          {path: 'experiment/:id', component: ManageExperimentComponent},
           {path: '', component: DasboardComponent},
+          {path: 'user', component: UserManagementComponent},
+
         ]
       },
 
     ]
   },
   {path: 'manage-experiment', component: ManageExperimentComponent},
+
 ];
 
 @NgModule({
