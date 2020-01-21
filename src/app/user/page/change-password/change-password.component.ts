@@ -11,7 +11,7 @@ import {UserService} from '../../shared/user.service';
 })
 export class ChangePasswordComponent implements OnInit {
   private isPasswordVisible: boolean;
-  private changePasswordFormGroup: FormGroup;
+  changePasswordFormGroup: FormGroup;
   private readonly changePasswordToken: string;
 
   constructor(private userService: UserService, private snackbar: MatSnackBar,
