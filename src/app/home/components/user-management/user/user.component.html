@@ -21,6 +21,7 @@
       <mat-label>{{ user.role }}</mat-label>
       <mat-error>error</mat-error>
       <mat-select (ngModelChange)="onSubmit()" formControlName="role" (change)="onSubmit()">
+        <mat-option [value]="'UNIDENTIFIED'">UNIDENTIFIED</mat-option>
         <mat-option [value]="'GEBRUIKER'">GEBRUIKER</mat-option>
         <mat-option [value]="'MEDEWERKER'">MEDEWERKER</mat-option>
         <mat-option [value]="'ADMIN'">ADMIN</mat-option>

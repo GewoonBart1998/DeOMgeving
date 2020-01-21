@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   private user: User;
+  private userrole: String;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -30,5 +31,9 @@ export class HomeComponent implements OnInit {
   logout() {
     this.userService.logout();
     this.router.navigate(['/login']);
+  }
+
+  usercheck() {
+    this.userrole = this.user.role.toString();
   }
 }
