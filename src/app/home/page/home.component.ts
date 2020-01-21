@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   private user: User;
-  private userrole: String;
+  private userrole = false;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.user = this.userService.getCurrentUser();
     console.log(this.user);
+    this.usercheck();
   }
 
   getLoggedUserame() {
@@ -34,6 +35,6 @@ export class HomeComponent implements OnInit {
   }
 
   usercheck() {
-    this.userrole = this.user.role.toString();
+    this.userrole = this.user.role.toString() === 'ADMIN';
   }
 }

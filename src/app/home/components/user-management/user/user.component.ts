@@ -25,8 +25,6 @@ export class UserComponent implements OnInit {
     );
   }
 
-
-
   onSubmit() {
     this.userService.updateUser(this.userForm.value).subscribe(res => {
     });
