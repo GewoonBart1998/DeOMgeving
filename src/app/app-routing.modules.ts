@@ -7,6 +7,7 @@ import {UserRegisterComponent} from './user/page/user-register/user-register.com
 import {UserLoginComponent} from './user/page/user-login/user-login.component';
 import {ChangePasswordComponent} from './user/page/change-password/change-password.component';
 import {DasboardComponent} from './home/components/dasboard/dasboard.component';
+import {VasteDienstenComponent} from './home/components/vaste-diensten/vaste-diensten.component';
 import {AuthGuard} from './auth.guard';
 import {UserManagementComponent} from './home/components/user-management/user-management.component';
 
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
           {path: 'experiment/:id', component: ManageExperimentComponent},
           {path: '', component: DasboardComponent},
           {path: 'user', component: UserManagementComponent},
+          {path: 'dienst', component: VasteDienstenComponent},
 
         ]
       },

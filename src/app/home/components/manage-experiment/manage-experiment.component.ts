@@ -1,12 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ExperimentService} from '../../experiment.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ExperimentService} from '../../service/experiment.service';
+import {PdfService} from '../../service/pdf.service';
+
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatSnackBar} from '@angular/material';
+import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
+import {User} from '../../../user/shared/user';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import pdfMake from 'pdfmake/build/pdfmake';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -16,6 +20,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 //TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
+
+
 
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
@@ -35,10 +41,10 @@ export class ManageExperimentComponent implements OnInit {
     private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
+    private pdfService: PdfService
   ) {
 
   }
-
 
   ngOnInit() {
     this.experimentId = this.getExperimentIdFromPath();
@@ -96,6 +102,11 @@ export class ManageExperimentComponent implements OnInit {
       this.buildFormExperimentDetails();
       this.updateAllInputs();
     });
+  }
+
+  generatePdf(){
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails);
+    pdfMake.createPdf(documentDefinition).download();
   }
 
   submitForm() {

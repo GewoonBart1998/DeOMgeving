@@ -11,13 +11,15 @@ import {AppRoutingModule} from './app-routing.modules';
 import {HomeModule} from './home/home.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './auth.interceptor';
+import { VasteDienstenComponent } from './home/components/vaste-diensten/vaste-diensten.component';
 
 // import {AppRoutingModule} from './app-routing.modules';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VasteDienstenComponent
   ],
   imports: [
     BrowserModule,

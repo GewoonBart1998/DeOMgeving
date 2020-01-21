@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class DasboardComponent implements OnInit {
   private experimentList: Array<Experiment>;
+  filterName: String;
 
   constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
   }
@@ -31,18 +32,26 @@ export class DasboardComponent implements OnInit {
   }
 
   changePhase(event){
-    this.experimentService.filterBy(event.target.value).subscribe(
-      res => {
+    if(event.target.value == 'none'){
+      this.experimentService.list().subscribe(res => {
         this.experimentList = res;
       });
+    }else {
+      this.experimentService.filterBy(event.target.value).subscribe(
+        res => {
+          this.experimentList = res;
+        });
+    }
+
   }
 
 
 
   onSearch(searchvalue: string) {
+    this.filterName = "";
     this.experimentService.searchBy(searchvalue).subscribe(
       res => {
-
+        this.experimentList = res;
       });
   }
 

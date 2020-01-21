@@ -35,9 +35,10 @@ export class ExperimentService {
 
   filterBy(value: string){
     return this.api.get<Array<Experiment>>(this.resourcePath + "/filter/" + value)
+
   }
 
   searchBy(searchBy: string){
-    return this.api.get<Array<Experiment>>(this.resourcePath + "/search/" +searchBy)
+    return this.api.get<Array<Experiment>>(this.resourcePath + "/search/" + searchBy)
   }
 }
