@@ -9,6 +9,8 @@ import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {HomeComponent} from './page/home.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UpdateHistoryComponent} from './components/manage-experiment/update-history/update-history.component';
+import {UpdateMessageComponent} from './components/manage-experiment/update-history/update-message/update-message.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatInputComponent,
     MatSelectComponent,
     MatTextareaComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateHistoryComponent,
+    UpdateMessageComponent
   ],
     imports: [
         CommonModule,

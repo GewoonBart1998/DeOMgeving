@@ -19,7 +19,9 @@
 
   </div>
 </div>
-<div class="experiment-info scroll-container">
+
+
+<div class="experiment-info scroll-container ">
   <h2>Experiment</h2>
   <br>
   <form [formGroup]="experimentForm">
@@ -146,3 +148,5 @@
     </div>
   </form>
 </div>
+<app-update-history *ngIf="!isEditingExperimen"></app-update-history>
+

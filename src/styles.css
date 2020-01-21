@@ -8,3 +8,14 @@ body {
   height: 100vh;  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
+.author {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  background-color: #BA81EB;
+  padding: 3px 15px;
+  border-radius: 20px;
+  margin-top: 20px;
+}

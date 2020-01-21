@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  height: 100%;
+  padding: 0;
+}
+
+.message-list {
+  max-height: 75.5%;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.post-message {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 20px 0;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+lable {
+  display: block;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  max-height: 150px; min-height: 150px;
+}
+
+.form-button {
+  display: inline-block;
+  margin: auto;
+}
+
+

@@ -1,0 +1,19 @@
+.container {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  margin: 10px 0;
+  padding: 10px;
+
+}
+
+.author, .date {
+  display: inline-block;
+}
+
+.date {
+  float: right;
+}
+
+.author{
+  margin:0;
+}
