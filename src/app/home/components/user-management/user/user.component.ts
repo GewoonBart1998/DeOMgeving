@@ -11,7 +11,7 @@ import {User} from '../../../../user/shared/user';
 export class UserComponent implements OnInit {
   @Input() user: User;
   userForm: FormGroup;
-
+  userrole= false;
 
   constructor(private userService: UserService) {
   }
@@ -24,6 +24,8 @@ export class UserComponent implements OnInit {
         role: new FormControl(this.user.role.toString()),
       }, [Validators.required, Validators.maxLength(255)]
     );
+    if (this.user.role.toString() === "UNIDENTIFIED")
+      this.userrole = true;
   }
   onDelete() {
     this.userService.removeUser(this.userForm.value.id).subscribe(res => {
@@ -35,8 +37,21 @@ export class UserComponent implements OnInit {
 
   onSubmit() {
     this.userService.updateUser(this.userForm.value).subscribe(res => {
-
-      console.log('User updated!');
     });
+  }
+  upgradeRole() {
+    console.log("click!");
+    if(this.user.role.toString() === "UNIDENTIFIED") {
+      this.userForm = new FormGroup({
+          id: new FormControl(this.user.id),
+          email: new FormControl(this.user.email),
+          name: new FormControl(this.user.name),
+          role: new FormControl("GEBRUIKER"),
+        }, [Validators.required, Validators.maxLength(255)]
+      );
+      this.userService.updateUser(this.userForm.value).subscribe(res => {
+      });
+      this.userrole = false;
+    }
   }
 }
