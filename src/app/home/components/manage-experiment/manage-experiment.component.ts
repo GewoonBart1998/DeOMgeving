@@ -11,6 +11,7 @@ import {User} from '../../../user/shared/user';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from "pdfmake/build/vfs_fonts";
 
 @Component({
   selector: 'app-manage-experiment',
@@ -105,8 +106,14 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   generatePdf(){
-    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails);
-    pdfMake.createPdf(documentDefinition).download();
+    const self = this;
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails,
+      function(data) {
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        var pdf = pdfMake.createPdf(data);
+        pdf.download(self.experiment.experiment_naam);
+    });
+
   }
 
   submitForm() {

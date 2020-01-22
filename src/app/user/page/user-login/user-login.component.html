@@ -1,8 +1,12 @@
+<div class="logocontainer">
+  <img class="logo" src="/assets/img/testlabOM_logo.png" alt="Omgeving logo">
+</div>
 <div class="container">
+
   <mat-card>
     <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()" (keydown.enter)="$event.preventDefault()">
 
-      <img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
+      <img class="logoomgeving" src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
 
       <div class="textfields">
         <mat-form-field matInput appearance="outline">
