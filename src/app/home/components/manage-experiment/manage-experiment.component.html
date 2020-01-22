@@ -60,10 +60,11 @@
       <mat-form-field>
         <mat-label>Fase</mat-label>
         <mat-error>error</mat-error>
-        <mat-select required="true" formControlName="fase">
+        <mat-select required="true" formControlName="fase"><mat-option [value]="'Idee'">Idee</mat-option>
           <mat-option [value]="'Lab in'">Lab in</mat-option>
           <mat-option [value]="'Lab uit'">Lab uit</mat-option>
-          <mat-option [value]="'Idee'">Idee</mat-option>
+          <mat-option [value]="'Vaste dienst'">Vaste dienst</mat-option>
+
         </mat-select>
       </mat-form-field>
       <br>
@@ -75,6 +76,7 @@
           <mat-option [value]="'Rood'">Rood</mat-option>
           <mat-option [value]="'Oranje'">Oranje</mat-option>
           <mat-option [value]="'Groen'">Groen</mat-option>
+          <mat-option [value]="'Blauw'">Blauw</mat-option>
         </mat-select>
       </mat-form-field>
 
