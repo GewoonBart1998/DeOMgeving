@@ -8,10 +8,10 @@ import {ExperimentCardComponent} from './components/experiment-card/experiment-c
 import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {HomeComponent} from './page/home.component';
 import {SharedModule} from '../shared/shared.module';
-import { UserManagementComponent } from './components/user-management/user-management.component';
-import { UserComponent } from './components/user-management/user/user.component';
-import { UserListComponent } from './components/user-management/user/user-list/user-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UserManagementComponent} from './components/user-management/user-management.component';
+import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
+import {UserComponent} from './components/user-management/user/user.component';
 
 
 @NgModule({

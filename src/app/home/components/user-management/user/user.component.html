@@ -32,9 +32,7 @@
       </mat-select>
     </mat-form-field>
 
-  <button class="delete-button" (click)="onSubmit()">Delete</button>
+  <button class="delete-button" type="submit" (click)="onDelete()" >Delete</button>
   <button *ngIf="userrole" class="identify-button" (click)="upgradeRole()">Identify</button>
-
   </form>
 </li>
-

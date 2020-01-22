@@ -27,6 +27,13 @@ export class UserComponent implements OnInit {
     if (this.user.role.toString() === "UNIDENTIFIED")
       this.userrole = true;
   }
+  onDelete() {
+    this.userService.removeUser(this.userForm.value.id).subscribe(res => {
+      console.log('User removed!');
+      window.location.reload();
+    });
+  }
+
 
   onSubmit() {
     this.userService.updateUser(this.userForm.value).subscribe(res => {

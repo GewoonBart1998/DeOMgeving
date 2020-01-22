@@ -5,6 +5,7 @@ import {ManageExperimentComponent} from './home/components/manage-experiment/man
 import {UserRegisterComponent} from './user/page/user-register/user-register.component';
 import {UserLoginComponent} from './user/page/user-login/user-login.component';
 import {DasboardComponent} from './home/components/dasboard/dasboard.component';
+import {VasteDienstenComponent} from './home/components/vaste-diensten/vaste-diensten.component';
 import {AuthGuard} from './auth.guard';
 import {AdminGuard} from './admin.guard';
 import {UserManagementComponent} from './home/components/user-management/user-management.component';
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
           {path: 'experiment/:id', component: ManageExperimentComponent},
           {path: '', component: DasboardComponent},
           {path: 'user', component: UserManagementComponent, canActivate: [AdminGuard]},
+          {path: 'dienst', component: VasteDienstenComponent},
 
         ]
       },
