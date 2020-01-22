@@ -57,6 +57,10 @@ export class UserService {
     return localStorage.getItem('jwtToken');
   }
 
+  removeUser(id: number) {
+    return this.api.delete('/user/remove/' + id);
+  }
+
   /*https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library */
   private decodeJWT(jwtToken: string) {
 
