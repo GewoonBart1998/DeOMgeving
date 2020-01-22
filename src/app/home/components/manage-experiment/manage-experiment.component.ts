@@ -18,7 +18,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
   styleUrls: ['./manage-experiment.component.css']
 })
 
-//TODO: split this into two components (no time)
+// TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
 
 
@@ -86,7 +86,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getExperiment() {
-    //todo: CORRECT EXPERIMENT ID
+    // TODO: CORRECT EXPERIMENT ID
     this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
@@ -104,7 +104,7 @@ export class ManageExperimentComponent implements OnInit {
     });
   }
 
-  generatePdf(){
+  generatePdf() {
     const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails);
     pdfMake.createPdf(documentDefinition).download();
   }
@@ -199,7 +199,7 @@ export class ManageExperimentComponent implements OnInit {
     }
   }
 
-  disablAllInputs() {
+  disableAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
 

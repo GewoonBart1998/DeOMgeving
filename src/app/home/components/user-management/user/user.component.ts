@@ -12,6 +12,7 @@ export class UserComponent implements OnInit {
   @Input() user: User;
   userForm: FormGroup;
 
+
   constructor(private userService: UserService) {
   }
 
@@ -24,7 +25,12 @@ export class UserComponent implements OnInit {
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
-
+  onDelete() {
+    this.userService.removeUser(this.userForm.value.id).subscribe(res => {
+      console.log('User removed!');
+      window.location.reload();
+    });
+  }
 
 
   onSubmit() {
