@@ -2,6 +2,10 @@ header {
   width: 250px;
 }
 
+.logo{
+  width: 220px;
+}
+
 .menu {
   position: relative;
   height: 100vh; /* 100% Full-height */
@@ -15,17 +19,18 @@ header {
 }
 
 .welcome {
-  height: 150px;
+  height: 120px;
 }
 
 .menu h1 {
+  font-size: 25px;
   margin: 0;
   padding-left: 12px;
   font-weight: 400;
 }
 
 .menu .user {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .menu .vertical-align {

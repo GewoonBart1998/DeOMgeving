@@ -3,6 +3,7 @@
     <div id="menu" class="menu">
       <div class="welcome">
         <div class="vertical-align">
+          <img class="logo" src="/assets/img/testlabOM_logo.png" alt="Omgeving logo">
           <h1>Welkom</h1>
           <h1 class="user">{{ getLoggedUserame()}}</h1>
         </div>
@@ -11,13 +12,12 @@
       <div class="buttons">
         <a routerLink='/home/dashboard' routerLinkActive='selected'>
           <img src="/assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
+        <a routerLink='/home/dienst' routerLinkActive='selected'>
+          <img src="/assets/img/icons/Vaste_diensten.png" alt="dienst">Vaste diensten</a>
         <a routerLink='/home/experiment' routerLinkActive='selected'>
           <img src="/assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
-        <a routerLink='/home/user' routerLinkActive='selected'>
+        <a routerLink='/home/user' routerLinkActive='selected' *ngIf="userrole" >
           <img src="/assets/img/icons/User_management.png" alt="users">User management</a>
-        <a routerLink='/home/export' routerLinkActive='selected'>
-          <img src="/assets/img/icons/Export_experiment.png" alt="export">Export experiment
-        </a>
       </div>
       <div class="bottom-button">
         <a class="logout" (click)="logout()" ><img src="/assets/img/icons/Log_out.png" alt="log-out">Log out</a>

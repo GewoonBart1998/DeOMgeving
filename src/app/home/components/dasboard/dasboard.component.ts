@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ExperimentService} from '../../experiment.service';
+import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dasboard',
@@ -10,8 +11,9 @@ import {MatSnackBar} from '@angular/material';
 })
 export class DasboardComponent implements OnInit {
   private experimentList: Array<Experiment>;
+  filterName: String;
 
-  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar) {
+  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
@@ -29,25 +31,33 @@ export class DasboardComponent implements OnInit {
       });
   }
 
-  changePhase(event) {
-    
-
-
-    this.experimentService.filterBy(event.target.value).subscribe(
-      res => {
-
+  changePhase(event){
+    if(event.target.value == 'none'){
+      this.experimentService.list().subscribe(res => {
+        this.experimentList = res;
       });
-    
+    }else {
+      this.experimentService.filterBy(event.target.value).subscribe(
+        res => {
+          this.experimentList = res;
+        });
+    }
+
   }
 
-  onSearch(searchvalue: string){
+
+
+  onSearch(searchvalue: string) {
+    this.filterName = "";
     this.experimentService.searchBy(searchvalue).subscribe(
       res => {
-
+        this.experimentList = res;
       });
   }
 
-  
 
 
+  onExperimentClick(experiment: Experiment) {
+    this.router.navigate([`/home/experiment/${experiment.experimentId}`]);
+  }
 }

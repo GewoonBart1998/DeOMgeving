@@ -1,22 +1,25 @@
 <div class="ribbon">
   <img class="logo" src="/assets/img/OMgeving_logo.png" alt="Omgeving logo">
   <div class="buttons">
-    <button *ngIf="isEditingExperimen && !fieldsEditable" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
-            color="primary" autofocuas>Experiment bewerken
+    <button *ngIf="!(existingExperiment && isEditingExperiment)" (click)="editExperiment()" class="form-button edit-experiment" mat-flat-button
+            color="primary" autofocus>Experiment bewerken
     </button>
 
-    <button *ngIf="isEditingExperimen && fieldsEditable" (click)="pushEditButton()" class="form-button push-edit-experiment" mat-flat-button
+    <button *ngIf="existingExperiment && isEditingExperiment" (click)="pushEditButton()" class="form-button push-edit-experiment" mat-flat-button
             color="primary" autofocus>Wijzigingen doorvoeren
     </button>
 
-    <button *ngIf="!isEditingExperimen" (click)="submitForm()" class="form-button add-experiment" type="submit" mat-flat-button
+    <button *ngIf="!existingExperiment" (click)="submitForm()" class="form-button add-experiment" type="submit" mat-flat-button
             color="primary" autofocus>Experiment toevoegen
     </button>
 
-    <button class="form-button export-experiment" mat-flat-button
+    <button (click)="generatePdf()" class="form-button export-experiment" mat-flat-button
             color="primary" autofocus>Exporteer naar PDF
     </button>
 
+    <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger" type="submit" mat-flat-button
+            color="primary" autofocus>Experiment verwijderen
+    </button>
   </div>
 </div>
 
@@ -128,8 +131,8 @@
       <br>
 
       <mat-form-field class="large-input">
-        <mat-label>Voortgang</mat-label>
-        <textarea class="large-input" matInput formControlName="voortgang"></textarea>
+        <mat-label>Overige opmerkingen</mat-label>
+        <textarea class="large-input" matInput formControlName="Overige opmerkingen"></textarea>
         <mat-error>error</mat-error>
       </mat-form-field>
       <br>

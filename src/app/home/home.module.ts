@@ -11,6 +11,10 @@ import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UpdateHistoryComponent} from './components/manage-experiment/update-history/update-history.component';
 import {UpdateMessageComponent} from './components/manage-experiment/update-history/update-message/update-message.component';
+import {UserManagementComponent} from './components/user-management/user-management.component';
+import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
+import {UserComponent} from './components/user-management/user/user.component';
+
 
 
 @NgModule({
@@ -23,6 +27,9 @@ import {UpdateMessageComponent} from './components/manage-experiment/update-hist
     MatSelectComponent,
     MatTextareaComponent,
     HomeComponent,
+    UserManagementComponent,
+    UserComponent,
+    UserListComponent,
     UpdateHistoryComponent,
     UpdateMessageComponent
   ],

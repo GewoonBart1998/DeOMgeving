@@ -57,4 +57,17 @@
   overflow: hidden;
 }
 
+.author-div {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  background-color: #BA81EB;
+}
 
+.author-div p {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 1rem;
+}

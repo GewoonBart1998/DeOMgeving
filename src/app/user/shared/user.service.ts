@@ -33,6 +33,14 @@ export class UserService {
     return this.api.get<Array<User>>(`${this.resourcePath}/usersByRole/` + role);
   }
 
+  getAllUsers() {
+    return this.api.get<Array<User>>(`${this.resourcePath}/getAllUsers`);
+  }
+
+  updateUser(user: User) {
+    return this.api.put(`${this.resourcePath}`, user);
+  }
+
   isUserLoggedIn() {
     return localStorage.getItem('jwtToken') != null;
   }
@@ -47,6 +55,10 @@ export class UserService {
 
   getJwtToken() {
     return localStorage.getItem('jwtToken');
+  }
+
+  removeUser(id: number) {
+    return this.api.delete('/user/remove/' + id);
   }
 
   /*https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library */

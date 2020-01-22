@@ -1,0 +1,33 @@
+.name {
+  margin: 0 10px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.rol {
+}
+
+.mdc-list-item {
+  list-style-type: none;
+}
+
+.delete-button {
+  margin: 0 10px;
+padding: 0 10px;
+background-color: #ED6C05 !important;
+border: none;
+border-radius: 3px;
+color: #FFFFFF !important;
+cursor: pointer;
+}
+
+.identify-button {
+  margin: 0 10px;
+  padding: 0 10px;
+  background-color: #BA81EB !important;
+  border: none;
+  border-radius: 3px;
+  color: #FFFFFF !important;
+  cursor: pointer;
+}

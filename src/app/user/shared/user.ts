@@ -1,11 +1,10 @@
 enum userRole {
-  GEBRUIKER, ADMIN
+  GEBRUIKER, ADMIN, MEDEWERKER, UNIDENTIFIED
 }
-
 export class User {
-  role: userRole;
   id: number;
-  name: string;
   email: string;
-  password: string;
+  role: userRole;
+  accountrole: string;
+  name: string;
 }

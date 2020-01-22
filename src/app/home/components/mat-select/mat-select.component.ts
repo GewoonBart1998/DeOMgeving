@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MatSelectComponent implements OnInit {
   @Input() required = false;
-  inputValue: string;
+  @Input() inputValue: string;
   @Input() label: string;
   @Input() values: Array<{value: string, text: string}>;
   @Input() default: string;
