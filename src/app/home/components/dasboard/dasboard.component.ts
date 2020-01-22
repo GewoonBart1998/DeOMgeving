@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExperimentService} from '../../experiment.service';
+import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class DasboardComponent implements OnInit {
   private experimentList: Array<Experiment>;
+  filterName: String;
 
   constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
   }
@@ -30,22 +31,30 @@ export class DasboardComponent implements OnInit {
       });
   }
 
-  changePhase(event) {
+  changePhase(event){
+    if(event.target.value == 'none'){
+      this.experimentService.list().subscribe(res => {
+        this.experimentList = res;
+      });
+    }else {
+      this.experimentService.filterBy(event.target.value).subscribe(
+        res => {
+          this.experimentList = res;
+        });
+    }
+
+  }
 
 
-    this.experimentService.filterBy(event.target.value).subscribe(
+
+  onSearch(searchvalue: string) {
+    this.filterName = "";
+    this.experimentService.searchBy(searchvalue).subscribe(
       res => {
         this.experimentList = res;
       });
-
   }
 
-  onSearch(searchvalue: string) {
-    this.experimentService.searchBy(searchvalue).subscribe(
-      res => {
-
-      });
-  }
 
 
   onExperimentClick(experiment: Experiment) {
