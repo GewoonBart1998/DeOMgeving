@@ -3,7 +3,7 @@
   <article class="form-body mat-elevation-z1">
 
     <h1>Registreren</h1>
-    <form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()" novalidate (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="userRegisterForm" (keydown.enter)="onSubmit()">
 
       <mat-form-field matInput appearance="outline">
         <mat-label>Volledige naam</mat-label>
@@ -28,7 +28,7 @@
       <button type="button" class="link" routerLink='/login' mat-flat-button color="primary">Terug</button>
 
       <button [disabled]="!userRegisterForm.valid" class="form-button float-right" type="submit" mat-flat-button
-              color="primary">Registreer
+              color="primary" (click)="onSubmit()">Registreer
       </button>
 
     </form>

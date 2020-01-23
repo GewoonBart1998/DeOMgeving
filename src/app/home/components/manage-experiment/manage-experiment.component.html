@@ -52,7 +52,8 @@
         <mat-form-field>
           <mat-label>Secundaire experiment leider</mat-label>
           <mat-error>error</mat-error>
-          <mat-select formControlName="experiment_leider_secundair" required="true">
+          <mat-select formControlName="experiment_leider_secundair" required="false">
+            <mat-option>n.v.t.</mat-option>
             <mat-option *ngFor="let leader of leaders" [value]="leader">
               {{ leader }}
             </mat-option>
@@ -65,6 +66,7 @@
           <mat-label>Fase</mat-label>
           <mat-error>error</mat-error>
           <mat-select required="true" formControlName="fase">
+            <mat-option [value]="'n.v.t.'">n.v.t.</mat-option>
             <mat-option [value]="'Lab in'">Lab in</mat-option>
             <mat-option [value]="'Lab uit'">Lab uit</mat-option>
             <mat-option [value]="'Idee'">Idee</mat-option>
@@ -76,6 +78,7 @@
           <mat-label>Status kleur</mat-label>
           <mat-error>error</mat-error>
           <mat-select required="true" formControlName="color">
+            <mat-option [value]="'gray'">n.v.t.</mat-option>
             <mat-option [value]="'Rood'">Rood</mat-option>
             <mat-option [value]="'Oranje'">Oranje</mat-option>
             <mat-option [value]="'Groen'">Groen</mat-option>
