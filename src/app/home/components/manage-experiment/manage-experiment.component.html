@@ -145,7 +145,7 @@
 
         <mat-form-field class="large-input">
           <mat-label>Overige opmerkingen</mat-label>
-          <textarea class="large-input" matInput formControlName="Overige opmerkingen"></textarea>
+          <textarea class="large-input" matInput formControlName="overige_opmerkingen"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
         <br>
@@ -164,4 +164,4 @@
       </div>
     </form>
   </div>
-<app-update-history *ngIf="!isEditingExperimen"></app-update-history>
+<app-update-history *ngIf="!isEditingExperiment" [experimentId]="experimentId"></app-update-history>

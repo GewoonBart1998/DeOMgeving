@@ -5,7 +5,7 @@
 }
 
 .message-list {
-  max-height: 75.5%;
+  max-height: 62%;
   padding: 20px;
   overflow-y: scroll;
 }
@@ -13,6 +13,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  background: #f7f5f5;
   padding: 20px 20px 0;
 }
 
@@ -31,11 +32,24 @@ textarea {
   width: 100%;
   margin: 10px 0;
   max-height: 150px; min-height: 150px;
+  background: none;
+  border: 1px solid #dbdbdb
 }
 
 .form-button {
   display: inline-block;
-  margin: auto;
+  font-size: 1.2em;
+  margin-top: 25px;
+  padding: 7px 10px;
+  background-color: #ED6C05;
+  border: none;
+  border-radius: 3px;
+  color: #FFFFFF;
+  cursor: pointer;
 }
 
-
+.form-button:disabled {
+  background-color: #9F9F9F;
+  color: #111111;
+  cursor: none;
+}

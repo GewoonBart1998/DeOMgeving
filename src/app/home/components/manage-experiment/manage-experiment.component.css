@@ -112,7 +112,7 @@ app-update-history {
   border-left: 1px solid #dbdbdb;
   background-color: #f7f5f5;
   width: 25%;
-  height: calc(100% - 125px);
+  height: calc(100% - 100px);
   padding-bottom: 25px;
 }
 

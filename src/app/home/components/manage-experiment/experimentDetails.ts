@@ -6,7 +6,7 @@ export class ExperimentDetails {
   kosten_anders: string;
   doorlooptijd: string;
   beschrijving: string;
-  voortgang: string;
+  overige_opmerkingen: string;
   archief_type: string;
 
   constructor() {
@@ -16,7 +16,7 @@ export class ExperimentDetails {
     this.kosten_anders = "";
     this.doorlooptijd = "";
     this.beschrijving = "";
-    this.voortgang = "";
+    this.overige_opmerkingen = "";
     this.archief_type= null;
   }
 }

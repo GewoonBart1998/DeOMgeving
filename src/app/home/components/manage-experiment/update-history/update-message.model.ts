@@ -1,8 +1,6 @@
 export class UpdateMessage {
+  public postedDate: Date
 
-  constructor(  public messageId: number,
-                public author: string,
-                public experimenttId: number,
-                public content: string,
-                public postedDate: Date) {}
+  constructor(  public author: string,
+                public content: string) {}
 }

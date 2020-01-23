@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="message-list">
+  <div class="message-list" id="message-list">
 
     <app-update-message
       *ngFor="let messageEl of messages; let i = index"
@@ -10,10 +10,10 @@
 
   <div class="post-message clearfix">
     <hr>
-    <form #messageForm="ngForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" >
       <label>Laat een bericht achter:</label>
-      <textarea type="text" id="message" required></textarea>
+      <textarea formControlName="message" id="message" required maxlength="400"></textarea>
+      <button type="submit" class="form-button" [disabled]="!messageForm.valid">Plaats</button>
     </form>
-    <button type="submit" class="form-button" [disabled]="!messageForm.valid">Plaats</button>
   </div>
 </div>

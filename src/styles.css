@@ -19,3 +19,9 @@ body {
   border-radius: 20px;
   margin-top: 20px;
 }
+
+.card {
+  -webkit-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  -moz-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+}
