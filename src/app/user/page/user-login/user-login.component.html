@@ -1,6 +1,6 @@
 <div class="container">
   <mat-card>
-    <form [formGroup]="userLoginForm" (ngSubmit)="onLogin()" (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="userLoginForm" (keydown.enter)="onLogin()">
 
       <img src="assets/img/OMgeving_logo.png" alt="Omgeving logo">
 
@@ -25,7 +25,6 @@
       <div class="button-groep">
         <ul class="float-left">
           <li><button type="button" class='link' routerLink='/register' mat-flat-button color="primary">Account aanmaken</button></li>
-          <li><button type="button" class='link' routerLink='/forgot-password' mat-flat-button color="primary">Wachtwoord wijzigen</button></li>
         </ul>
         <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
       </div>

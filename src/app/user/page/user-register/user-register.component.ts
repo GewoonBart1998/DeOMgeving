@@ -33,9 +33,8 @@ export class UserRegisterComponent implements OnInit {
   onSubmit() {
     console.warn(this.userRegisterForm.value);
     this.userService.createUser(this.userRegisterForm.value).subscribe(res => {
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
       console.log('User added!');
-      this.ngZone.run(() => this.router.navigateByUrl('/user-list'));
     });
   }
 }

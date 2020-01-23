@@ -16,9 +16,9 @@
               color="primary" autofocus>Experiment toevoegen
       </button>
 
-      <button *ngIf="existingExperiment" class="form-button export-experiment" mat-flat-button
-              color="primary" autofocus>Exporteer naar PDF
-      </button>
+    <button *ngIf="existingExperiment" (click)="generatePdf()" class="form-button export-experiment" mat-flat-button
+            color="primary" autofocus>Exporteer naar PDF
+    </button>
 
       <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger"
               type="submit" mat-flat-button
@@ -143,8 +143,8 @@
         <br>
 
         <mat-form-field class="large-input">
-          <mat-label>Voortgang</mat-label>
-          <textarea class="large-input" matInput formControlName="voortgang"></textarea>
+          <mat-label>Overige opmerkingen</mat-label>
+          <textarea class="large-input" matInput formControlName="Overige opmerkingen"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
         <br>

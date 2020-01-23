@@ -1,5 +1,5 @@
 enum userRole {
-  GEBRUIKER, ADMIN, MEDEWERKER
+  GEBRUIKER, ADMIN, MEDEWERKER, UNIDENTIFIED
 }
 export class User {
   id: number;
