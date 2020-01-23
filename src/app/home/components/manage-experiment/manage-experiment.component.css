@@ -35,6 +35,17 @@
   margin-left: 50px;
 }
 
+.file-upload {
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.file-upload mat-label {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 1.1em;
+}
+
 h2 {
   color: #4bb194;
   margin-left: 50px;
