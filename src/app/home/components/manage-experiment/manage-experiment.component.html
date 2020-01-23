@@ -20,17 +20,18 @@
             color="primary" autofocus>Exporteer naar PDF
     </button>
 
-      <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger"
-              type="submit" mat-flat-button
-              color="primary" autofocus>Experiment verwijderen
-      </button>
-    </div>
+    <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger" type="submit" mat-flat-button
+            color="primary" autofocus>Experiment verwijderen
+    </button>
   </div>
-  <div class="experiment-info scroll-container">
-    <h2>Experiment</h2>
-    <br>
-    <form [formGroup]="experimentForm">
-      <div class="textfields">
+</div>
+
+
+<div class="experiment-info scroll-container ">
+  <h2>Experiment</h2>
+  <br>
+  <form [formGroup]="experimentForm">
+    <div class="textfields">
 
         <mat-form-field>
           <mat-label>Experiment naam</mat-label>
@@ -147,7 +148,7 @@
 
         <mat-form-field class="large-input">
           <mat-label>Overige opmerkingen</mat-label>
-          <textarea class="large-input" matInput formControlName="Overige opmerkingen"></textarea>
+          <textarea class="large-input" matInput formControlName="overige_opmerkingen"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
         <br>
@@ -166,3 +167,4 @@
       </div>
     </form>
   </div>
+<app-update-history *ngIf="!isEditingExperiment" [experimentId]="experimentId"></app-update-history>
