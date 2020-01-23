@@ -33,8 +33,8 @@ export class ExperimentCardComponent implements OnInit {
           return "orange";
           break;
 
-        case "Blauw":
-          return "blue";
+        case "Grijs":
+          return "nvt";
           break;
       }
     }

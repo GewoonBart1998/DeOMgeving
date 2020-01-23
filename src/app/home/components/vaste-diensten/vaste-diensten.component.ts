@@ -22,12 +22,12 @@ export class VasteDienstenComponent implements OnInit {
 
 
   ngOnInit() {
-    this.experimentService.filterBy("filter/fase/Vaste dienst").subscribe(
+    this.experimentService.filterBy("vaste dienst/wijziging_datum/ASC").subscribe(
       res => {
         this.experimentList = res;
       },
       error => {
-        this.snackbar.open('Kon experimenten niet inladen', '', {
+        this.snackbar.open('Kon diensten niet inladen', '', {
           duration: 2000,
           // here specify the position
           //TODO snackbar call method maken
@@ -38,16 +38,11 @@ export class VasteDienstenComponent implements OnInit {
   }
 
   changePhase(event){
-    if(event.target.value == 'none'){
-      this.experimentService.list().subscribe(res => {
+    this.experimentService.filterBy(event.target.value).subscribe(
+      res => {
         this.experimentList = res;
       });
-    }else {
-      this.experimentService.filterBy(event.target.value).subscribe(
-        res => {
-          this.experimentList = res;
-        });
-    }
+
   }
 
   onSearch(searchvalue: string) {
