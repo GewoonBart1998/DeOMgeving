@@ -26,7 +26,7 @@
         <ul class="float-left">
           <li><button type="button" class='link' routerLink='/register' mat-flat-button color="primary">Account aanmaken</button></li>
         </ul>
-        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
+        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus (click)="onLogin()">Login</button>
       </div>
     </form>
   </mat-card>

@@ -48,7 +48,7 @@
       <mat-form-field>
         <mat-label>Secundaire experiment leider</mat-label>
         <mat-error>error</mat-error>
-        <mat-select formControlName="experiment_leider_secundair" required="true">
+        <mat-select formControlName="experiment_leider_secundair" required="false">
           <mat-option *ngFor="let leader of leaders" [value]="leader">
             {{ leader }}
           </mat-option>
