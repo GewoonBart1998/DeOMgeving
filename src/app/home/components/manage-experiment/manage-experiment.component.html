@@ -92,7 +92,7 @@
 
         <div class="file-upload">
           <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
-          <mat-label (click)="downloadFile()" *ngIf="uploadedFile !== null">
+          <mat-label *ngIf="uploadedFile !== null">
             <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
           </mat-label>
           <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"

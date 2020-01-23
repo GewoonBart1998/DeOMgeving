@@ -83,32 +83,20 @@ export class ManageExperimentComponent implements OnInit {
 
   private getUploadedAttachment() {
     if(this.existingExperiment) {
-        this.uploader.getUploadedFile(this.experimentId).subscribe(response => {
-          const byteString = atob(response.fileData);
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i += 1) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          this.fileBlob = new Blob([ab]);
+        this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
+          // const byteString = atob(response.fileData);
+          // const ab = new ArrayBuffer(byteString.length);
+          // const ia = new Uint8Array(ab);
+          // for (let i = 0; i < byteString.length; i += 1) {
+          //   ia[i] = byteString.charCodeAt(i);
+          // }
+          // this.fileBlob = new Blob([ab]);
 
           // response.fileData = atob(response.fileData);
-          this.uploadedFile = response;
-          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(this.fileBlob));
+          this.uploadedFile = file;
+          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
         });
     }
-  }
-
-  downloadFile() {
-    // console.log(this.fileBlob);
-    // const url= window.URL.createObjectURL(this.fileBlob);
-    // this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    // console.log(url);
-    // window.open(url);
-    // const data = 'some text';
-    // const blob = new Blob([data], { type: 'application/octet-stream' });
-
-    // this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
   }
 
   private fillLeaders() {
