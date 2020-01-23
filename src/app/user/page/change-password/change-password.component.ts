@@ -61,19 +61,19 @@ export class ChangePasswordComponent implements OnInit {
     );
   }
 
-  private getPasswordIcon() {
+  getPasswordIcon() {
     return this.isPasswordVisible ? 'visibility_off' : 'visibility';
   }
 
-  private getPasswordInputType() {
+  getPasswordInputType() {
     return this.isPasswordVisible ? 'text' : 'password';
   }
 
-  private toggedPasswordVisibility() {
+  toggedPasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  private FormIsValid() {
+  FormIsValid() {
     return this.changePasswordFormGroup.valid;
   }
 
