@@ -1,18 +1,14 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
-
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
 import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
-import {User} from '../../../user/shared/user';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ApiService} from '../../../shared/services/api.service';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
-import {UploadedFile} from '../../../shared/services/UploadedFile';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
 
@@ -24,9 +20,6 @@ import pdfMake from 'pdfmake/build/pdfmake';
 
 // TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
-
-
-
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
   private experiment: Experiment;
@@ -39,6 +32,7 @@ export class ManageExperimentComponent implements OnInit {
   private experimentId;
 
   uploadedFile = null;
+  isUploading: boolean = false;
 
   bijlage: File = null;
   private fileBlob: Blob;
@@ -83,18 +77,11 @@ export class ManageExperimentComponent implements OnInit {
 
   private getUploadedAttachment() {
     if(this.existingExperiment) {
+        var self = this;
         this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
-          // const byteString = atob(response.fileData);
-          // const ab = new ArrayBuffer(byteString.length);
-          // const ia = new Uint8Array(ab);
-          // for (let i = 0; i < byteString.length; i += 1) {
-          //   ia[i] = byteString.charCodeAt(i);
-          // }
-          // this.fileBlob = new Blob([ab]);
 
-          // response.fileData = atob(response.fileData);
-          this.uploadedFile = file;
-          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
+          self.uploadedFile = file;
+          self.fileUrl = self.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
         });
     }
   }
@@ -115,7 +102,6 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getExperiment() {
-    // TODO: CORRECT EXPERIMENT ID
     this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
@@ -183,7 +169,7 @@ export class ManageExperimentComponent implements OnInit {
         kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-        voortgang: new FormControl(this.experimentDetails.voortgang),
+        Overige_opmerkingen: new FormControl(this.experimentDetails.voortgang),
         archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
@@ -206,8 +192,13 @@ export class ManageExperimentComponent implements OnInit {
 
   manageUpload(experimentId: number) {
     if(this.bijlage) {
+      this.isUploading = true;
+      var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
-          console.log("DONE");
+        self.isUploading = false;
+        console.log((self.uploadedFile === null && self.existingExperiment) || self.isUploading);
+        self.getUploadedAttachment();
+
       });
     }
   }
@@ -301,7 +292,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   handleFileInput(files: FileList) {
+    this.uploadedFile.fileName = "...";
     this.bijlage = files.item(0);
-    console.log(this.bijlage);
   }
 }

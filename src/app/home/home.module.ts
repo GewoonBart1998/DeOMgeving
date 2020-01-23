@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserManagementComponent} from './components/user-management/user-management.component';
 import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
 import {UserComponent} from './components/user-management/user/user.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -28,12 +30,14 @@ import {UserComponent} from './components/user-management/user/user.component';
     UserComponent,
     UserListComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
+  ],
   exports: [SharedModule, FormsModule, DasboardComponent,
     HomeComponent,
     ExperimentCardComponent,
