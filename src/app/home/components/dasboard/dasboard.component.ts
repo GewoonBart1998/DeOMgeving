@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./dasboard.component.css']
 })
 export class DasboardComponent implements OnInit {
-  private experimentList: Array<Experiment>;
+  experimentList: Array<Experiment>;
   filterName: String;
 
   constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
