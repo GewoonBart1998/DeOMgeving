@@ -1,5 +1,5 @@
 <div class="ribbon">
-  <a class="logo" href="/home"><img src="/assetsimg/OMgeving_logo.png" alt="Omgeving logo"></a>
+  <a class="logo" href="/home"><img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo"></a>
 
   <input #search_value type="text" name="search" placeholder="search" [(ngModel)]="filterName">
   <button (click)="onSearch(search_value.value)" class="search-button">Zoek</button>
@@ -33,6 +33,12 @@
     <option value="order/wijziging_datum/ASC">Gewijzigd ↑</option>
     <option value="order/wijziging_datum/DESC">Gewijzigd↓</option>
   </select>
+</div>
+
+<div class="Stats">
+<!--  <a>Lab in: {{ experimentStat.labIn}}</a>-->
+<!--  <a>Lab uit: {{experimentStat.labUit}}</a>-->
+<!--  <a>Lab idee: {{experimentStat.idee}}</a>-->
 </div>
 
 <div class="experiment-list">

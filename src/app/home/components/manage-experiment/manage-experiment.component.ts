@@ -317,7 +317,8 @@ export class ManageExperimentComponent implements OnInit {
     }, 900);
   }
 
-  handleFileInput(files: FileList) {
+  handleFileInput($event: any) {
+    const files = $event.target.files;
     this.bijlage = files.item(0);
     console.log(this.bijlage);
   }

@@ -13,7 +13,9 @@ export class DasboardComponent implements OnInit {
   experimentList: Array<Experiment>;
   filterName: String;
 
-  constructor(private experimentService: ExperimentService, private snackbar: MatSnackBar, private router: Router) {
+  constructor(private experimentService: ExperimentService,
+              private snackbar: MatSnackBar,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -31,6 +33,8 @@ export class DasboardComponent implements OnInit {
       });
   }
 
+
+
   changePhase(event){
     if(event.target.value == 'none'){
       this.experimentService.list().subscribe(res => {
@@ -42,10 +46,7 @@ export class DasboardComponent implements OnInit {
           this.experimentList = res;
         });
     }
-
   }
-
-
 
   onSearch(searchvalue: string) {
     this.filterName = "";
@@ -54,8 +55,6 @@ export class DasboardComponent implements OnInit {
         this.experimentList = res;
       });
   }
-
-
 
   onExperimentClick(experiment: Experiment) {
     this.router.navigate([`/home/experiment/${experiment.experimentId}`]);
