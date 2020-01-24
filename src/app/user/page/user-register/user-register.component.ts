@@ -32,7 +32,8 @@ export class UserRegisterComponent implements OnInit {
 
   onSubmit() {
     this.userService.createUser(this.userRegisterForm.value).subscribe(res => {
+      this.router.navigate(['/login']);
     });
-    this.router.navigate(['/login']);
+    // geef error
   }
 }

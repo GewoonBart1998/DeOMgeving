@@ -177,7 +177,7 @@ export class PdfService {
 
               },
               {
-                text: experimentDetails.voortgang,
+                text: experimentDetails.overige_opmerkingen,
                 style: 'text'
               },
               {

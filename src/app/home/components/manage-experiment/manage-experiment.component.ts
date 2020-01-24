@@ -10,6 +10,10 @@ import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
 import {User} from '../../../user/shared/user';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from '../../../shared/services/api.service';
+import {FileUploadService} from '../../../shared/services/file-upload.service';
+import {UploadedFile} from '../../../shared/services/UploadedFile';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
@@ -19,7 +23,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
   styleUrls: ['./manage-experiment.component.css']
 })
 
-//TODO: split this into two components (no time)
+// TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
 
 
@@ -29,11 +33,17 @@ export class ManageExperimentComponent implements OnInit {
   private experiment: Experiment;
   private experimentDetails: ExperimentDetails;
 
-  private leaders: Array<string> = [];
+  leaders: Array<string> = [];
 
-  private existingExperiment = false;
-  private isEditingExperiment = true;
+  existingExperiment = false;
+  isEditingExperiment = true;
   private experimentId;
+
+  uploadedFile = null;
+
+  bijlage: File = null;
+  private fileBlob: Blob;
+  fileUrl: SafeResourceUrl;
 
   constructor(
     private experimentService: ExperimentService,
@@ -42,6 +52,8 @@ export class ManageExperimentComponent implements OnInit {
     private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
+    private uploader: FileUploadService,
+    private sanitizer: DomSanitizer,
     private pdfService: PdfService
   ) {
 
@@ -55,7 +67,6 @@ export class ManageExperimentComponent implements OnInit {
     this.buildFormExperimentDetails();
     this.buildFormExperiment();
 
-    console.log(this.experimentId);
 
     if (this.existingExperiment) {
       this.isEditingExperiment = false;
@@ -68,8 +79,38 @@ export class ManageExperimentComponent implements OnInit {
 
     this.fillLeaders();
     this.updateAllInputs();
+    this.getUploadedAttachment();
   }
 
+  private getUploadedAttachment() {
+    if(this.existingExperiment) {
+        this.uploader.getUploadedFile(this.experimentId).subscribe(response => {
+          const byteString = atob(response.fileData);
+          const ab = new ArrayBuffer(byteString.length);
+          const ia = new Uint8Array(ab);
+          for (let i = 0; i < byteString.length; i += 1) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          this.fileBlob = new Blob([ab]);
+
+          // response.fileData = atob(response.fileData);
+          this.uploadedFile = response;
+          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(this.fileBlob));
+        });
+    }
+  }
+
+  downloadFile() {
+    // console.log(this.fileBlob);
+    // const url= window.URL.createObjectURL(this.fileBlob);
+    // this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    // console.log(url);
+    // window.open(url);
+    // const data = 'some text';
+    // const blob = new Blob([data], { type: 'application/octet-stream' });
+
+    // this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+  }
 
   private fillLeaders() {
     this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
@@ -87,7 +128,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getExperiment() {
-    //todo: CORRECT EXPERIMENT ID
+    // TODO: CORRECT EXPERIMENT ID
     this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
@@ -105,7 +146,7 @@ export class ManageExperimentComponent implements OnInit {
     });
   }
 
-  generatePdf(){
+  generatePdf() {
     const self = this;
     const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails,
       function(data) {
@@ -113,7 +154,6 @@ export class ManageExperimentComponent implements OnInit {
         var pdf = pdfMake.createPdf(data);
         pdf.download(self.experiment.experiment_naam);
     });
-
   }
 
   submitForm() {
@@ -123,8 +163,9 @@ export class ManageExperimentComponent implements OnInit {
     } else {
       this.experimentService.create(this.experimentForm.value).subscribe(res => {
         const experimentDetails = this.experimentDetailsForm.value;
-        // experimentDetails.netwerk = "";
         experimentDetails.experimentId = <number>res;
+        this.manageUpload(experimentDetails.experimentId);
+
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
             this.snackbar.open('Experiment aangemaakt!', '', {
@@ -132,9 +173,7 @@ export class ManageExperimentComponent implements OnInit {
               verticalPosition: 'top',
               horizontalPosition: 'right'
             });
-
             this.router.navigate(['/home']);
-
           }
         );
 
@@ -162,7 +201,7 @@ export class ManageExperimentComponent implements OnInit {
         kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-        voortgang: new FormControl(this.experimentDetails.voortgang),
+        overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),
         archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
@@ -175,8 +214,20 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
       console.log(response);
     });
+
+    this.manageUpload(this.experiment.experimentId);
+
+
     this.isEditingExperiment = false;
     this.updateAllInputs();
+  }
+
+  manageUpload(experimentId: number) {
+    if(this.bijlage) {
+      this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
+          console.log("DONE");
+      });
+    }
   }
 
   editExperiment() {
@@ -189,23 +240,22 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   disableOrEnableAllInputs(disable) {
-    for (let input of Object.keys(this.experimentForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentForm.controls)) {
+      if(disable){
         this.experimentForm.get(input).disable();
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if(disable){
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();
       }
     }
   }
-
   disablAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
@@ -236,21 +286,6 @@ export class ManageExperimentComponent implements OnInit {
     return Number(experimentId);
   }
 
-  //
-  // private getExperiment(experimentId) {
-  //   this.experimentService.getById(experimentId).subscribe(response => {
-  //     this.experiment = response;
-  //     this.buildFormExperiment();
-  //     this.buildFormExperimentDetails();
-  //   });
-  // }
-  //
-  // private getExperimentDetails(experimentId) {
-  //   this.experimentDetailsService.getByExperimentId(experimentId).subscribe(response => {
-  //     this.experimentDetails = response;
-  //     this.buildFormExperimentDetails();
-  //   });
-  // }
 
   deleteExperiment() {
     this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
@@ -280,5 +315,10 @@ export class ManageExperimentComponent implements OnInit {
     setTimeout(() => {
 
     }, 900);
+  }
+
+  handleFileInput(files: FileList) {
+    this.bijlage = files.item(0);
+    console.log(this.bijlage);
   }
 }

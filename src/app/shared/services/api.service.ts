@@ -41,7 +41,7 @@ export class ApiService {
     return this.httpClient.get<T>(url);
   }
 
-  post(path: string, body: object) {
+  post(path: string, body: object | string) {
     return this.httpClient.post(this.endpoint + path, body);
   }
 
