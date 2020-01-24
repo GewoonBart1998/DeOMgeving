@@ -15,4 +15,17 @@ export class UpdateMessageComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  convertUTCToLocal(postDate) {
+    return this.formatDate(new Date(postDate + " UTC"));
+  }
+
+  formatDate(date) {
+    return [date.getDate(), this.addLeadingZero(date.getMonth() + 1), date.getFullYear()].join('-') + ' ' +
+      [date.getHours(), this.addLeadingZero(date.getMinutes()) ].join(':');
+  }
+
+  private addLeadingZero(number: number) {
+    return String(number).padStart(2, '0')
+  }
 }

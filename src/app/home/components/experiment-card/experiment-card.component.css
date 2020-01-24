@@ -61,7 +61,7 @@
   display: none;
 }
 
-.card .status-hover {
+.card .status {
   width: 120px;
   background-color: #E6E5E5;
   color: #212529;

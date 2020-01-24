@@ -9,14 +9,4 @@ export class ExperimentDetails {
   overige_opmerkingen: string;
   archief_type: string;
 
-  constructor() {
-    this.netwerk = "";
-    this.status = "";
-    this.kosten_inovatie = "";
-    this.kosten_anders = "";
-    this.doorlooptijd = "";
-    this.beschrijving = "";
-    this.overige_opmerkingen = "";
-    this.archief_type= null;
-  }
 }
