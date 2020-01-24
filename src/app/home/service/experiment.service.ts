@@ -15,7 +15,7 @@ export class ExperimentService {
     return this.api.get<Array<Experiment>>(this.resourcePath);
   }
 
-  //TODO clean method names
+  // TODO clean method names
   getById(experimentId: number) {
     return this.api.get<Experiment>(`${this.resourcePath}/${experimentId}`);
   }

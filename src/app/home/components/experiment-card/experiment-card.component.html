@@ -4,7 +4,7 @@
   <div class="card-content">
     <h4 class="title">{{experiment.experiment_naam}}</h4>
     <p class="date">{{experiment.wijziging_datum}}</p>
-    <p>Hier komt een simpele uitleg over waar het experiment over zal gaan.</p>
+    <p class="description">{{ getBeschrijving() }}</p>
 
     <div class="author-div">
       <p class="author">{{experiment.experiment_leider_primair}}</p>

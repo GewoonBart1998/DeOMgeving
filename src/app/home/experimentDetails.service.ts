@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Experiment} from './components/experiment-card/experiment';
 import {ApiService} from '../shared/services/api.service';
 import {ExperimentDetails} from './components/manage-experiment/experimentDetails';
 
@@ -15,6 +14,7 @@ export class ExperimentDetailsService {
   getByExperimentId(experimentId: number) {
     return this.api.get<ExperimentDetails>(`${this.resourcePath}/${experimentId}`);
   }
+
 
   create(experiment: ExperimentDetails) {
     return this.api.post(this.resourcePath, experiment);
