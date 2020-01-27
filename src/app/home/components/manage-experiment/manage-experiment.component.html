@@ -1,7 +1,7 @@
   <div class="ribbon">
     <img class="logo" src="assets/img/OMgeving_logo.png" alt="Omgeving logo">
     <div class="buttons">
-      <button *ngIf="!(existingExperiment && isEditingExperiment)" (click)="editExperiment()"
+      <button *ngIf="existingExperiment && !isEditingExperiment" (click)="editExperiment()"
               class="form-button edit-experiment" mat-flat-button
               color="primary" autofocus>Experiment bewerken
       </button>
@@ -20,14 +20,14 @@
             color="primary" autofocus>Exporteer naar PDF
     </button>
 
-    <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger" type="submit" mat-flat-button
+    <button *ngIf="existingExperiment" (click)="onDeleteExperimentButtonClick()" class="form-button add-experiment bg-danger" type="submit" mat-flat-button
             color="primary" autofocus>Experiment verwijderen
     </button>
   </div>
 </div>
 
 
-<div class="experiment-info scroll-container ">
+<div class="experiment-info scroll-container " [ngClass]="existingExperiment ? 'partial-width' : 'full-width'">
   <h2>Experiment</h2>
   <br>
   <form [formGroup]="experimentForm">
@@ -102,7 +102,7 @@
             <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
           </mat-label>
           <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
-                 (change)="handleFileInput($event.target.files)" [disabled]="!isEditingExperiment">
+                 (change)="handleFileInput($event)" [disabled]="!isEditingExperiment">
           <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="upload-button mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
         <br>

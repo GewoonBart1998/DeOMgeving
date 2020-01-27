@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DasboardComponent} from './components/dasboard/dasboard.component';
 import {ManageExperimentComponent} from './components/manage-experiment/manage-experiment.component';
@@ -11,9 +11,9 @@ import {UpdateMessageComponent} from './components/manage-experiment/update-hist
 import {UserManagementComponent} from './components/user-management/user-management.component';
 import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
 import {UserComponent} from './components/user-management/user/user.component';
-import {MatProgressBarModule} from "@angular/material/progress-bar";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {VasteDienstenComponent} from './components/vaste-diensten/vaste-diensten.component';
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     UserComponent,
     UserListComponent,
     UpdateHistoryComponent,
-    UpdateMessageComponent
+    UpdateMessageComponent,
+    VasteDienstenComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +42,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     HomeComponent,
     ExperimentCardComponent,
     ManageExperimentComponent,
-    HomeComponent]
+    HomeComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule {
 }

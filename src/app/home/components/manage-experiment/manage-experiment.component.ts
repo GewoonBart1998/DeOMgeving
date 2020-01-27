@@ -1,17 +1,19 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatSelect, MatSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
 import {SnackbarUtilService} from '../../../shared/services/snackbar-util.service';
+import {ConfirmActionComponent} from '../../../shared/components/confirm-action.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -50,7 +52,8 @@ export class ManageExperimentComponent implements OnInit {
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private snackbarUtil: SnackbarUtilService
+    private snackbarUtil: SnackbarUtilService,
+    public dialog: MatDialog
   ) {
 
   }
@@ -79,13 +82,13 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getUploadedAttachment() {
-    if(this.existingExperiment) {
-        var self = this;
-        this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
+    if (this.existingExperiment) {
+      var self = this;
+      this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
 
-          self.uploadedFile = file;
-          self.fileUrl = self.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
-        });
+        self.uploadedFile = file;
+        self.fileUrl = self.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
+      });
     }
   }
 
@@ -131,7 +134,7 @@ export class ManageExperimentComponent implements OnInit {
     } else {
       this.experimentService.create(this.experimentForm.value).subscribe(res => {
         const experimentDetails = this.experimentDetailsForm.value;
-        experimentDetails.experimentId = <number>res;
+        experimentDetails.experimentId = <number> res;
         this.manageUpload(experimentDetails.experimentId);
 
         this.experimentDetailsService.create(experimentDetails).subscribe(
@@ -171,21 +174,25 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   pushEditButton() {
-    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
-      console.log(response);
-    });
-    this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
-      console.log(response);
+
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      data: {title: 'Wijzigingen opslaan?', message: 'huidige aanpassingen worden opgeslagen', confirmButtonText: 'Opslaan'},
+      width: '750px',
+      position: {top: '5%'}
     });
 
-    this.manageUpload(this.experiment.experimentId);
 
-    this.isEditingExperiment = false;
-    this.updateAllInputs();
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      console.log(isConfirmed);
+      if (isConfirmed) {
+        this.updateExperimentModifications();
+      }
+
+    });
   }
 
   manageUpload(experimentId: number) {
-    if(this.bijlage) {
+    if (this.bijlage) {
       this.isUploading = true;
       var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
@@ -207,16 +214,16 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   disableOrEnableAllInputs(disable) {
-    for(let input of Object.keys(this.experimentForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentForm.controls)) {
+      if (disable) {
         this.experimentForm.get(input).disable();
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if (disable) {
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();
@@ -254,6 +261,23 @@ export class ManageExperimentComponent implements OnInit {
   }
 
 
+  onDeleteExperimentButtonClick() {
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      data: {title: 'Experiment verwijderen?', message: 'Alle wijzigingen gaan veloren', confirmButtonText: 'Verwijderen'},
+      width: '750px',
+      position: {top: '5%'}
+    });
+
+
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      console.log(isConfirmed);
+      if (isConfirmed) {
+        this.deleteExperiment();
+      }
+
+    });
+  }
+
   deleteExperiment() {
     this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
     });
@@ -280,8 +304,29 @@ export class ManageExperimentComponent implements OnInit {
     }, 900);
   }
 
-  handleFileInput(files: FileList) {
-    this.uploadedFile.fileName = "...";
+  handleFileInput($event: any) {
+    const files = $event.target.files;
+    this.uploadedFile.fileName = '...';
     this.bijlage = files.item(0);
+  }
+
+  private updateExperimentModifications() {
+    this.updateExperiment();
+    this.updateExperimentDetails();
+    this.manageUpload(this.experiment.experimentId);
+    this.isEditingExperiment = false;
+    this.updateAllInputs();
+  }
+
+  private updateExperiment() {
+    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  private updateExperimentDetails() {
+    this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
+      console.log(response);
+    });
   }
 }

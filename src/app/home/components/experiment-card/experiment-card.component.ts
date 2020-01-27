@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Experiment} from './experiment';
 
 @Component({
   selector: 'app-experiment-card',
@@ -7,7 +6,7 @@ import {Experiment} from './experiment';
   styleUrls: ['./experiment-card.component.css']
 })
 export class ExperimentCardComponent implements OnInit {
-  @Input() experiment: Experiment;
+  @Input() experiment: { fase: string; color: string; experiment_leider_primair: string; experimentId: number; experiment_leider_secundair: string; wijziging_datum: Date; experiment_naam: string };
 
   constructor() {
   }

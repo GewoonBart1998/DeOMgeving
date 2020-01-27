@@ -19,4 +19,12 @@ export class SnackbarService {
   }
 
 
+  displayMessageCenter(message: string, durationInSeconds: number) {
+    this.snackbar.open(message, '', {
+      duration: durationInSeconds * 1000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    });
+  }
+
 }

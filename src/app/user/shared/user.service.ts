@@ -13,17 +13,25 @@ export class UserService {
     this.resourcePath = '/user';
   }
 
-  createUser(user: User, callback: Function) {
+  createUser(user: User, registerCallback: Function) {
     return this.api.post('/register', user).subscribe(
       res => {
-        callback();
+        registerCallback();
       }, error => {
-        callback(true);
+        registerCallback(true);
       });
   }
 
-  login(user: User) {
-    return this.api.post('/login', user);
+  login(user: User, loginCallback: Function) {
+    return this.api.post('/login', user).subscribe(
+      res => {
+        this.storeJwt(res);
+        loginCallback(res);
+      },
+      error => {
+        loginCallback(error, true);
+      }
+    );
   }
 
   forgetPassword(email: object) {
@@ -82,8 +90,8 @@ export class UserService {
     return JSON.parse(jsonPayload);
   }
 
-  private storeJwt(res: Object) {
-    const jwtToken = res['jwtToken'];
+  private storeJwt(res: any) {
+    const jwtToken = res.jwtToken;
     localStorage.setItem('jwtToken', jwtToken);
   }
 }
