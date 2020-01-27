@@ -7,24 +7,34 @@
 
       <mat-form-field matInput appearance="outline">
         <mat-label>Volledige naam</mat-label>
-        <input type="naam" formControlName="name" matInput placeholder="Volledinge naam" required>
+        <input type="naam" formControlName="name" matInput placeholder="Volledinge naam"  required>
         <mat-error>Geen geldige naam</mat-error>
       </mat-form-field>
+
       <mat-form-field matInput appearance="outline">
         <mat-label>E-mail adres</mat-label>
-        <input type="email" formControlName="email" matInput placeholder="E-mail" required>
+        <input type="email" formControlName="email" matInput placeholder="E-mail" minlength="3" maxlength="191" required>
         <mat-error>Geen geldig e-mail adres</mat-error>
       </mat-form-field>
+
       <mat-form-field matInput appearance="outline">
         <mat-label>Wachtwoord</mat-label>
         <input type="password" formControlName="password" matInput placeholder="Wachtwoord"
-               [type]="hide ? 'password' : 'text'" required>
-        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+               [type]="isPasswordHidden() ? 'password' : 'text'" minlength="8" maxlength="255" required>
+
+        <button type="button" mat-icon-button matSuffix (click)="togglePasswordType()"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="isPasswordHidden()">
+          <mat-icon>{{isPasswordHidden() ? 'visibility_off' : 'visibility'}}</mat-icon>
+
         </button>
-        <mat-error>Geen geldig wachtwoord</mat-error>
+
+        <mat-error>
+          Wachtwoord moet minimaal 8 en mag maximaal 255 tekens lang zijn, het moet een HOOFDLETTER en een $ymbool bevatten.
+        </mat-error>
+
       </mat-form-field>
+
       <button type="button" class="link" routerLink='/login' mat-flat-button color="primary">Terug</button>
 
       <button [disabled]="!userRegisterForm.valid" class="form-button float-right" type="submit" mat-flat-button

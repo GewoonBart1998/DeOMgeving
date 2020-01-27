@@ -13,8 +13,13 @@ export class UserService {
     this.resourcePath = '/user';
   }
 
-  createUser(user: User) {
-    return this.api.post('/register', user);
+  createUser(user: User, callback: Function) {
+    return this.api.post('/register', user).subscribe(
+      res => {
+        callback();
+      }, error => {
+        callback(true);
+      });
   }
 
   login(user: User) {
@@ -75,5 +80,10 @@ export class UserService {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  private storeJwt(res: Object) {
+    const jwtToken = res['jwtToken'];
+    localStorage.setItem('jwtToken', jwtToken);
   }
 }
