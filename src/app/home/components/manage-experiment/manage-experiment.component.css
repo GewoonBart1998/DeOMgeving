@@ -120,4 +120,8 @@ app-update-history {
   padding-bottom: 25px;
 }
 
+.disabled {
+  cursor: not-allowed;
+}
+
 
