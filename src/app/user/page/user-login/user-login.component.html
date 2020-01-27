@@ -1,6 +1,7 @@
 <div class="container">
   <mat-card>
     <form [formGroup]="userLoginForm" (keydown.enter)="onLogin()">
+
       <img src="assets/img/OMgeving_logo.png" alt="Omgeving logo">
 
       <div class="textfields">
@@ -25,7 +26,7 @@
         <ul class="float-left">
           <li><button type="button" class='link' routerLink='/register' mat-flat-button color="primary">Account aanmaken</button></li>
         </ul>
-        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus (click)="onLogin()">Login</button>
+        <button [disabled]="!userLoginForm.valid" class="form-button float-right" type="submit" mat-flat-button color="primary" autofocus>Login</button>
       </div>
     </form>
   </mat-card>

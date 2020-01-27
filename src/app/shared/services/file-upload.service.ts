@@ -46,20 +46,7 @@ export class FileUploadService {
   }
 
 
-  getUploadedFile(experimentId: number, uploadedFileCallback: Function) {
-    return this.api.get<UploadedFile>(this.resourcePath + '/attachment/' + experimentId).subscribe( response => {
-      const byteString = atob(response.fileData);
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i += 1) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-
-      const fileBlob = new Blob([ab]);
-      uploadedFileCallback(response, fileBlob);
-    });
+  getUploadedFile(experimentId: number) {
+    return this.api.get<UploadedFile>(this.resourcePath + '/attachment/' + experimentId);
   }
-
-
-
 }

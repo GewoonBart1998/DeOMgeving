@@ -15,7 +15,7 @@ import {UserRoutingModule} from './user-routing.modules';
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    UserRoutingModule
+    UserRoutingModule,
   ],
   exports: [UserRoutingModule]
 })

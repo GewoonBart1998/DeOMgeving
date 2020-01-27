@@ -7,6 +7,10 @@
   border-radius: 7px;
   cursor: pointer;
 
+  -webkit-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  -moz-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+
   transition: 0.3s;
 }
 
@@ -53,23 +57,18 @@
   overflow: hidden;
 }
 
-.author {
-  margin: 20px 15px 0 0;
+.author-div {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  background-color: #BA81EB;
+  margin-right: 10px;
 }
 
-.hidden {
-  display: none;
-}
-
-.card .status {
-  width: 120px;
-  background-color: #E6E5E5;
-  color: #212529;
-  text-align: center;
-  border-radius: 3px;
-  padding: 2px 0;
-
-  position: absolute;
-  top: 5px;
-  right: 5px;
+.author-div p {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 1rem;
 }

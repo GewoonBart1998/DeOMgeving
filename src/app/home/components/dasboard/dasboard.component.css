@@ -85,7 +85,9 @@ select {
   width: 100%;
   padding: 20px 25px 20px 70px;
   background-color: #F7F5F5;
+  overflow-y: hidden;
   overflow-x: hidden;
   /*display: flex;*/
+  min-height: 100%;
   flex-wrap: wrap;
 }

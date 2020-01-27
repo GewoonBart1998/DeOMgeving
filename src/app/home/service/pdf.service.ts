@@ -128,7 +128,7 @@ export class PdfService {
 
         },
         {
-          text: experimentDetails.overige_opmerkingen,
+          text: experimentDetails.voortgang,
           style: 'text'
         },
         {

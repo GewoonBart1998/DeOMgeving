@@ -16,7 +16,6 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
-  //TODO: add feedback when user executes an action
   ngOnInit() {
     this.userForm = new FormGroup({
         id: new FormControl(this.user.id),

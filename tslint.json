@@ -4,7 +4,7 @@
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
-      "severity": "off"
+      "severity": "warning"
     },
     "component-class-suffix": true,
     "contextual-lifecycle": true,
@@ -85,7 +85,6 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true
   },
-  "defaultSeverity": "off",
   "rulesDirectory": [
     "codelyzer"
   ]

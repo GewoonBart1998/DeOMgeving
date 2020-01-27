@@ -20,18 +20,17 @@
             color="primary" autofocus>Exporteer naar PDF
     </button>
 
-    <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger" type="submit" mat-flat-button
-            color="primary" autofocus>Experiment verwijderen
-    </button>
+      <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger"
+              type="submit" mat-flat-button
+              color="primary" autofocus>Experiment verwijderen
+      </button>
+    </div>
   </div>
-</div>
-
-
-<div class="experiment-info scroll-container ">
-  <h2>Experiment</h2>
-  <br>
-  <form [formGroup]="experimentForm">
-    <div class="textfields">
+  <div class="experiment-info scroll-container">
+    <h2>Experiment</h2>
+    <br>
+    <form [formGroup]="experimentForm">
+      <div class="textfields">
 
         <mat-form-field>
           <mat-label>Experiment naam</mat-label>
@@ -53,8 +52,7 @@
         <mat-form-field>
           <mat-label>Secundaire experiment leider</mat-label>
           <mat-error>error</mat-error>
-          <mat-select formControlName="experiment_leider_secundair" required="false">
-            <mat-option>n.v.t.</mat-option>
+          <mat-select formControlName="experiment_leider_secundair" required="true">
             <mat-option *ngFor="let leader of leaders" [value]="leader">
               {{ leader }}
             </mat-option>
@@ -67,7 +65,6 @@
           <mat-label>Fase</mat-label>
           <mat-error>error</mat-error>
           <mat-select required="true" formControlName="fase">
-            <mat-option [value]="'n.v.t.'">n.v.t.</mat-option>
             <mat-option [value]="'Lab in'">Lab in</mat-option>
             <mat-option [value]="'Lab uit'">Lab uit</mat-option>
             <mat-option [value]="'Idee'">Idee</mat-option>
@@ -79,7 +76,6 @@
           <mat-label>Status kleur</mat-label>
           <mat-error>error</mat-error>
           <mat-select required="true" formControlName="color">
-            <mat-option [value]="'Grijs'">n.v.t.</mat-option>
             <mat-option [value]="'Rood'">Rood</mat-option>
             <mat-option [value]="'Oranje'">Oranje</mat-option>
             <mat-option [value]="'Groen'">Groen</mat-option>
@@ -95,17 +91,15 @@
       <div class="textfields">
 
         <div class="file-upload">
-          <mat-spinner diameter="40" *ngIf="(uploadedFile === null && existingExperiment) || isUploading">
-          </mat-spinner>
           <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
-          <mat-label *ngIf="uploadedFile !== null">
+          <mat-label (click)="downloadFile()" *ngIf="uploadedFile !== null">
             <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
           </mat-label>
           <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
-                 (change)="handleFileInput($event.target.files)" [disabled]="!isEditingExperiment">
-          <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="upload-button mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
+                 (change)="handleFileInput($event.target.files)">
+          <label for="input-file-id" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
-        <br>
+
         <mat-form-field class="large-input">
           <mat-label>Beschrijving</mat-label>
           <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
@@ -135,7 +129,7 @@
         </mat-form-field>
 
         <mat-form-field class="large-input">
-          <mat-label>Geschatte kosten</mat-label>
+          <mat-label>Kosten anders</mat-label>
           <textarea class="large-input" matInput formControlName="kosten_anders"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
@@ -150,7 +144,7 @@
 
         <mat-form-field class="large-input">
           <mat-label>Overige opmerkingen</mat-label>
-          <textarea class="large-input" matInput formControlName="overige_opmerkingen"></textarea>
+          <textarea class="large-input" matInput formControlName="Overige opmerkingen"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
         <br>
@@ -169,4 +163,3 @@
       </div>
     </form>
   </div>
-<app-update-history *ngIf="!isEditingExperiment" [experimentId]="experimentId"></app-update-history>
