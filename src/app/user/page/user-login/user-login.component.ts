@@ -22,6 +22,11 @@ export class UserLoginComponent {
   }
 
   onLogin() {
+
+    if(!this.isFormValid()){
+      return;
+    }
+
     this.userService.login(this.userLoginForm.value, (response, isFailed) => {
 
       if (isFailed) {
@@ -39,5 +44,9 @@ export class UserLoginComponent {
 
   private handleLoginResponse(response) {
     this.router.navigate(['/home']);
+  }
+
+  isFormValid() {
+    return this.userLoginForm.valid;
   }
 }

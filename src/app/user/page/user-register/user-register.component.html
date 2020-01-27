@@ -37,7 +37,7 @@
 
       <button type="button" class="link" routerLink='/login' mat-flat-button color="primary">Terug</button>
 
-      <button [disabled]="!userRegisterForm.valid" class="form-button float-right" type="submit" mat-flat-button
+      <button [disabled]="!isFormValid()" class="form-button float-right" type="submit" mat-flat-button
               color="primary" (click)="onSubmit()">Registreer
       </button>
 

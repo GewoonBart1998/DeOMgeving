@@ -329,4 +329,8 @@ export class ManageExperimentComponent implements OnInit {
       console.log(response);
     });
   }
+
+  isFormValid() {
+    return this.experimentForm.valid;
+  }
 }

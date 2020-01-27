@@ -52,7 +52,7 @@ export class UserRegisterComponent implements OnInit {
     this.createUser();
   }
 
-  private isFormValid() {
+  isFormValid() {
     return this.userRegisterForm.valid;
   }
 
