@@ -17,6 +17,7 @@ export class UserLoginComponent {
     email: new FormControl('', [Validators.email])
   }, [Validators.required, Validators.maxLength(255)]);
 
+  //TODO: add feedback to user
   constructor(public userService: UserService, private router: Router) {
   }
 

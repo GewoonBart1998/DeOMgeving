@@ -95,15 +95,17 @@
       <div class="textfields">
 
         <div class="file-upload">
+          <mat-spinner diameter="40" *ngIf="(uploadedFile === null && existingExperiment) || isUploading">
+          </mat-spinner>
           <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
-          <mat-label (click)="downloadFile()" *ngIf="uploadedFile !== null">
+          <mat-label *ngIf="uploadedFile !== null">
             <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
           </mat-label>
           <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
-                 (change)="handleFileInput($event.target.files)">
-          <label for="input-file-id" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
+                 (change)="handleFileInput($event.target.files)" [disabled]="!isEditingExperiment">
+          <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
-
+        <br>
         <mat-form-field class="large-input">
           <mat-label>Beschrijving</mat-label>
           <textarea class="large-input" matInput formControlName="beschrijving"></textarea>

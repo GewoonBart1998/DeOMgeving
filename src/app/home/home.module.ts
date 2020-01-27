@@ -14,6 +14,8 @@ import {UpdateMessageComponent} from './components/manage-experiment/update-hist
 import {UserManagementComponent} from './components/user-management/user-management.component';
 import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
 import {UserComponent} from './components/user-management/user/user.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
@@ -33,12 +35,14 @@ import {UserComponent} from './components/user-management/user/user.component';
     UpdateHistoryComponent,
     UpdateMessageComponent
   ],
-    imports: [
-        CommonModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
+  ],
   exports: [SharedModule, FormsModule, DasboardComponent,
     HomeComponent,
     ExperimentCardComponent,
