@@ -1,0 +1,10 @@
+<div class="container card">
+  <p class="user-message">{{message.content}}</p>
+
+  <hr>
+
+  <div class="message-info">
+    <p class="author">{{message.author}}</p>
+    <p class="date"> {{ convertUTCToLocal(message.postedDate)}} </p>
+  </div>
+</div>
