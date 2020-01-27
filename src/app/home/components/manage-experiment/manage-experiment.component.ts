@@ -6,15 +6,13 @@ import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
-import {User} from '../../../user/shared/user';
+import {MatSelect, MatSnackBar} from '@angular/material';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ApiService} from '../../../shared/services/api.service';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
-import {UploadedFile} from '../../../shared/services/UploadedFile';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
+import {SnackbarUtilService} from '../../../shared/services/snackbar-util.service';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -24,8 +22,6 @@ import pdfMake from 'pdfmake/build/pdfmake';
 
 // TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
-
-
 
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
@@ -53,7 +49,8 @@ export class ManageExperimentComponent implements OnInit {
     private router: Router,
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
-    private pdfService: PdfService
+    private pdfService: PdfService,
+    private snackbarUtil: SnackbarUtilService
   ) {
 
   }
@@ -84,15 +81,6 @@ export class ManageExperimentComponent implements OnInit {
   private getUploadedAttachment() {
     if(this.existingExperiment) {
         this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
-          // const byteString = atob(response.fileData);
-          // const ab = new ArrayBuffer(byteString.length);
-          // const ia = new Uint8Array(ab);
-          // for (let i = 0; i < byteString.length; i += 1) {
-          //   ia[i] = byteString.charCodeAt(i);
-          // }
-          // this.fileBlob = new Blob([ab]);
-
-          // response.fileData = atob(response.fileData);
           this.uploadedFile = file;
           this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
         });
@@ -106,16 +94,11 @@ export class ManageExperimentComponent implements OnInit {
         }
       },
       error => {
-        this.snackbar.open('Kon experiment leiders niet inladen', '', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right'
-        });
+        this.snackbarUtil.showMessage('Kon experiment leiders niet inladen');
       });
   }
 
   private getExperiment() {
-    // TODO: CORRECT EXPERIMENT ID
     this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
@@ -138,6 +121,7 @@ export class ManageExperimentComponent implements OnInit {
     pdfMake.createPdf(documentDefinition).download();
   }
 
+  //todo: make this a bit more readable
   submitForm() {
     if (this.existingExperiment) {
       this.experimentService.update(this.experimentId, this.experiment);
@@ -150,15 +134,10 @@ export class ManageExperimentComponent implements OnInit {
 
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
-            this.snackbar.open('Experiment aangemaakt!', '', {
-              duration: 2000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right'
-            });
+            this.snackbarUtil.showMessage('Experiment aangemaakt');
             this.router.navigate(['/home']);
           }
         );
-
 
       });
     }
@@ -199,7 +178,6 @@ export class ManageExperimentComponent implements OnInit {
 
     this.manageUpload(this.experiment.experimentId);
 
-
     this.isEditingExperiment = false;
     this.updateAllInputs();
   }
@@ -239,6 +217,7 @@ export class ManageExperimentComponent implements OnInit {
     }
   }
 
+  //todo: remove this if it is not used
   disableAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
@@ -247,6 +226,7 @@ export class ManageExperimentComponent implements OnInit {
     this.disableOrEnableAllInputs(false);
   }
 
+  //todo: remove this if it is not used
   private setupForm() {
 
     const experimentId = this.getExperimentIdFromPath();
@@ -254,9 +234,6 @@ export class ManageExperimentComponent implements OnInit {
     if (experimentId == null) {
       return;
     }
-
-    // this.getExperiment(experimentId);
-    // this.getExperimentDetails(experimentId);
   }
 
   private getExperimentIdFromPath() {
@@ -272,20 +249,15 @@ export class ManageExperimentComponent implements OnInit {
 
   deleteExperiment() {
     this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
-      console.log('success');
     });
     this.experimentService.delete(this.experimentId).subscribe(res => {
-      console.log('success');
     });
 
-    this.snackbar.open('Experiment verwijderd!', '', {
-      duration: 2000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right'
-    });
+    this.snackbarUtil.showMessage('Experiment verwijderd');
     this.router.navigate(['/home']);
   }
 
+  //todo: remove this if it is not used
   private createEmptyForm() {
     this.experiment = new Experiment();
     this.experimentDetails = new ExperimentDetails();
@@ -294,6 +266,7 @@ export class ManageExperimentComponent implements OnInit {
     this.enableAllInputs();
   }
 
+  //todo: remove this if it is not used
   private delayNaviagate() {
     setTimeout(() => {
 

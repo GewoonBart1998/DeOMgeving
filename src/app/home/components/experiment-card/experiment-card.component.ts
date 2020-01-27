@@ -15,6 +15,7 @@ export class ExperimentCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  //todo: remove this if it is not used
   public setExperiment(experiment: Experiment) {
     this.experiment = experiment;
   }
