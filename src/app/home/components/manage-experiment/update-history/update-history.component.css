@@ -51,5 +51,5 @@ textarea {
 .form-button:disabled {
   background-color: #9F9F9F;
   color: #111111;
-  cursor: none;
+  cursor: not-allowed;
 }
