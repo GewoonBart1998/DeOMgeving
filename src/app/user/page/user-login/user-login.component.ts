@@ -39,7 +39,7 @@ export class UserLoginComponent {
   }
 
   private handleLoginFailedResponse(responseError) {
-    this.snackbar.displayMessage('Inloggen is mislukt', 2);
+    this.snackbar.showMessage('Inloggen is mislukt', 2);
   }
 
   private handleLoginResponse(response) {

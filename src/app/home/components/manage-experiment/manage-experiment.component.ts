@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
-import {SnackbarUtilService} from '../../../shared/services/snackbar-util.service';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
 import {ConfirmActionComponent} from '../../../shared/components/confirm-action.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -52,7 +52,7 @@ export class ManageExperimentComponent implements OnInit {
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private snackbarUtil: SnackbarUtilService,
+    private snackbarUtil: SnackbarService,
     public dialog: MatDialog
   ) {
 

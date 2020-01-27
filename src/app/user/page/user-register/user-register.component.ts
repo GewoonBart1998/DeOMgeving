@@ -70,11 +70,11 @@ export class UserRegisterComponent implements OnInit {
   }
 
   handleFailedRegisterResponse() {
-    this.snackbar.displayMessage('Het aanmaken van een gebruikers account is niet gelukt', 3);
+    this.snackbar.showMessage('Het aanmaken van een gebruikers account is niet gelukt', 3);
   }
 
   handleRegisterResponse() {
-    this.snackbar.displayMessage('<insert meme>', 5);
+    this.snackbar.showMessage('Registratie voltooid!', 5);
     this.router.navigate(['/login']);
   }
 

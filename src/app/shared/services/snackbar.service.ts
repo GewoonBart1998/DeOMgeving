@@ -1,30 +1,26 @@
 import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar, MatSnackBarVerticalPosition} from '@angular/material';
+import {MatSnackBarHorizontalPosition} from '@angular/material/snack-bar/typings/snack-bar-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SnackbarService {
 
-  constructor(private snackbar: MatSnackBar) {
+  standardDuration = 2000;
+  standardVerticalPosition: MatSnackBarVerticalPosition = 'top';
+  standardHorizontalPosition: MatSnackBarHorizontalPosition = 'right';
 
-  }
+  constructor(private snackbar: MatSnackBar) { }
 
-  displayMessage(message: string, durationInSeconds: number) {
+  showMessage(message: string,
+              duration: number = this.standardDuration,
+              verticalPosition: MatSnackBarVerticalPosition = this.standardVerticalPosition,
+              horizontalPosition: MatSnackBarHorizontalPosition = this.standardHorizontalPosition) {
     this.snackbar.open(message, '', {
-      duration: durationInSeconds * 1000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right'
+      duration: duration,
+      verticalPosition: verticalPosition,
+      horizontalPosition: horizontalPosition
     });
   }
-
-
-  displayMessageCenter(message: string, durationInSeconds: number) {
-    this.snackbar.open(message, '', {
-      duration: durationInSeconds * 1000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center'
-    });
-  }
-
 }
