@@ -164,7 +164,7 @@ export class ManageExperimentComponent implements OnInit {
         kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-        Overige_opmerkingen: new FormControl(this.experimentDetails.voortgang),
+        overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),
         archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
@@ -207,16 +207,16 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   disableOrEnableAllInputs(disable) {
-    for (let input of Object.keys(this.experimentForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentForm.controls)) {
+      if(disable){
         this.experimentForm.get(input).disable();
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if (disable) {
+    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if(disable){
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();

@@ -1,6 +1,6 @@
 .ribbon {
   width: 100%;
-  height: 75px;
+  height: 15vh;
   padding: 25px 70px;
   background-color: #E6E5E5;
 }
@@ -35,4 +35,8 @@ h2 {
   border-radius: 3px;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+.experiment-info {
+  height: 85vh;
 }

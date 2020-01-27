@@ -9,11 +9,14 @@ import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {HomeComponent} from './page/home.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UpdateHistoryComponent} from './components/manage-experiment/update-history/update-history.component';
+import {UpdateMessageComponent} from './components/manage-experiment/update-history/update-message/update-message.component';
 import {UserManagementComponent} from './components/user-management/user-management.component';
 import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
 import {UserComponent} from './components/user-management/user/user.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     HomeComponent,
     UserManagementComponent,
     UserComponent,
-    UserListComponent
+    UserListComponent,
+    UpdateHistoryComponent,
+    UpdateMessageComponent
   ],
   imports: [
     CommonModule,

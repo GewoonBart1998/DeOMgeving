@@ -54,4 +54,5 @@ export class DasboardComponent implements OnInit {
   onExperimentClick(experiment: Experiment) {
     this.router.navigate([`/home/experiment/${experiment.experimentId}`]);
   }
+
 }

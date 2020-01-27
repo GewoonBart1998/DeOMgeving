@@ -9,5 +9,19 @@ body {
 }
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.author {
+  display: inline-block;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  background-color: #BA81EB;
+  padding: 3px 15px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  -webkit-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  -moz-box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+  box-shadow: 3px 3px 2px 1px rgba(196,194,194,1);
+}
