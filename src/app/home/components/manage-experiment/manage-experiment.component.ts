@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
-
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -35,6 +34,7 @@ export class ManageExperimentComponent implements OnInit {
   private experimentId;
 
   uploadedFile = null;
+  isUploading: boolean = false;
 
   bijlage: File = null;
   private fileBlob: Blob;
@@ -80,9 +80,11 @@ export class ManageExperimentComponent implements OnInit {
 
   private getUploadedAttachment() {
     if(this.existingExperiment) {
+        var self = this;
         this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
-          this.uploadedFile = file;
-          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
+
+          self.uploadedFile = file;
+          self.fileUrl = self.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
         });
     }
   }
@@ -162,7 +164,7 @@ export class ManageExperimentComponent implements OnInit {
         kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
-        voortgang: new FormControl(this.experimentDetails.voortgang),
+        Overige_opmerkingen: new FormControl(this.experimentDetails.voortgang),
         archief_type: new FormControl(this.experimentDetails.archief_type),
       }, [Validators.required, Validators.maxLength(255)]
     );
@@ -184,8 +186,13 @@ export class ManageExperimentComponent implements OnInit {
 
   manageUpload(experimentId: number) {
     if(this.bijlage) {
+      this.isUploading = true;
+      var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
-          console.log("DONE");
+        self.isUploading = false;
+        console.log((self.uploadedFile === null && self.existingExperiment) || self.isUploading);
+        self.getUploadedAttachment();
+
       });
     }
   }
@@ -274,7 +281,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   handleFileInput(files: FileList) {
+    this.uploadedFile.fileName = "...";
     this.bijlage = files.item(0);
-    console.log(this.bijlage);
   }
 }
