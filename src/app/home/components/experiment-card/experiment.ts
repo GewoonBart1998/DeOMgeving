@@ -1,7 +1,7 @@
 export class Experiment {
   experimentId: number;
   experiment_naam: string;
-  wijziging_datum: Date;
+  wijziging_datum: string ;
   beschrijving: string;
   fase: string;
   color: string;

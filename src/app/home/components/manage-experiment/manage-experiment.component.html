@@ -79,7 +79,7 @@
           <mat-label>Status kleur</mat-label>
           <mat-error>error</mat-error>
           <mat-select required="true" formControlName="color">
-            <mat-option [value]="'gray'">n.v.t.</mat-option>
+            <mat-option [value]="'Grijs'">n.v.t.</mat-option>
             <mat-option [value]="'Rood'">Rood</mat-option>
             <mat-option [value]="'Oranje'">Oranje</mat-option>
             <mat-option [value]="'Groen'">Groen</mat-option>
@@ -95,15 +95,17 @@
       <div class="textfields">
 
         <div class="file-upload">
+          <mat-spinner diameter="40" *ngIf="(uploadedFile === null && existingExperiment) || isUploading">
+          </mat-spinner>
           <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
-          <mat-label (click)="downloadFile()" *ngIf="uploadedFile !== null">
+          <mat-label *ngIf="uploadedFile !== null">
             <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
           </mat-label>
           <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
-                 (change)="handleFileInput($event.target.files)">
-          <label for="input-file-id" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
+                 (change)="handleFileInput($event.target.files)" [disabled]="!isEditingExperiment">
+          <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
-
+        <br>
         <mat-form-field class="large-input">
           <mat-label>Beschrijving</mat-label>
           <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
@@ -133,7 +135,7 @@
         </mat-form-field>
 
         <mat-form-field class="large-input">
-          <mat-label>Kosten anders</mat-label>
+          <mat-label>Geschatte kosten</mat-label>
           <textarea class="large-input" matInput formControlName="kosten_anders"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>

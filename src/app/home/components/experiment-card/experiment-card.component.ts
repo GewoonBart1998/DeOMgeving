@@ -33,7 +33,7 @@ export class ExperimentCardComponent implements OnInit {
   }
 
   getStatusKleur() {
-    switch(this.experiment.color) {
+    switch (this.experiment.color) {
       case "Rood":
         return "red";
         break;
@@ -45,8 +45,20 @@ export class ExperimentCardComponent implements OnInit {
       case "Oranje":
         return "orange";
         break;
-
-
     }
   }
+
+  getExperimentLocalDate() {
+    return this.formatDate(new Date(this.experiment.wijziging_datum + " UTC"));
+  }
+
+  formatDate(date) {
+    return [date.getDate(), this.addLeadingZero(date.getMonth() + 1), date.getFullYear()].join('-') + ' ' +
+      [date.getHours(), this.addLeadingZero(date.getMinutes()) ].join(':');
+  }
+
+  private addLeadingZero(number: number) {
+    return String(number).padStart(2, '0')
+  }
+
 }

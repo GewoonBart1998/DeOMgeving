@@ -53,21 +53,23 @@
   overflow: hidden;
 }
 
-.author-div {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 3px 15px;
-  border-radius: 20px;
-  background-color: #BA81EB;
-}
-
-.author-div p {
-  display: inline-block;
-  margin-bottom: 0;
-  color: #ffffff;
-  font-size: 1rem;
+.author {
+  margin: 20px 15px 0 0;
 }
 
 .hidden {
   display: none;
+}
+
+.card .status {
+  width: 120px;
+  background-color: #E6E5E5;
+  color: #212529;
+  text-align: center;
+  border-radius: 3px;
+  padding: 2px 0;
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

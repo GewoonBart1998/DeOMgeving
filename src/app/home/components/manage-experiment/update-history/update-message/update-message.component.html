@@ -5,6 +5,6 @@
 
   <div class="message-info">
     <p class="author">{{message.author}}</p>
-    <p class="date"> 2019-09-09 </p>
+    <p class="date"> {{ convertUTCToLocal(message.postedDate)}} </p>
   </div>
 </div>
