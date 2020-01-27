@@ -101,7 +101,7 @@ export class PdfService {
 
         },
         {
-          text: experimentDetails.kosten_inovatie,
+          text: experimentDetails.kosten_innovatie,
           style: 'text'
         },
         {

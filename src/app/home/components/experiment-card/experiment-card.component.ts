@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Experiment} from './experiment';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
+import {ManageExperimentComponent} from '../manage-experiment/manage-experiment.component';
+import {ExperimentDetails} from '../manage-experiment/experimentDetails';
 
 @Component({
   selector: 'app-experiment-card',
@@ -9,7 +11,10 @@ import {ExperimentDetailsService} from '../../experimentDetails.service';
 })
 export class ExperimentCardComponent implements OnInit {
   @Input() experiment: Experiment;
-  @Input() experimentDetailsService: ExperimentDetailsService
+  @Input() manageExperimentComponent: ManageExperimentComponent;
+  private experimentDetails: ExperimentDetails;
+  private experimentId;
+  private experimentDetailsService: ExperimentDetailsService;
 
   constructor() {
   }
@@ -20,8 +25,11 @@ export class ExperimentCardComponent implements OnInit {
   public setExperiment(experiment: Experiment) {
     this.experiment = experiment;
   }
+
   getBeschrijving() {
-    return this.experimentDetailsService.getByExperimentId(this.experiment.experimentId);
+      this.experimentDetailsService.getByExperimentId(this.experimentId).subscribe(response => {
+        this.experimentDetails = response;
+  });
   }
 
   getStatusKleur() {

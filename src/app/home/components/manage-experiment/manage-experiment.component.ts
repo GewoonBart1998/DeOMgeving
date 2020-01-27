@@ -183,6 +183,7 @@ export class ManageExperimentComponent implements OnInit {
         experiment_leider_secundair: new FormControl(this.experiment.experiment_leider_secundair),
         fase: new FormControl(this.experiment.fase),
         color: new FormControl(this.experiment.color),
+        beschrijving: new FormControl(this.experiment.beschrijving),
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
@@ -192,7 +193,7 @@ export class ManageExperimentComponent implements OnInit {
         beschrijving: new FormControl(this.experimentDetails.beschrijving),
         netwerk: new FormControl(this.experimentDetails.netwerk),
         status: new FormControl(this.experimentDetails.status),
-        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+        kosten_innovatie: new FormControl(this.experimentDetails.kosten_innovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
         overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),

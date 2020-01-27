@@ -2,7 +2,7 @@ export class ExperimentDetails {
   experimentId: number;
   netwerk: string;
   status: string;
-  kosten_inovatie: string;
+  kosten_innovatie: string;
   kosten_anders: string;
   doorlooptijd: string;
   beschrijving: string;
@@ -12,7 +12,7 @@ export class ExperimentDetails {
   constructor() {
     this.netwerk = "";
     this.status = "";
-    this.kosten_inovatie = "";
+    this.kosten_innovatie = "";
     this.kosten_anders = "";
     this.doorlooptijd = "";
     this.beschrijving = "";

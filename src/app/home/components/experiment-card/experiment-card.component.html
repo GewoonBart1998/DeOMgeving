@@ -4,15 +4,8 @@
   <div class="card-content">
     <h4 class="title">{{experiment.experiment_naam}}</h4>
     <p class="date">{{experiment.wijziging_datum}}</p>
-    <p class="description">{{ getBeschrijving() }}</p>
 
-    <div class="author-div">
-      <p class="author">{{experiment.experiment_leider_primair}}</p>
-    </div>
-    <div class="author-div" *ngIf="experiment.experiment_leider_secundair">
-      <p class="author">{{experiment.experiment_leider_secundair}}</p>
-    </div>
-    <p>Hier komt een simpele uitleg over waar het experiment over zal gaan.</p>
+    <p>{{getBeschrijving()}}</p>
     <p class="author">{{experiment.experiment_leider_primair}}</p>
     <p class="author" [ngClass]="{'hidden': !experiment.experiment_leider_secundair}">{{experiment.experiment_leider_secundair}}</p>
   </div>
