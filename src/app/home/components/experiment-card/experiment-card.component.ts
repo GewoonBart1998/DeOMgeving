@@ -3,6 +3,7 @@ import {Experiment} from './experiment';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ManageExperimentComponent} from '../manage-experiment/manage-experiment.component';
 import {ExperimentDetails} from '../manage-experiment/experimentDetails';
+import {ExperimentService} from '../../service/experiment.service';
 
 @Component({
   selector: 'app-experiment-card',
@@ -12,9 +13,12 @@ import {ExperimentDetails} from '../manage-experiment/experimentDetails';
 export class ExperimentCardComponent implements OnInit {
   @Input() experiment: Experiment;
   @Input() manageExperimentComponent: ManageExperimentComponent;
+  experimentService: ExperimentService;
   private experimentDetails: ExperimentDetails;
   private experimentId;
   private experimentDetailsService: ExperimentDetailsService;
+
+
 
   constructor() {
   }
@@ -26,10 +30,8 @@ export class ExperimentCardComponent implements OnInit {
     this.experiment = experiment;
   }
 
-  getBeschrijving() {
-      this.experimentDetailsService.getByExperimentId(this.experimentId).subscribe(response => {
-        this.experimentDetails = response;
-  });
+  public getBeschrijving() {
+    return this.manageExperimentComponent.getBeschrijving();
   }
 
   getStatusKleur() {

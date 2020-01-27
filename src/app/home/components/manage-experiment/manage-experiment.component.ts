@@ -50,7 +50,7 @@ export class ManageExperimentComponent implements OnInit {
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private snackbarUtil: SnackbarUtilService
+    private snackbarUtil: SnackbarUtilService,
   ) {
 
   }
@@ -62,6 +62,7 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentDetails = new ExperimentDetails();
     this.buildFormExperimentDetails();
     this.buildFormExperiment();
+    console.log(this.experimentDetailsForm.value.beschrijving);
 
 
     if (this.existingExperiment) {
@@ -162,7 +163,7 @@ export class ManageExperimentComponent implements OnInit {
         beschrijving: new FormControl(this.experimentDetails.beschrijving),
         netwerk: new FormControl(this.experimentDetails.netwerk),
         status: new FormControl(this.experimentDetails.status),
-        kosten_innovatie: new FormControl(this.experimentDetails.kosten_innovatie),
+        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
         overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),
@@ -285,4 +286,9 @@ export class ManageExperimentComponent implements OnInit {
     this.uploadedFile.fileName = "...";
     this.bijlage = files.item(0);
   }
+  getBeschrijving(){
+   return  this.experimentDetailsForm.value.beschrijving.toString();
+
+  }
+
 }

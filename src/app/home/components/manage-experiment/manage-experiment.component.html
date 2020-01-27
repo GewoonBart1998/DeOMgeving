@@ -29,7 +29,9 @@
 
 <div class="experiment-info scroll-container ">
   <h2>Experiment</h2>
+  <p>{{experimentDetails.beschrijving}}</p>
   <br>
+
   <form [formGroup]="experimentForm">
     <div class="textfields">
 
@@ -130,7 +132,7 @@
 
         <mat-form-field class="large-input">
           <mat-label>Kosten innovatie</mat-label>
-          <textarea class="large-input" matInput formControlName="kosten_innovatie"></textarea>
+          <textarea class="large-input" matInput formControlName="kosten_inovatie"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
 

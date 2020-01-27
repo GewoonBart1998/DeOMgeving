@@ -4,6 +4,7 @@ import {ExperimentCardComponent} from './experiment-card.component';
 import {UserModule} from '../../../user/user.module';
 import {HomeModule} from '../../home.module';
 
+
 describe('ExperimentCardComponent', () => {
   let component: ExperimentCardComponent;
   let fixture: ComponentFixture<ExperimentCardComponent>;
