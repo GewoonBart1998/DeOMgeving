@@ -107,14 +107,14 @@ export class PdfService {
                 text: 'Beschrijving:',
                 style: 'koptext'
 
-        },
-        {
-          text: experiment.beschrijving,
-          style: 'text'
-        },
-        {
-          text: 'Netwerk: :',
-          style: 'koptext'
+              },
+              {
+                text: experimentDetails.beschrijving,
+                style: 'text'
+              },
+              {
+                text: 'Netwerk: :',
+                style: 'koptext'
 
               },
               {
@@ -134,14 +134,14 @@ export class PdfService {
                 text: 'Kosten innovatie:',
                 style: 'koptext'
 
-        },
-        {
-          text: experimentDetails.kosten_innovatie,
-          style: 'text'
-        },
-        {
-          text: 'Kosten anders:',
-          style: 'koptext'
+              },
+              {
+                text: experimentDetails.kosten_inovatie,
+                style: 'text'
+              },
+              {
+                text: 'Kosten anders:',
+                style: 'koptext'
 
               },
               {

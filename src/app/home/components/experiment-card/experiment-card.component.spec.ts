@@ -4,11 +4,9 @@ import {ExperimentCardComponent} from './experiment-card.component';
 import {UserModule} from '../../../user/user.module';
 import {HomeModule} from '../../home.module';
 
-
 describe('ExperimentCardComponent', () => {
   let component: ExperimentCardComponent;
   let fixture: ComponentFixture<ExperimentCardComponent>;
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +25,6 @@ describe('ExperimentCardComponent', () => {
       color: '',
       experiment_leider_primair: '',
       experiment_leider_secundair: '',
-      beschrijving: ''
     };
     component = fixture.componentInstance;
     component.experiment = testExperiment;
