@@ -14,7 +14,7 @@
           <img src="assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
         <a routerLink='/home/dienst' routerLinkActive='selected'>
           <img src="/assets/img/icons/Vaste_diensten.png" alt="dienst">Vaste diensten</a>
-        <a routerLink='/home/experiment' routerLinkActive='selected'>
+        <a routerLink='/home/experiment' routerLinkActive='selected'  [routerLinkActiveOptions]="{ exact: true }">
           <img src="assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
         <a routerLink='/home/user' routerLinkActive='selected' *ngIf="userrole" >
           <img src="assets/img/icons/User_management.png" alt="users">User management</a>

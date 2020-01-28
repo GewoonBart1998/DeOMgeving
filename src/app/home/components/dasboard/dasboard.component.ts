@@ -3,7 +3,7 @@ import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
-import {SnackbarUtilService} from '../../../shared/services/snackbar-util.service';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-dasboard',
@@ -18,7 +18,7 @@ export class DasboardComponent implements OnInit {
     private experimentService: ExperimentService,
     private snackbar: MatSnackBar,
     private router: Router,
-    private snackbarUtil: SnackbarUtilService) {
+    private snackbarUtil: SnackbarService) {
   }
 
   ngOnInit() {

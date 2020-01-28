@@ -26,7 +26,7 @@ describe('UserRegisterComponent', () => {
   });
 
   it('should have text block enabled', () => {
-    expect(component.hide).toEqual(true);
+    expect(component.passwordHidden).toEqual(true);
   });
 
   it('should have text blocked', () => {
