@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Experiment} from './experiment';
-import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ManageExperimentComponent} from '../manage-experiment/manage-experiment.component';
+import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ExperimentDetails} from '../manage-experiment/experimentDetails';
-import {ExperimentService} from '../../service/experiment.service';
 
 @Component({
   selector: 'app-experiment-card',
@@ -12,12 +11,8 @@ import {ExperimentService} from '../../service/experiment.service';
 })
 export class ExperimentCardComponent implements OnInit {
   @Input() experiment: Experiment;
+  @Input() experiment_details: ExperimentDetails
   @Input() manageExperimentComponent: ManageExperimentComponent;
-  experimentService: ExperimentService;
-  private experimentDetails: ExperimentDetails;
-  private experimentId;
-  private experimentDetailsService: ExperimentDetailsService;
-
 
 
   constructor() {
@@ -30,9 +25,9 @@ export class ExperimentCardComponent implements OnInit {
     this.experiment = experiment;
   }
 
-  public getBeschrijving() {
-    return this.manageExperimentComponent.getBeschrijving();
-  }
+  // public getBeschrijving() {
+  //   this.experimentDetailsService.getByExperimentId(this.experiment.experimentId);
+  // }
 
   getStatusKleur() {
     switch (this.experiment.color) {

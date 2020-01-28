@@ -29,9 +29,7 @@
 
 <div class="experiment-info scroll-container ">
   <h2>Experiment</h2>
-  <p>{{experimentDetails.beschrijving}}</p>
   <br>
-
   <form [formGroup]="experimentForm">
     <div class="textfields">
 
@@ -88,8 +86,14 @@
           </mat-select>
         </mat-form-field>
 
-        <hr>
+      <mat-form-field class="large-input">
+        <mat-label>Beschrijving</mat-label>
+        <textarea class="large-input" matInput required = true formControlName="beschrijving"></textarea>
+        <mat-error>error</mat-error>
+      </mat-form-field>
       </div>
+    <hr>
+    <br>
     </form>
     <form [formGroup]="experimentDetailsForm">
       <h2>Experiment details</h2>
@@ -108,12 +112,7 @@
           <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="upload-button mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
         <br>
-        <mat-form-field class="large-input">
-          <mat-label>Beschrijving</mat-label>
-          <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
-          <mat-error>error</mat-error>
-        </mat-form-field>
-        <br>
+
 
         <mat-form-field class="la   rge-input">
           <mat-label>Netwerk</mat-label>
@@ -132,7 +131,7 @@
 
         <mat-form-field class="large-input">
           <mat-label>Kosten innovatie</mat-label>
-          <textarea class="large-input" matInput formControlName="kosten_inovatie"></textarea>
+          <textarea class="large-input" matInput formControlName="kosten_innovatie"></textarea>
           <mat-error>error</mat-error>
         </mat-form-field>
 

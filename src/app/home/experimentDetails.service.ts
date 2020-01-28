@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../shared/services/api.service';
 import {ExperimentDetails} from './components/manage-experiment/experimentDetails';
+import {ManageExperimentComponent} from './components/manage-experiment/manage-experiment.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExperimentDetailsService {
   private resourcePath = '/experimentDetails';
-
   constructor(private api: ApiService) {
   }
 
@@ -27,5 +27,6 @@ export class ExperimentDetailsService {
   deleteByExperimentId(experimentId: number) {
     return this.api.delete(`${this.resourcePath}/${experimentId}`);
   }
+
 
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Output, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
 import {Experiment} from '../experiment-card/experiment';
@@ -21,7 +21,6 @@ import {SnackbarUtilService} from '../../../shared/services/snackbar-util.servic
 
 // TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
-
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
   private experiment: Experiment;
@@ -62,7 +61,6 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentDetails = new ExperimentDetails();
     this.buildFormExperimentDetails();
     this.buildFormExperiment();
-    console.log(this.experimentDetailsForm.value.beschrijving);
 
 
     if (this.existingExperiment) {
@@ -111,7 +109,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
 
-  private getExperimentDetails() {
+   getExperimentDetails() {
     this.experimentDetailsService.getByExperimentId(this.experimentId).subscribe(response => {
       this.experimentDetails = response;
       this.buildFormExperimentDetails();
@@ -160,10 +158,10 @@ export class ManageExperimentComponent implements OnInit {
 
   private buildFormExperimentDetails() {
     this.experimentDetailsForm = new FormGroup({
-        beschrijving: new FormControl(this.experimentDetails.beschrijving),
+
         netwerk: new FormControl(this.experimentDetails.netwerk),
         status: new FormControl(this.experimentDetails.status),
-        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+        kosten_innovatie: new FormControl(this.experimentDetails.kosten_innovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
         overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),
@@ -285,10 +283,6 @@ export class ManageExperimentComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.uploadedFile.fileName = "...";
     this.bijlage = files.item(0);
-  }
-  getBeschrijving(){
-   return  this.experimentDetailsForm.value.beschrijving.toString();
-
   }
 
 }
