@@ -14,6 +14,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import {SnackbarService} from '../../../shared/services/snackbar.service';
 import {ConfirmActionComponent} from '../../../shared/components/confirm-action.component';
 import {MatDialog} from '@angular/material/dialog';
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import {ExperimentStatsService} from '../../service/experimentStats.service';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -53,7 +55,8 @@ export class ManageExperimentComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
     private snackbarUtil: SnackbarService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private experimentStats: ExperimentStatsService
   ) {
 
   }
@@ -122,8 +125,13 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   generatePdf() {
-    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails);
-    pdfMake.createPdf(documentDefinition).download();
+    const self = this;
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails,
+      function(data) {
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        var pdf = pdfMake.createPdf(data);
+        pdf.download(self.experiment.experiment_naam);
+    });
   }
 
   //todo: make this a bit more readable

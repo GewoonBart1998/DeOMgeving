@@ -41,6 +41,10 @@
   background-color: #ED8077;
 }
 
+.nvt {
+  background-color: lightgray;
+}
+
 .card-content {
   padding: 5px 30px;
 }

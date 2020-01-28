@@ -14,10 +14,9 @@ export class DasboardComponent implements OnInit {
   experimentList: Array<Experiment>;
   filterName: String;
 
-  constructor(
-    private experimentService: ExperimentService,
-    private snackbar: MatSnackBar,
-    private router: Router,
+  constructor(private experimentService: ExperimentService,
+              private snackbar: MatSnackBar,
+              private router: Router,
     private snackbarUtil: SnackbarService) {
   }
 
@@ -29,6 +28,8 @@ export class DasboardComponent implements OnInit {
         this.snackbarUtil.showMessage('Kon experimenten niet inladen');
       });
   }
+
+
 
   changePhase(event){
     if(event.target.value == 'none'){
