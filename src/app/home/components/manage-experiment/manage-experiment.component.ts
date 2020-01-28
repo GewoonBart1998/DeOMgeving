@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
-
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -16,6 +15,7 @@ import {UploadedFile} from '../../../shared/services/UploadedFile';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import {ExperimentStatsService} from '../../service/experimentStats.service';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -54,7 +54,8 @@ export class ManageExperimentComponent implements OnInit {
     private router: Router,
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
-    private pdfService: PdfService
+    private pdfService: PdfService,
+    private experimentStats: ExperimentStatsService
   ) {
 
   }
@@ -100,17 +101,6 @@ export class ManageExperimentComponent implements OnInit {
     }
   }
 
-  downloadFile() {
-    // console.log(this.fileBlob);
-    // const url= window.URL.createObjectURL(this.fileBlob);
-    // this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    // console.log(url);
-    // window.open(url);
-    // const data = 'some text';
-    // const blob = new Blob([data], { type: 'application/octet-stream' });
-
-    // this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
-  }
 
   private fillLeaders() {
     this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {

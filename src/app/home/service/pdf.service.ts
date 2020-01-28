@@ -41,20 +41,6 @@ export class PdfService {
       });
   }
 
-  getBase64(file) {
-    // const reader = new FileReader();
-    // var fileBlob = new Blob([file), {type: 'image/png'});
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   console.log(reader.result);
-    //  // this.resume.profilePic = reader.result as string;
-    //   return reader.result as string;
-    // };
-    // reader.onerror = (error) => {
-    //   console.log('Error: ', error);
-    // };
-  }
-
     getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, doneFunc){
       this.getTestlabLogo(function(image) {
         console.log(image);
