@@ -85,13 +85,19 @@
           </mat-select>
         </mat-form-field>
 
-      <hr>
-    </div>
-  </form>
-  <form [formGroup]="experimentDetailsForm">
-    <h2>Experiment details</h2>
+      <mat-form-field class="large-input">
+        <mat-label>Beschrijving</mat-label>
+        <textarea class="large-input" matInput required = true formControlName="beschrijving"></textarea>
+        <mat-error>error</mat-error>
+      </mat-form-field>
+      </div>
+    <hr>
     <br>
-    <div class="textfields">
+    </form>
+    <form [formGroup]="experimentDetailsForm">
+      <h2>Experiment details</h2>
+      <br>
+      <div class="textfields">
 
         <div class="file-upload">
           <mat-spinner diameter="40" *ngIf="(uploadedFile === null && existingExperiment) || isUploading">
@@ -105,12 +111,7 @@
           <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="upload-button mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
         </div>
         <br>
-        <mat-form-field class="large-input">
-          <mat-label>Beschrijving</mat-label>
-          <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
-          <mat-error>error</mat-error>
-        </mat-form-field>
-        <br>
+
 
       <mat-form-field class="la   rge-input">
         <mat-label>Netwerk</mat-label>
@@ -127,11 +128,11 @@
 
       <br>
 
-      <mat-form-field class="large-input">
-        <mat-label>Kosten innovatie</mat-label>
-        <textarea class="large-input" matInput formControlName="kosten_inovatie"></textarea>
-        <mat-error>error</mat-error>
-      </mat-form-field>
+        <mat-form-field class="large-input">
+          <mat-label>Kosten innovatie</mat-label>
+          <textarea class="large-input" matInput formControlName="kosten_innovatie"></textarea>
+          <mat-error>error</mat-error>
+        </mat-form-field>
 
       <mat-form-field class="large-input">
         <mat-label>Geschatte kosten</mat-label>

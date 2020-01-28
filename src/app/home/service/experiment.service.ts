@@ -16,6 +16,7 @@ export class ExperimentService {
     return this.api.get<Array<Experiment>>(this.resourcePath);
   }
 
+  // TODO clean method names
   Stats(){
     return this.api.get<stats>(this.resourcePath);
   }

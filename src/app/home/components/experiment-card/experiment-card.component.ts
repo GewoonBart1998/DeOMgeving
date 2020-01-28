@@ -1,4 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Experiment} from './experiment';
+import {ManageExperimentComponent} from '../manage-experiment/manage-experiment.component';
+import {ExperimentDetailsService} from '../../experimentDetails.service';
+import {ExperimentDetails} from '../manage-experiment/experimentDetails';
 
 @Component({
   selector: 'app-experiment-card',
@@ -6,13 +10,24 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./experiment-card.component.css']
 })
 export class ExperimentCardComponent implements OnInit {
-  @Input() experiment: { fase: string; color: string; experiment_leider_primair: string; experimentId: number; experiment_leider_secundair: string; wijziging_datum: Date; experiment_naam: string };
+  @Input() experiment: Experiment;
+  @Input() experiment_details: ExperimentDetails
+  @Input() manageExperimentComponent: ManageExperimentComponent;
+
 
   constructor() {
   }
 
   ngOnInit() {
   }
+
+  public setExperiment(experiment: Experiment) {
+    this.experiment = experiment;
+  }
+
+  // public getBeschrijving() {
+  //   this.experimentDetailsService.getByExperimentId(this.experiment.experimentId);
+  // }
 
   getStatusKleur() {
       switch (this.experiment.color) {

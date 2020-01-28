@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Output, ViewChild} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatSnackBar} from '@angular/material';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
@@ -25,7 +24,6 @@ import {ExperimentStatsService} from '../../service/experimentStats.service';
 
 // TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
-
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
   private experiment: Experiment;
@@ -48,13 +46,12 @@ export class ManageExperimentComponent implements OnInit {
     private experimentService: ExperimentService,
     private experimentDetailsService: ExperimentDetailsService,
     private userService: UserService,
-    private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private snackbarUtil: SnackbarService,
+    private snackbar: SnackbarService,
     public dialog: MatDialog,
     private experimentStats: ExperimentStatsService
   ) {
@@ -102,7 +99,7 @@ export class ManageExperimentComponent implements OnInit {
         }
       },
       error => {
-        this.snackbarUtil.showMessage('Kon experiment leiders niet inladen');
+        this.snackbar.showMessage('Kon experiment leiders niet inladen');
       });
   }
 
@@ -116,7 +113,7 @@ export class ManageExperimentComponent implements OnInit {
   }
 
 
-  private getExperimentDetails() {
+   getExperimentDetails() {
     this.experimentDetailsService.getByExperimentId(this.experimentId).subscribe(response => {
       this.experimentDetails = response;
       this.buildFormExperimentDetails();
@@ -147,7 +144,7 @@ export class ManageExperimentComponent implements OnInit {
 
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
-            this.snackbarUtil.showMessage('Experiment aangemaakt');
+            this.snackbar.showMessage('Experiment aangemaakt');
             this.router.navigate(['/home']);
           }
         );
@@ -163,16 +160,17 @@ export class ManageExperimentComponent implements OnInit {
         experiment_leider_secundair: new FormControl(this.experiment.experiment_leider_secundair),
         fase: new FormControl(this.experiment.fase),
         color: new FormControl(this.experiment.color),
+        beschrijving: new FormControl(this.experiment.beschrijving),
       }, [Validators.required, Validators.maxLength(255)]
     );
   }
 
   private buildFormExperimentDetails() {
     this.experimentDetailsForm = new FormGroup({
-        beschrijving: new FormControl(this.experimentDetails.beschrijving),
+
         netwerk: new FormControl(this.experimentDetails.netwerk),
         status: new FormControl(this.experimentDetails.status),
-        kosten_inovatie: new FormControl(this.experimentDetails.kosten_inovatie),
+        kosten_innovatie: new FormControl(this.experimentDetails.kosten_innovatie),
         kosten_anders: new FormControl(this.experimentDetails.kosten_anders),
         doorlooptijd: new FormControl(this.experimentDetails.doorlooptijd),
         overige_opmerkingen: new FormControl(this.experimentDetails.overige_opmerkingen),
@@ -292,7 +290,7 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentService.delete(this.experimentId).subscribe(res => {
     });
 
-    this.snackbarUtil.showMessage('Experiment verwijderd');
+    this.snackbar.showMessage('Experiment verwijderd');
     this.router.navigate(['/home']);
   }
 
