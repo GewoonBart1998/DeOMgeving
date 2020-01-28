@@ -1,21 +1,8 @@
-.name {
-  margin: 0 10px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.rol {
-}
-
-.mdc-list-item {
-  list-style-type: none;
-}
 
 .delete-button {
   margin: 0 10px;
 padding: 0 10px;
-background-color: #ED6C05 !important;
+background-color: #ED6C05;
 border: none;
 border-radius: 3px;
 color: #FFFFFF !important;
@@ -25,9 +12,21 @@ cursor: pointer;
 .identify-button {
   margin: 0 10px;
   padding: 0 10px;
-  background-color: #BA81EB !important;
+  background-color: #BA81EB;
   border: none;
   border-radius: 3px;
   color: #FFFFFF !important;
   cursor: pointer;
+  display: block;
+  height: 22px;
+}
+
+.description, mat-panel-title{
+  max-width: 40%;
+  overflow: hidden;
+  width: 40%;
+}
+
+.identify-button:hover{
+  background-color: #a472d1;
 }

@@ -23,7 +23,7 @@
 
 h2 {
   color: #4bb194;
-  margin-left: 50px;
+  margin-bottom: 20px;
 }
 
 .add-experiment {
@@ -39,4 +39,9 @@ h2 {
 
 .experiment-info {
   height: 85vh;
+}
+
+.mat-accordion {
+  display: inline-block;
+  width: 60%;
 }

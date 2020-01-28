@@ -9,7 +9,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UpdateHistoryComponent} from './components/manage-experiment/update-history/update-history.component';
 import {UpdateMessageComponent} from './components/manage-experiment/update-history/update-message/update-message.component';
 import {UserManagementComponent} from './components/user-management/user-management.component';
-import {UserListComponent} from './components/user-management/user/user-list/user-list.component';
 import {UserComponent} from './components/user-management/user/user.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -25,7 +24,6 @@ import {VasteDienstenComponent} from './components/vaste-diensten/vaste-diensten
     HomeComponent,
     UserManagementComponent,
     UserComponent,
-    UserListComponent,
     UpdateHistoryComponent,
     UpdateMessageComponent,
     VasteDienstenComponent

@@ -1,7 +1,10 @@
-import {Component, Input, OnInit, Type} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../../../user/shared/user.service';
 import {User} from '../../../../user/shared/user';
+import {ConfirmActionComponent} from '../../../../shared/components/confirm-action.component';
+import {MatDialog} from '@angular/material';
+import {SnackbarService} from '../../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-user',
@@ -11,48 +14,78 @@ import {User} from '../../../../user/shared/user';
 export class UserComponent implements OnInit {
   @Input() user: User;
   userForm: FormGroup;
-  userrole= false;
+  isUnidentified = false;
+  isUserRemoved = false;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private dialog: MatDialog, private snackbar: SnackbarService) {
   }
 
-  //TODO: add feedback when user executes an action
   ngOnInit() {
+    this.buildForm(this.user.role.toString());
+    this.checkUserIfUnidentified();
+  }
+
+  onDelete() {
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      data: {
+        title: 'Gebruiker verwijderen?',
+        message: 'Weet u zeker dat u deze gebruiker wilt verwijderen?',
+        confirmButtonText: 'verwijderen'
+      },
+      width: '750px',
+      position: {top: '5%'}
+    });
+
+
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      if (isConfirmed) {
+        this.deleteUser();
+      }
+    });
+  }
+
+  deleteUser() {
+    this.userService.removeUser(this.userForm.value.id).subscribe(res => {
+      this.isUserRemoved = true;
+    });
+  }
+
+  onSubmit() {
+   this.updateUser()
+  }
+
+  upgradeRole() {
+    if (this.isUnidentified) {
+      this.buildForm('GEBRUIKER');
+
+      this.updateUser();
+      this.checkUserIfUnidentified();
+    }
+  }
+
+  private buildForm(role) {
     this.userForm = new FormGroup({
         id: new FormControl(this.user.id),
         email: new FormControl(this.user.email),
         name: new FormControl(this.user.name),
-        role: new FormControl(this.user.role.toString()),
+        role: new FormControl(role),
       }, [Validators.required, Validators.maxLength(255)]
     );
-    if (this.user.role.toString() === "UNIDENTIFIED")
-      this.userrole = true;
-  }
-  onDelete() {
-    this.userService.removeUser(this.userForm.value.id).subscribe(res => {
-      console.log('User removed!');
-      window.location.reload();
-    });
   }
 
-
-  onSubmit() {
-    this.userService.updateUser(this.userForm.value).subscribe(res => {
-    });
-  }
-  upgradeRole() {
-    console.log("click!");
-    if(this.user.role.toString() === "UNIDENTIFIED") {
-      this.userForm = new FormGroup({
-          id: new FormControl(this.user.id),
-          email: new FormControl(this.user.email),
-          name: new FormControl(this.user.name),
-          role: new FormControl("GEBRUIKER"),
-        }, [Validators.required, Validators.maxLength(255)]
-      );
-      this.userService.updateUser(this.userForm.value).subscribe(res => {
-      });
-      this.userrole = false;
+  private checkUserIfUnidentified() {
+    if (this.user.role.toString() === 'UNIDENTIFIED') {
+      this.isUnidentified = true;
     }
+  }
+
+  private updateUser() {
+    this.userService.updateUser(this.userForm.value).subscribe(res => {
+        this.snackbar.showMessage('Gebruiker aangepast!');
+      },
+      error => {
+        this.snackbar.showMessage('Kon gebruiker niet aanpassen');
+      });
+
   }
 }
