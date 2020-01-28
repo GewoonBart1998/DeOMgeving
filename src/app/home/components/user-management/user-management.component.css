@@ -15,6 +15,7 @@
   padding-top: 50px;
   padding-bottom: 100px;
   background-color: #F7F5F5;
+  height: 85vh;
 }
 
 .textfields {
@@ -35,10 +36,6 @@ h2 {
   border-radius: 3px;
   color: #FFFFFF;
   cursor: pointer;
-}
-
-.experiment-info {
-  height: 85vh;
 }
 
 .mat-accordion {

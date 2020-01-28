@@ -9,6 +9,8 @@ import {VasteDienstenComponent} from './home/components/vaste-diensten/vaste-die
 import {AuthGuard} from './auth.guard';
 import {AdminGuard} from './admin.guard';
 import {UserManagementComponent} from './home/components/user-management/user-management.component';
+import {OverzichtExporterenComponent} from './home/components/overzicht-exporteren/overzicht-exporteren.component';
+
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -29,6 +31,7 @@ const appRoutes: Routes = [
           {path: '', component: DasboardComponent},
           {path: 'user', component: UserManagementComponent, canActivate: [AdminGuard]},
           {path: 'dienst', component: VasteDienstenComponent},
+          {path: 'export', component: OverzichtExporterenComponent},
 
         ]
       },
