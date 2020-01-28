@@ -3,18 +3,9 @@
 </div>
 <div class="experiment-info scroll-container">
   <h2>User Management</h2>
-  <br>
-  <br>
-  <app-user-list></app-user-list>
-<!--  <ul class="mdc-list">-->
-<!--    <li class="mdc-list-item" tabindex="0">-->
-<!--      <span class="mdc-list-item__text">Single-line item</span>-->
-<!--    </li>-->
-<!--    <li class="mdc-list-item">-->
-<!--      <span class="mdc-list-item__text">Single-line item</span>-->
-<!--    </li>-->
-<!--    <li class="mdc-list-item">-->
-<!--      <span class="mdc-list-item__text">Single-line item</span>-->
-<!--    </li>-->
-<!--  </ul>-->
+
+  <mat-accordion>
+    <app-user *ngFor="let user of users" [user]="user"></app-user>
+  </mat-accordion>
+
 </div>

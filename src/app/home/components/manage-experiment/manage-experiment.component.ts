@@ -333,4 +333,8 @@ export class ManageExperimentComponent implements OnInit {
   isFormValid() {
     return this.experimentForm.valid;
   }
+
+  isHalfWidth() {
+    return !this.isEditingExperiment;
+  }
 }

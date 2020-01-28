@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="experiment-info scroll-container " [ngClass]="existingExperiment ? 'partial-width' : 'full-width'">
+<div class="experiment-info scroll-container " [ngClass]="isHalfWidth() ? 'partial-width' : 'full-width'">
   <h2>Experiment</h2>
   <br>
   <form [formGroup]="experimentForm">

@@ -1,25 +1,27 @@
-<li class="mdc-list-item" tabindex="0">
+<mat-expansion-panel *ngIf="!isUserRemoved">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{user.name}}
+    </mat-panel-title>
+    <mat-panel-description>
+
+      <span class="description">{{user.email}}</span>
+      <button *ngIf="isUnidentified" class="identify-button" (click)="upgradeRole()">Identify</button>    </mat-panel-description>
+  </mat-expansion-panel-header>
   <form [formGroup]="userForm">
-  <label class="name" style="display:none">
-    <input type="id" placeholder="{{user.id}}" name="id" value="{{user.id}}" required  formControlName="id">
-  </label>
-  <label class="name">
-<!--    <input type="id" placeholder="{{user.email}}" name="email" value="{{user.email}}" required formControlName="email">-->
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput (change)="onSubmit()" name="email" placeholder="{{user.email}}" required
              value="{{user.email}}" formControlName="email">
       <mat-error>error</mat-error>
     </mat-form-field>
-  </label>
-  <label class="name">
+
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput (change)="onSubmit()" name="Naam" placeholder="{{user.name}}" required
              value="{{user.name}}" formControlName="name">
       <mat-error>error</mat-error>
     </mat-form-field>
-  </label>
 
     <mat-form-field>
       <mat-label>{{ user.role }}</mat-label>
@@ -32,7 +34,7 @@
       </mat-select>
     </mat-form-field>
 
-  <button class="delete-button" type="submit" (click)="onDelete()" >Delete</button>
-  <button *ngIf="userrole" class="identify-button" (click)="upgradeRole()">Identify</button>
+    <button class="delete-button" type="submit" (click)="onDelete()" >Delete</button>
+
   </form>
-</li>
+</mat-expansion-panel>
