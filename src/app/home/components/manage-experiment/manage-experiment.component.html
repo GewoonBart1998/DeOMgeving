@@ -1,7 +1,7 @@
 <div class="ribbon">
   <img class="logo" src="assets/img/OMgeving_logo.png" alt="Omgeving logo">
   <div class="buttons">
-    <button *ngIf="!(existingExperiment && isEditingExperiment)" (click)="editExperiment()"
+    <button *ngIf="existingExperiment && !isEditingExperiment" (click)="editExperiment()"
             class="form-button edit-experiment" mat-flat-button
             color="primary" autofocus>Experiment bewerken
     </button>
@@ -13,14 +13,14 @@
 
     <button *ngIf="!existingExperiment" (click)="submitForm()" class="form-button add-experiment" type="submit"
             mat-flat-button
-            color="primary" autofocus>Experiment toevoegen
+            [disabled]="!isFormValid()"color="primary" autofocus>Experiment toevoegen
     </button>
 
     <button *ngIf="existingExperiment" (click)="generatePdf()" class="form-button export-experiment" mat-flat-button
             color="primary" autofocus>Exporteer naar PDF
     </button>
 
-    <button *ngIf="existingExperiment" (click)="deleteExperiment()" class="form-button add-experiment bg-danger"
+    <button *ngIf="existingExperiment" (click)="onDeleteExperimentButtonClick()" class="form-button add-experiment bg-danger"
             type="submit" mat-flat-button
             color="primary" autofocus>Experiment verwijderen
     </button>
@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="experiment-info scroll-container ">
+<div class="experiment-info scroll-container " [ngClass]="isHalfWidth() ? 'partial-width' : 'full-width'">
   <h2>Experiment</h2>
   <br>
   <form [formGroup]="experimentForm">
@@ -36,25 +36,23 @@
 
       <mat-form-field>
         <mat-label>Experiment naam</mat-label>
-        <input type="text" matInput required="true" formControlName="experiment_naam">
-        <mat-error>error</mat-error>
+        <input type="text" matInput formControlName="experiment_naam" required>
+        <mat-error>Experiment naam kan niet leeg zijn.</mat-error>
       </mat-form-field>
       <br>
 
       <mat-form-field>
         <mat-label>Primaire experiment leider</mat-label>
-        <mat-error>error</mat-error>
-        <mat-select formControlName="experiment_leider_primair" required="true">
+        <mat-select formControlName="experiment_leider_primair" required>
           <mat-option *ngFor="let leader of leaders" [value]="leader">
             {{ leader }}
           </mat-option>
-        </mat-select>
+        </mat-select><mat-error>Kan geen experiment aanmaken zonder primaire leider</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Secundaire experiment leider</mat-label>
-        <mat-error>error</mat-error>
-        <mat-select formControlName="experiment_leider_secundair" required="false">
+        <mat-select formControlName="experiment_leider_secundair">
           <mat-option>n.v.t.</mat-option>
           <mat-option *ngFor="let leader of leaders" [value]="leader">
             {{ leader }}
@@ -66,27 +64,26 @@
 
       <mat-form-field>
         <mat-label>Fase</mat-label>
-        <mat-error>error</mat-error>
-        <mat-select required="true" formControlName="fase">
+        <mat-select formControlName="fase" required>
           <mat-option [value]="'Idee'">Idee</mat-option>
           <mat-option [value]="'Lab in'">Lab in</mat-option>
           <mat-option [value]="'Lab uit'">Lab uit</mat-option>
           <mat-option [value]="'Vaste dienst'">Vaste dienst</mat-option>
 
-        </mat-select>
+        </mat-select><mat-error>error</mat-error>
       </mat-form-field>
       <br>
 
-      <mat-form-field>
-        <mat-label>Status kleur</mat-label>
-        <mat-error>error</mat-error>
-        <mat-select required="true" formControlName="color">
-          <mat-option [value]="'Rood'">Rood</mat-option>
-          <mat-option [value]="'Oranje'">Oranje</mat-option>
-          <mat-option [value]="'Groen'">Groen</mat-option>
-          <mat-option [value]="'Grijs'">n.v.t.</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Status kleur</mat-label>
+          <mat-error>error</mat-error>
+          <mat-select formControlName="color" required>
+            <mat-option [value]="'Grijs'">n.v.t.</mat-option>
+            <mat-option [value]="'Rood'">Rood</mat-option>
+            <mat-option [value]="'Oranje'">Oranje</mat-option>
+            <mat-option [value]="'Groen'">Groen</mat-option>
+          </mat-select>
+        </mat-form-field>
 
       <hr>
     </div>
@@ -96,22 +93,24 @@
     <br>
     <div class="textfields">
 
-      <div class="file-upload">
-        <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
-        <mat-label (click)="downloadFile()" *ngIf="uploadedFile !== null">
-          <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
-        </mat-label>
-        <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
-               (change)="handleFileInput($event)">
-        <label for="input-file-id" class="mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
-      </div>
-
-      <mat-form-field class="large-input">
-        <mat-label>Beschrijving</mat-label>
-        <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
-        <mat-error>error</mat-error>
-      </mat-form-field>
-      <br>
+        <div class="file-upload">
+          <mat-spinner diameter="40" *ngIf="(uploadedFile === null && existingExperiment) || isUploading">
+          </mat-spinner>
+          <mat-label *ngIf="uploadedFile === null">Bijlage</mat-label>
+          <mat-label *ngIf="uploadedFile !== null">
+            <a [href]="fileUrl" download="{{ uploadedFile.fileName }}">{{ uploadedFile.fileName }}</a>
+          </mat-label>
+          <input class="ng-hide" style="display: none" id="input-file-id" multiple type="file"
+                 (change)="handleFileInput($event)" [disabled]="!isEditingExperiment">
+          <label for="input-file-id" [class.disabled]="!isEditingExperiment" class="upload-button mat-flat-button mat-raised-button mat-primary">Kies bestand</label>
+        </div>
+        <br>
+        <mat-form-field class="large-input">
+          <mat-label>Beschrijving</mat-label>
+          <textarea class="large-input" matInput formControlName="beschrijving"></textarea>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+        <br>
 
       <mat-form-field class="la   rge-input">
         <mat-label>Netwerk</mat-label>
@@ -135,7 +134,7 @@
       </mat-form-field>
 
       <mat-form-field class="large-input">
-        <mat-label>Kosten anders</mat-label>
+        <mat-label>Geschatte kosten</mat-label>
         <textarea class="large-input" matInput formControlName="kosten_anders"></textarea>
         <mat-error>error</mat-error>
       </mat-form-field>

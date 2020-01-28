@@ -1,19 +1,19 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExperimentService} from '../../service/experiment.service';
 import {PdfService} from '../../service/pdf.service';
 import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatFormField, MatSelect, MatSnackBar} from '@angular/material';
-import {User} from '../../../user/shared/user';
+import {MatSnackBar} from '@angular/material';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ApiService} from '../../../shared/services/api.service';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
-import {UploadedFile} from '../../../shared/services/UploadedFile';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
+import {ConfirmActionComponent} from '../../../shared/components/confirm-action.component';
+import {MatDialog} from '@angular/material/dialog';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ExperimentStatsService} from '../../service/experimentStats.service';
 
@@ -25,8 +25,6 @@ import {ExperimentStatsService} from '../../service/experimentStats.service';
 
 // TODO: split this into two components (no time)
 export class ManageExperimentComponent implements OnInit {
-
-
 
   experimentForm: FormGroup;
   experimentDetailsForm: FormGroup;
@@ -40,6 +38,7 @@ export class ManageExperimentComponent implements OnInit {
   private experimentId;
 
   uploadedFile = null;
+  isUploading: boolean = false;
 
   bijlage: File = null;
   private fileBlob: Blob;
@@ -55,6 +54,8 @@ export class ManageExperimentComponent implements OnInit {
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
+    private snackbarUtil: SnackbarService,
+    public dialog: MatDialog,
     private experimentStats: ExperimentStatsService
   ) {
 
@@ -84,23 +85,15 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   private getUploadedAttachment() {
-    if(this.existingExperiment) {
-        this.uploader.getUploadedFile(this.experimentId).subscribe(response => {
-          const byteString = atob(response.fileData);
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i += 1) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          this.fileBlob = new Blob([ab]);
+    if (this.existingExperiment) {
+      var self = this;
+      this.uploader.getUploadedFile(this.experimentId, function(file, fileBlob) {
 
-          // response.fileData = atob(response.fileData);
-          this.uploadedFile = response;
-          this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(this.fileBlob));
-        });
+        self.uploadedFile = file;
+        self.fileUrl = self.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(fileBlob));
+      });
     }
   }
-
 
   private fillLeaders() {
     this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
@@ -109,16 +102,11 @@ export class ManageExperimentComponent implements OnInit {
         }
       },
       error => {
-        this.snackbar.open('Kon experiment leiders niet inladen', '', {
-          duration: 2000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right'
-        });
+        this.snackbarUtil.showMessage('Kon experiment leiders niet inladen');
       });
   }
 
   private getExperiment() {
-    // TODO: CORRECT EXPERIMENT ID
     this.experimentService.getById(this.experimentId).subscribe(response => {
       this.experiment = response;
       this.buildFormExperiment();
@@ -146,6 +134,7 @@ export class ManageExperimentComponent implements OnInit {
     });
   }
 
+  //todo: make this a bit more readable
   submitForm() {
     if (this.existingExperiment) {
       this.experimentService.update(this.experimentId, this.experiment);
@@ -153,20 +142,15 @@ export class ManageExperimentComponent implements OnInit {
     } else {
       this.experimentService.create(this.experimentForm.value).subscribe(res => {
         const experimentDetails = this.experimentDetailsForm.value;
-        experimentDetails.experimentId = <number>res;
+        experimentDetails.experimentId = <number> res;
         this.manageUpload(experimentDetails.experimentId);
 
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
-            this.snackbar.open('Experiment aangemaakt!', '', {
-              duration: 2000,
-              verticalPosition: 'top',
-              horizontalPosition: 'right'
-            });
+            this.snackbarUtil.showMessage('Experiment aangemaakt');
             this.router.navigate(['/home']);
           }
         );
-
 
       });
     }
@@ -198,24 +182,32 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   pushEditButton() {
-    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
-      console.log(response);
+
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      data: {title: 'Wijzigingen opslaan?', message: 'huidige aanpassingen worden opgeslagen', confirmButtonText: 'Opslaan'},
+      width: '750px',
+      position: {top: '5%'}
     });
-    this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
-      console.log(response);
+
+
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      console.log(isConfirmed);
+      if (isConfirmed) {
+        this.updateExperimentModifications();
+      }
+
     });
-
-    this.manageUpload(this.experiment.experimentId);
-
-
-    this.isEditingExperiment = false;
-    this.updateAllInputs();
   }
 
   manageUpload(experimentId: number) {
-    if(this.bijlage) {
+    if (this.bijlage) {
+      this.isUploading = true;
+      var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
-          console.log("DONE");
+        self.isUploading = false;
+        console.log((self.uploadedFile === null && self.existingExperiment) || self.isUploading);
+        self.getUploadedAttachment();
+
       });
     }
   }
@@ -230,23 +222,25 @@ export class ManageExperimentComponent implements OnInit {
   }
 
   disableOrEnableAllInputs(disable) {
-    for(let input of Object.keys(this.experimentForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentForm.controls)) {
+      if (disable) {
         this.experimentForm.get(input).disable();
       } else {
         this.experimentForm.get(input).enable();
       }
     }
 
-    for(let input of Object.keys(this.experimentDetailsForm.controls)) {
-      if(disable){
+    for (let input of Object.keys(this.experimentDetailsForm.controls)) {
+      if (disable) {
         this.experimentDetailsForm.get(input).disable();
       } else {
         this.experimentDetailsForm.get(input).enable();
       }
     }
   }
-  disablAllInputs() {
+
+  //todo: remove this if it is not used
+  disableAllInputs() {
     this.disableOrEnableAllInputs(true);
   }
 
@@ -254,6 +248,7 @@ export class ManageExperimentComponent implements OnInit {
     this.disableOrEnableAllInputs(false);
   }
 
+  //todo: remove this if it is not used
   private setupForm() {
 
     const experimentId = this.getExperimentIdFromPath();
@@ -261,9 +256,6 @@ export class ManageExperimentComponent implements OnInit {
     if (experimentId == null) {
       return;
     }
-
-    // this.getExperiment(experimentId);
-    // this.getExperimentDetails(experimentId);
   }
 
   private getExperimentIdFromPath() {
@@ -277,22 +269,34 @@ export class ManageExperimentComponent implements OnInit {
   }
 
 
-  deleteExperiment() {
-    this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
-      console.log('success');
-    });
-    this.experimentService.delete(this.experimentId).subscribe(res => {
-      console.log('success');
+  onDeleteExperimentButtonClick() {
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      data: {title: 'Experiment verwijderen?', message: 'Alle wijzigingen gaan veloren', confirmButtonText: 'Verwijderen'},
+      width: '750px',
+      position: {top: '5%'}
     });
 
-    this.snackbar.open('Experiment verwijderd!', '', {
-      duration: 2000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right'
+
+    dialogRef.afterClosed().subscribe(isConfirmed => {
+      console.log(isConfirmed);
+      if (isConfirmed) {
+        this.deleteExperiment();
+      }
+
     });
+  }
+
+  deleteExperiment() {
+    this.experimentDetailsService.deleteByExperimentId(this.experimentId).subscribe(res => {
+    });
+    this.experimentService.delete(this.experimentId).subscribe(res => {
+    });
+
+    this.snackbarUtil.showMessage('Experiment verwijderd');
     this.router.navigate(['/home']);
   }
 
+  //todo: remove this if it is not used
   private createEmptyForm() {
     this.experiment = new Experiment();
     this.experimentDetails = new ExperimentDetails();
@@ -301,6 +305,7 @@ export class ManageExperimentComponent implements OnInit {
     this.enableAllInputs();
   }
 
+  //todo: remove this if it is not used
   private delayNaviagate() {
     setTimeout(() => {
 
@@ -309,7 +314,35 @@ export class ManageExperimentComponent implements OnInit {
 
   handleFileInput($event: any) {
     const files = $event.target.files;
+    this.uploadedFile.fileName = '...';
     this.bijlage = files.item(0);
-    console.log(this.bijlage);
+  }
+
+  private updateExperimentModifications() {
+    this.updateExperiment();
+    this.updateExperimentDetails();
+    this.manageUpload(this.experiment.experimentId);
+    this.isEditingExperiment = false;
+    this.updateAllInputs();
+  }
+
+  private updateExperiment() {
+    this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  private updateExperimentDetails() {
+    this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  isFormValid() {
+    return this.experimentForm.valid;
+  }
+
+  isHalfWidth() {
+    return !this.isEditingExperiment;
   }
 }

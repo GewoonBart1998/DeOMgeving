@@ -78,4 +78,5 @@ export class UpdateHistoryComponent implements OnInit {
     }, 100)
 
   }
+
 }

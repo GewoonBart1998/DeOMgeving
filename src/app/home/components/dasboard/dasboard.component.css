@@ -29,11 +29,16 @@ input {
 .search-button{
   margin: 0 20px;
   padding: 0 37px;
-  background-color: #ED6C05 !important;
+  background-color: #ED6C05;
   border: none;
   border-radius: 3px;
-  color: #FFFFFF !important;
+  color: #FFFFFF;
   cursor: pointer;
+  height: 40px;
+}
+
+.search-button:hover{
+  background-color: #e16305;
 }
 
 .form-button:hover {
@@ -48,15 +53,6 @@ select {
   border-radius: 5px;
   font-size: 13px;
   color: #ACACAC;
-}
-
-.ribbon button {
-  text-decoration: none;
-  color: #111111;
-  font-weight: 500;
-  background-color: rgba(0, 0, 0, 0);
-  border: none;
-
 }
 
 .sort-by {
@@ -90,8 +86,7 @@ select {
   width: 100%;
   padding: 170px 25px 20px 70px;
   background-color: #F7F5F5;
-  overflow: auto;
+  overflow-x: hidden;
   /*display: flex;*/
-  min-height: 100%;
   flex-wrap: wrap;
 }

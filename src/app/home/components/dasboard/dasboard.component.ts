@@ -3,6 +3,7 @@ import {ExperimentService} from '../../service/experiment.service';
 import {Experiment} from '../experiment-card/experiment';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-dasboard',
@@ -15,7 +16,8 @@ export class DasboardComponent implements OnInit {
 
   constructor(private experimentService: ExperimentService,
               private snackbar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+    private snackbarUtil: SnackbarService) {
   }
 
   ngOnInit() {
@@ -23,13 +25,7 @@ export class DasboardComponent implements OnInit {
         this.experimentList = res;
       },
       error => {
-        this.snackbar.open('Kon experimenten niet inladen', '', {
-          duration: 2000,
-          // here specify the position
-          //TODO snackbar call method maken
-          verticalPosition: 'top',
-          horizontalPosition: 'right'
-        });
+        this.snackbarUtil.showMessage('Kon experimenten niet inladen');
       });
   }
 
@@ -59,4 +55,5 @@ export class DasboardComponent implements OnInit {
   onExperimentClick(experiment: Experiment) {
     this.router.navigate([`/home/experiment/${experiment.experimentId}`]);
   }
+
 }
