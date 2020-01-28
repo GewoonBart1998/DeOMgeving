@@ -13,12 +13,25 @@ export class UserService {
     this.resourcePath = '/user';
   }
 
-  createUser(user: User) {
-    return this.api.post('/register', user);
+  createUser(user: User, registerCallback: Function) {
+    return this.api.post('/register', user).subscribe(
+      res => {
+        registerCallback();
+      }, error => {
+        registerCallback(true);
+      });
   }
 
-  login(user: User) {
-    return this.api.post('/login', user);
+  login(user: User, loginCallback: Function) {
+    return this.api.post('/login', user).subscribe(
+      res => {
+        this.storeJwt(res);
+        loginCallback(res);
+      },
+      error => {
+        loginCallback(error, true);
+      }
+    );
   }
 
   forgetPassword(email: object) {
@@ -64,7 +77,7 @@ export class UserService {
   /*https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript-without-using-a-library */
   private decodeJWT(jwtToken: string) {
 
-    if (jwtToken === null || jwtToken.length === 0) {
+    if (jwtToken === null || jwtToken == undefined || jwtToken.length === 0) {
       return '';
     }
 
@@ -75,5 +88,10 @@ export class UserService {
     }).join(''));
 
     return JSON.parse(jsonPayload);
+  }
+
+  private storeJwt(res: any) {
+    const jwtToken = res.jwtToken;
+    localStorage.setItem('jwtToken', jwtToken);
   }
 }

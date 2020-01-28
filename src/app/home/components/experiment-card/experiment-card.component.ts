@@ -30,23 +30,28 @@ export class ExperimentCardComponent implements OnInit {
   // }
 
   getStatusKleur() {
-    switch (this.experiment.color) {
-      case "Rood":
-        return "red";
-        break;
+      switch (this.experiment.color) {
+        case "Rood":
+          return "red";
+          break;
 
-      case "Groen":
-        return "green";
-        break;
+        case "Groen":
+          return "green";
+          break;
 
-      case "Oranje":
-        return "orange";
-        break;
+        case "Oranje":
+          return "orange";
+          break;
+
+        case "Grijs":
+          return "nvt";
+          break;
     }
   }
 
   getExperimentLocalDate() {
-    return this.formatDate(new Date(this.experiment.wijziging_datum + " UTC"));
+    const createDate = new Date(this.experiment.wijziging_datum);
+    return this.formatDate( new Date(createDate.toUTCString()) );
   }
 
   formatDate(date) {

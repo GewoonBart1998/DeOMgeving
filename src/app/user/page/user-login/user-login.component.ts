@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../shared/user.service';
+import {SnackbarService} from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-user-login',
@@ -17,21 +18,35 @@ export class UserLoginComponent {
     email: new FormControl('', [Validators.email])
   }, [Validators.required, Validators.maxLength(255)]);
 
-  //TODO: add feedback to user
-  constructor(public userService: UserService, private router: Router) {
+  constructor(public userService: UserService, private router: Router, private snackbar: SnackbarService) {
   }
 
-   // 200 ok en on error
-    // snackbar wachtwoord verkeerd
   onLogin() {
-    this.userService.login(this.userLoginForm.value).subscribe(res => {
-      this.handleLoginResponse(res);
+
+    if(!this.isFormValid()){
+      return;
+    }
+
+    this.userService.login(this.userLoginForm.value, (response, isFailed) => {
+
+      if (isFailed) {
+        this.handleLoginFailedResponse(response);
+        return;
+      }
+
+      this.handleLoginResponse(response);
     });
   }
 
-  handleLoginResponse(response) {
-    const jwtToken = response.jwtToken;
-    localStorage.setItem('jwtToken', jwtToken);
+  private handleLoginFailedResponse(responseError) {
+    this.snackbar.showMessage('Inloggen is mislukt', 2000);
+  }
+
+  private handleLoginResponse(response) {
     this.router.navigate(['/home']);
+  }
+
+  isFormValid() {
+    return this.userLoginForm.valid;
   }
 }

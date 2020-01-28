@@ -1,9 +1,21 @@
+.logo{
+  width: 220px;
+}
+
+.logocontainer{
+  float: left;
+  background-color: #4bb194;
+  width: 100%;
+  height: 5vh;
+}
+
 .container {
   max-width: none;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   align-items: center;
   background-color: #4bb194;
+  padding-left: 15px;
 
 }
 .container h1::after {
@@ -25,7 +37,7 @@
   border-radius: 5px;
   background-color: #ffffff;
   border: 1px solid #e3e3e3;
-  width: 470px;
+  width: 500px;
   padding: 20px;
   margin: auto auto;
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UpdateMessage} from '../update-message.model';
+import {post} from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-update-message',
@@ -17,7 +18,8 @@ export class UpdateMessageComponent implements OnInit {
 
 
   convertUTCToLocal(postDate) {
-    return this.formatDate(new Date(postDate + " UTC"));
+    const createDate = new Date(postDate);
+    return this.formatDate( new Date(createDate.toUTCString()) );
   }
 
   formatDate(date) {

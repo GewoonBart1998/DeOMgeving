@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatSnackBar, MatSnackBarVerticalPosition} from '@angular/material';
 import {MatSnackBarHorizontalPosition} from '@angular/material/snack-bar/typings/snack-bar-config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SnackbarUtilService {
+export class SnackbarService {
 
   standardDuration = 2000;
   standardVerticalPosition: MatSnackBarVerticalPosition = 'top';

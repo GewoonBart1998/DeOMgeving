@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Experiment} from '../components/experiment-card/experiment';
 import {ApiService} from '../../shared/services/api.service';
-import {BehaviorSubject} from 'rxjs';
+import {stats} from '../components/dasboard/stats';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExperimentService {
   private resourcePath = '/experimenten';
-  private messageSource = new BehaviorSubject<string>("De details van dit experiment zijn momenteel niet beschikbaar");
-  currentMessage = this.messageSource.asObservable();
 
   constructor(private api: ApiService) {
   }
@@ -19,6 +17,11 @@ export class ExperimentService {
   }
 
   // TODO clean method names
+  Stats(){
+    return this.api.get<stats>(this.resourcePath);
+  }
+
+  //TODO clean method names
   getById(experimentId: number) {
     return this.api.get<Experiment>(`${this.resourcePath}/${experimentId}`);
   }
