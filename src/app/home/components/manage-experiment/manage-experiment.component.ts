@@ -5,13 +5,11 @@ import {Experiment} from '../experiment-card/experiment';
 import {UserService} from '../../../user/shared/user.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperimentDetails} from './experimentDetails';
-import {MatSnackBar} from '@angular/material';
 import {ExperimentDetailsService} from '../../experimentDetails.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FileUploadService} from '../../../shared/services/file-upload.service';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import pdfMake from 'pdfmake/build/pdfmake';
-import {SnackbarUtilService} from "../../../shared/services/snackbar-util.service";
 import {SnackbarService} from '../../../shared/services/snackbar.service';
 import {ConfirmActionComponent} from '../../../shared/components/confirm-action.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -48,13 +46,12 @@ export class ManageExperimentComponent implements OnInit {
     private experimentService: ExperimentService,
     private experimentDetailsService: ExperimentDetailsService,
     private userService: UserService,
-    private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
     private uploader: FileUploadService,
     private sanitizer: DomSanitizer,
     private pdfService: PdfService,
-    private snackbarUtil: SnackbarUtilService,
+    private snackbar: SnackbarService,
     public dialog: MatDialog,
     private experimentStats: ExperimentStatsService
   ) {
@@ -102,7 +99,7 @@ export class ManageExperimentComponent implements OnInit {
         }
       },
       error => {
-        this.snackbarUtil.showMessage('Kon experiment leiders niet inladen');
+        this.snackbar.showMessage('Kon experiment leiders niet inladen');
       });
   }
 
@@ -147,7 +144,7 @@ export class ManageExperimentComponent implements OnInit {
 
         this.experimentDetailsService.create(experimentDetails).subscribe(
           res1 => {
-            this.snackbarUtil.showMessage('Experiment aangemaakt');
+            this.snackbar.showMessage('Experiment aangemaakt');
             this.router.navigate(['/home']);
           }
         );
@@ -293,7 +290,7 @@ export class ManageExperimentComponent implements OnInit {
     this.experimentService.delete(this.experimentId).subscribe(res => {
     });
 
-    this.snackbarUtil.showMessage('Experiment verwijderd');
+    this.snackbar.showMessage('Experiment verwijderd');
     this.router.navigate(['/home']);
   }
 
