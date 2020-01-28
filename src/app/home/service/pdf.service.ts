@@ -26,13 +26,10 @@ export class PdfService {
 
 
   getBlob(url, doneFunc) {
-    console.log("REQUEST " + url);
     this.http.get(url, { responseType: 'blob' })
       .subscribe(res => {
-        console.log("resp1 " + url);
         const reader = new FileReader();
         reader.onloadend = () => {
-          console.log("resp2 " + url);
           var base64data = reader.result;
           doneFunc(base64data);
         };
@@ -43,7 +40,6 @@ export class PdfService {
 
     getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, doneFunc){
       this.getTestlabLogo(function(image) {
-        console.log(image);
         doneFunc(
           {
             content: [
