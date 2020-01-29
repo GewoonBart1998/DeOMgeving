@@ -28,7 +28,9 @@ h2 {
 }
 
 mat-form-field {
-  margin-left: 40%;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 30px;
 }
 
 .mat-accordion {
@@ -37,17 +39,15 @@ mat-form-field {
 }
 
 .submit-button {
-  padding: 50px;
-  margin-left: 37%;
+  padding: 10px 30px;
+  margin-left: 3%;
   background-color: #ED6C05;
   border: none;
   border-radius: 3px;
   color: #FFFFFF !important;
   cursor: pointer;
-  -webkit-box-shadow: 2px 2px 0px 1px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 0px 1px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 0px 1px rgba(0,0,0,0.75);
-  font-size: 30px;
+
+  font-size: 20px;
 }
 
 .submit-button:hover {
