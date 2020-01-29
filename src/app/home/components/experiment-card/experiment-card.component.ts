@@ -1,4 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Experiment} from './experiment';
+import {ManageExperimentComponent} from '../manage-experiment/manage-experiment.component';
+import {ExperimentDetailsService} from '../../experimentDetails.service';
+import {ExperimentDetails} from '../manage-experiment/experimentDetails';
 
 @Component({
   selector: 'app-experiment-card',
@@ -6,7 +10,10 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./experiment-card.component.css']
 })
 export class ExperimentCardComponent implements OnInit {
-  @Input() experiment: { fase: string; color: string; experiment_leider_primair: string; experimentId: number; experiment_leider_secundair: string; wijziging_datum: Date; experiment_naam: string };
+  @Input() experiment: Experiment;
+  @Input() experiment_details: ExperimentDetails
+  @Input() manageExperimentComponent: ManageExperimentComponent;
+
 
   constructor() {
   }
@@ -14,25 +21,42 @@ export class ExperimentCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  public setExperiment(experiment: Experiment) {
+    this.experiment = experiment;
+  }
+
+
   getStatusKleur() {
-    switch (this.experiment.color) {
-      case "Rood":
-        return "red";
-        break;
+      switch (this.experiment.color) {
+        case "Rood":
+          return "red";
+          break;
 
-      case "Groen":
-        return "green";
-        break;
+        case "Groen":
+          return "green";
+          break;
 
-      case "Oranje":
-        return "orange";
-        break;
+        case "Oranje":
+          return "orange";
+          break;
+
+        case "Grijs":
+          return "nvt";
+          break;
     }
   }
 
   getExperimentLocalDate() {
     const createDate = new Date(this.experiment.wijziging_datum);
     return this.formatDate( new Date(createDate.toUTCString()) );
+  }
+
+  getExperimentBeschrijving(){
+    if( this.experiment.beschrijving == ""){
+      return "Geen beschrijving beschikbaar"
+    }else{
+      return this.experiment.beschrijving
+    }
   }
 
   formatDate(date) {

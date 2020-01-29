@@ -1,1 +1,30 @@
-<p>vaste-diensten works!</p>
+<div class="ribbon">
+  <a class="logo" href="/home"><img src="assets/img/OMgeving_logo.png" alt="Omgeving logo"></a>
+
+  <input #search_value type="text" name="search" placeholder="Zoeken" [(ngModel)]="filterName">
+  <button (click)="onSearchDienst(search_value.value)" class="search-button" mat-flat-button>Zoek</button>
+  <br>
+
+  <select (change)="changePhase($event)">
+    <p>Experiment naam:</p>
+    <option value="vaste dienst/experiment_naam/ASC">Experiment Naam ↑</option>
+    <option value="vaste dienst/experiment_naam/DESC">Experiment Naam ↓</option>
+    <hr>
+    <p>Experiment leider:</p>
+    <option value="vaste dienst/experiment_leider_primair/ASC">Leider Naam ↑</option>
+    <option value="vaste dienst/experiment_leider_primair/DESC">Leider Naam ↓</option>
+    <hr>
+    <p>Laatst gewijzigd:</p>
+    <option value="vaste dienst/wijziging_datum/ASC" selected>Gewijzigd ↑</option>
+    <option value="vaste dienst/wijziging_datum/DESC">Gewijzigd ↓</option>
+  </select>
+
+</div>
+
+<div class="experiment-list">
+  <app-experiment-card
+    *ngFor="let experiment of experimentList"
+    [experiment]="experiment"
+    (click)="onExperimentClick(experiment)"></app-experiment-card>
+
+</div>

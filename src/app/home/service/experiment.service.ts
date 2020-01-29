@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Experiment} from '../components/experiment-card/experiment';
 import {ApiService} from '../../shared/services/api.service';
+import {stats} from '../components/dasboard/stats';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,11 @@ export class ExperimentService {
 
   list() {
     return this.api.get<Array<Experiment>>(this.resourcePath);
+  }
+
+  // TODO clean method names
+  Stats(){
+    return this.api.get<stats>(this.resourcePath);
   }
 
   //TODO clean method names
@@ -41,4 +47,10 @@ export class ExperimentService {
   searchBy(searchBy: string){
     return this.api.get<Array<Experiment>>(this.resourcePath + "/search/" + searchBy)
   }
+
+  searchByDienst(searchBy: string){
+    return this.api.get<Array<Experiment>>(this.resourcePath + "/searchDienst/" + searchBy)
+  }
+
+
 }

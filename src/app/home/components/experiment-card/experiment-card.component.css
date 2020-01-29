@@ -41,6 +41,10 @@
   background-color: #ED8077;
 }
 
+.nvt {
+  background-color: lightgray;
+}
+
 .card-content {
   padding: 5px 30px;
 }
@@ -54,7 +58,8 @@
 }
 
 .author {
-  margin: 20px 15px 0 0;
+  margin: 40px 15px 0 0;
+  float: bottom;
 }
 
 .hidden {
@@ -73,3 +78,4 @@
   top: 5px;
   right: 5px;
 }
+

@@ -4,11 +4,8 @@
   <div class="card-content">
     <h4 class="title">{{experiment.experiment_naam}}</h4>
     <p class="date">{{ getExperimentLocalDate() }}</p>
-    <p>Hier komt een simpele uitleg over waar het experiment over zal gaan.</p>
+    <p class="beschrijving"> {{getExperimentBeschrijving()}}</p>
     <p class="author">{{experiment.experiment_leider_primair}}</p>
-
     <p class="author" [ngClass]="{'hidden': !experiment.experiment_leider_secundair}">{{experiment.experiment_leider_secundair}}</p>
   </div>
-  <span class="status">{{experiment.fase}}</span>
 </div>
-

@@ -10,14 +10,14 @@
   </mat-expansion-panel-header>
   <form [formGroup]="userForm">
     <mat-form-field>
-      <mat-label>Email</mat-label>
+      <mat-label>E-mail</mat-label>
       <input matInput (change)="onSubmit()" name="email" placeholder="{{user.email}}" required
              value="{{user.email}}" formControlName="email">
       <mat-error>error</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Username</mat-label>
+      <mat-label>Gebruikersnaam</mat-label>
       <input matInput (change)="onSubmit()" name="Naam" placeholder="{{user.name}}" required
              value="{{user.name}}" formControlName="name">
       <mat-error>error</mat-error>
@@ -34,7 +34,7 @@
       </mat-select>
     </mat-form-field>
 
-    <button class="delete-button" type="submit" (click)="onDelete()" >Delete</button>
+    <button class="delete-button" type="submit" (click)="onDelete()" >Verwijder</button>
 
   </form>
 </mat-expansion-panel>
