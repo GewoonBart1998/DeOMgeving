@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatNativeDateModule,
   MatOptionModule,
   MatSelectModule,
   MatSnackBarModule
@@ -23,8 +23,11 @@ import {
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatExpansionModule
-  ],
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
+],
   exports: [
     CommonModule,
     MatInputModule,
