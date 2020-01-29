@@ -25,9 +25,6 @@ export class ExperimentCardComponent implements OnInit {
     this.experiment = experiment;
   }
 
-  // public getBeschrijving() {
-  //   this.experimentDetailsService.getByExperimentId(this.experiment.experimentId);
-  // }
 
   getStatusKleur() {
       switch (this.experiment.color) {
@@ -52,6 +49,14 @@ export class ExperimentCardComponent implements OnInit {
   getExperimentLocalDate() {
     const createDate = new Date(this.experiment.wijziging_datum);
     return this.formatDate( new Date(createDate.toUTCString()) );
+  }
+
+  getExperimentBeschrijving(){
+    if( this.experiment.beschrijving == ""){
+      return "Geen beschrijving beschikbaar"
+    }else{
+      return this.experiment.beschrijving
+    }
   }
 
   formatDate(date) {

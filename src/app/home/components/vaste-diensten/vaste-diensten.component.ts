@@ -45,11 +45,12 @@ export class VasteDienstenComponent implements OnInit {
 
   }
 
-  onSearch(searchvalue: string) {
+  onSearchDienst(searchvalue: string) {
     this.filterName = "";
-    this.experimentService.searchBy(searchvalue).subscribe(
+    this.experimentService.searchByDienst(searchvalue).subscribe(
       res => {
         this.experimentList = res;
+        console.log(res);
       });
   }
 

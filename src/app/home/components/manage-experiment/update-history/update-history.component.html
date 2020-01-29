@@ -13,7 +13,7 @@
     <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" >
       <label>Laat een bericht achter:</label>
       <textarea formControlName="message" id="message" required maxlength="400"></textarea>
-      <button type="submit" class="form-button" [disabled]="!messageForm.valid">Plaats</button>
+      <button type="submit" class="form-button" mat-flat-button [disabled]="!messageForm.valid">Plaats</button>
     </form>
   </div>
 </div>
