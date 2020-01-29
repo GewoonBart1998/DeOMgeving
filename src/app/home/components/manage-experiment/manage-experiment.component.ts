@@ -15,6 +15,7 @@ import {ConfirmActionComponent} from '../../../shared/components/confirm-action.
 import {MatDialog} from '@angular/material/dialog';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ExperimentStatsService} from '../../service/experimentStats.service';
+import {UploadedFile} from '../../../shared/services/UploadedFile';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -317,6 +318,7 @@ export class ManageExperimentComponent implements OnInit {
 
   handleFileInput($event: any) {
     const files = $event.target.files;
+    this.uploadedFile = new UploadedFile();
     this.uploadedFile.fileName = '...';
     this.bijlage = files.item(0);
     this.snackbar.showMessage("Bijlage geupload. Sla de wijzigingen op om de bijlage toe te voegen.", 4000);

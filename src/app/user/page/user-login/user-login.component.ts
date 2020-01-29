@@ -21,6 +21,12 @@ export class UserLoginComponent {
   constructor(public userService: UserService, private router: Router, private snackbar: SnackbarService) {
   }
 
+  ngOnInit() {
+    if(this.userService.isUserLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   onLogin() {
 
     if(!this.isFormValid()){
