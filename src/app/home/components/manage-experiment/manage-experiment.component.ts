@@ -92,6 +92,7 @@ export class ManageExperimentComponent implements OnInit {
     }
   }
 
+  //TODO: clean up this method in the future. I am making this the day before launch so....
   private fillLeaders() {
     this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
         for (const leader of users) {
@@ -100,6 +101,12 @@ export class ManageExperimentComponent implements OnInit {
       },
       error => {
         this.snackbar.showMessage('Kon experiment leiders niet inladen');
+      });
+
+    this.userService.getUsersByRole('ADMIN').subscribe(users => {
+        for (const leader of users) {
+          this.leaders.push(leader.name);
+        }
       });
   }
 
@@ -123,7 +130,8 @@ export class ManageExperimentComponent implements OnInit {
 
   generatePdf() {
     const self = this;
-    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails,
+    var attachmentName = (this.uploadedFile) ? this.uploadedFile.fileName : null;
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails, attachmentName,
       function(data) {
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         var pdf = pdfMake.createPdf(data);
