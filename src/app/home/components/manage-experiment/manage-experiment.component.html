@@ -8,7 +8,7 @@
 
     <button *ngIf="existingExperiment && isEditingExperiment" (click)="pushEditButton()"
             class="form-button push-edit-experiment" mat-flat-button
-            color="primary" autofocus>Wijzigingen doorvoeren
+            color="primary" autofocus>Wijzigingen opslaan
     </button>
 
     <button *ngIf="!existingExperiment" (click)="submitForm()" class="form-button add-experiment" type="submit"
@@ -74,6 +74,12 @@
       </mat-form-field>
       <br>
 
+      <mat-form-field class="large-input">
+        <mat-label>Beschrijving</mat-label>
+        <textarea class="large-input" matInput required = true formControlName="beschrijving"></textarea>
+        <mat-error>error</mat-error>
+      </mat-form-field>
+
         <mat-form-field>
           <mat-label>Status kleur</mat-label>
           <mat-error>error</mat-error>
@@ -85,11 +91,7 @@
           </mat-select>
         </mat-form-field>
 
-      <mat-form-field class="large-input">
-        <mat-label>Beschrijving</mat-label>
-        <textarea class="large-input" matInput required = true formControlName="beschrijving"></textarea>
-        <mat-error>error</mat-error>
-      </mat-form-field>
+
       </div>
     <hr>
     <br>
@@ -165,6 +167,11 @@
         </mat-select>
       </mat-form-field>
       <br>
+
+        <button *ngIf="!existingExperiment" (click)="submitForm()" class="form-button add-experiment" type="submit"
+                mat-flat-button
+                [disabled]="!isFormValid()"color="primary" autofocus>Experiment toevoegen
+        </button>
 
     </div>
   </form>

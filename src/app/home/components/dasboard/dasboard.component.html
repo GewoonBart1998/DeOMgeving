@@ -1,12 +1,12 @@
 <div class="ribbon">
   <a class="logo" href="/home"><img src="/assets/img/OMgeving_logo.png" alt="Omgeving logo"></a>
 
-  <input #search_value type="text" name="search" placeholder="search" [(ngModel)]="filterName">
-  <button (click)="onSearch(search_value.value)" class="search-button">Zoek</button>
+  <input #search_value type="text" name="search" placeholder="Zoeken" [(ngModel)]="filterName">
+  <button (click)="onSearch(search_value.value)" class="search-button" mat-flat-button>Zoek</button>
   <br>
 
   <select (change)="changePhase($event)">
-    <option value="none" selected>None</option>
+    <option value="none" selected>Niet gefilterd</option>
     <p>Fase:</p>
     <option value="filter/fase/Lab in">Lab in</option>
     <option value="filter/fase/Lab uit">Lab uit</option>

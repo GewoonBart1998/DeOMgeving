@@ -58,7 +58,8 @@
 }
 
 .author {
-  margin: 20px 15px 0 0;
+  margin: 40px 15px 0 0;
+  float: bottom;
 }
 
 .hidden {
@@ -77,3 +78,4 @@
   top: 5px;
   right: 5px;
 }
+
