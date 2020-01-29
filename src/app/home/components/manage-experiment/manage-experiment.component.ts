@@ -319,6 +319,7 @@ export class ManageExperimentComponent implements OnInit {
     const files = $event.target.files;
     this.uploadedFile.fileName = '...';
     this.bijlage = files.item(0);
+    this.snackbar.showMessage("Bijlage geupload. Sla de wijzigingen op om de bijlage toe te voegen.", 4000);
   }
 
   private updateExperimentModifications() {
