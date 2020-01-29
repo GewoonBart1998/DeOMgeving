@@ -130,7 +130,8 @@ export class ManageExperimentComponent implements OnInit {
 
   generatePdf() {
     const self = this;
-    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails,
+    var attachmentName = (this.uploadedFile) ? this.uploadedFile.fileName : null;
+    const documentDefinition = this.pdfService.getDocumentDefinition(this.experiment, this.experimentDetails, attachmentName,
       function(data) {
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         var pdf = pdfMake.createPdf(data);

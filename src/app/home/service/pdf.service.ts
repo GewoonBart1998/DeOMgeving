@@ -41,7 +41,7 @@ export class PdfService {
       });
   }
 
-    getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, doneFunc){
+    getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, attachment: string, doneFunc){
       this.getTestlabLogo(function(image) {
         doneFunc(
           {
@@ -98,6 +98,16 @@ export class PdfService {
                 text: experiment.color,
                 style: 'text'
               },
+              {
+                text: 'Bijlage:',
+                style: 'koptext'
+
+              },
+              {
+                text: (attachment && attachment.trim) ? attachment : '-',
+                style: 'text'
+              },
+
               {
                 text: 'Experiment details',
                 style: 'header'
