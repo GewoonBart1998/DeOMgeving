@@ -8,4 +8,3 @@ export class Experiment {
   experiment_leider_secundair: string;
   beschrijving: string;
 }
-

@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {UserService} from '../../shared/user.service';
 import {SnackbarService} from '../../../shared/services/snackbar.service';
 
+declare var particlesJS: any;
+
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
@@ -24,6 +26,10 @@ export class UserRegisterComponent implements OnInit {
   ngOnInit() {
     this.hidePassword();
     this.buildForm();
+
+    particlesJS.load('particles-js', 'assets/particles/particlesjs-config.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
   }
 
   hidePassword() {
@@ -85,6 +91,4 @@ export class UserRegisterComponent implements OnInit {
   isPasswordHidden() {
     return this.passwordHidden;
   }
-
-
 }

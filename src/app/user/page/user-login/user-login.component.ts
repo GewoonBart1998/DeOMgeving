@@ -1,15 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../shared/user.service';
 import {SnackbarService} from '../../../shared/services/snackbar.service';
+
+declare var particlesJS: any;
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
-export class UserLoginComponent {
+export class UserLoginComponent implements OnInit{
+
   hidePassword = true;
   hide = true;
 
@@ -18,7 +21,13 @@ export class UserLoginComponent {
     email: new FormControl('', [Validators.email])
   }, [Validators.required, Validators.maxLength(255)]);
 
-  constructor(public userService: UserService, private router: Router, private snackbar: SnackbarService) {
+  constructor(public userService: UserService, private router: Router, private snackbar: SnackbarService
+) {
+  }
+  ngOnInit() {
+    particlesJS.load('particles-js', 'assets/particles/particlesjs-config.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
   }
 
   onLogin() {
