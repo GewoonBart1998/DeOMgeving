@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   private user: User;
-  private userrole = false;
+  private userrole;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -34,6 +34,6 @@ export class HomeComponent implements OnInit {
   }
 
   usercheck() {
-    this.userrole = this.user.role.toString() === 'ADMIN';
+    this.userrole = this.user.role.toString();
   }
 }

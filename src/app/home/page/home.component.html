@@ -14,9 +14,9 @@
           <img src="assets/img/icons/Experiment_view.png" alt="experiments">Experiment view</a>
         <a routerLink='/home/dienst' routerLinkActive='selected'>
           <img src="/assets/img/icons/Vaste_diensten.png" alt="dienst">Vaste diensten</a>
-        <a routerLink='/home/experiment' routerLinkActive='selected'  [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink='/home/experiment' routerLinkActive='selected'  *ngIf="userrole === 'ADMIN' || userrole === 'MEDEWERKER'" [routerLinkActiveOptions]="{ exact: true } ">
           <img src="assets/img/icons/Add_experiment.png" alt="add">Add experiment</a>
-        <a routerLink='/home/user' routerLinkActive='selected' *ngIf="userrole" >
+        <a routerLink='/home/user' routerLinkActive='selected' *ngIf="userrole === 'ADMIN'" >
           <img src="assets/img/icons/User_management.png" alt="users">User management</a>
         <a routerLink='/home/export' routerLinkActive='selected'>
           <img src="assets/img/icons/Export_experiment.png" alt="export">Overzicht exporteren</a>
