@@ -43,7 +43,6 @@ export class PdfService {
 
     getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, doneFunc){
       this.getTestlabLogo(function(image) {
-        console.log(image);
         doneFunc(
           {
             content: [

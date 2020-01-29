@@ -92,6 +92,7 @@ export class ManageExperimentComponent implements OnInit {
     }
   }
 
+  //TODO: clean up this method in the future. I am making this the day before launch so....
   private fillLeaders() {
     this.userService.getUsersByRole('MEDEWERKER').subscribe(users => {
         for (const leader of users) {
@@ -100,6 +101,12 @@ export class ManageExperimentComponent implements OnInit {
       },
       error => {
         this.snackbar.showMessage('Kon experiment leiders niet inladen');
+      });
+
+    this.userService.getUsersByRole('ADMIN').subscribe(users => {
+        for (const leader of users) {
+          this.leaders.push(leader.name);
+        }
       });
   }
 
