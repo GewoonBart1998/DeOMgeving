@@ -90,7 +90,7 @@ export class UserService {
     return JSON.parse(jsonPayload);
   }
 
-  private storeJwt(res: any) {
+  storeJwt(res: any) {
     const jwtToken = res.jwtToken;
     localStorage.setItem('jwtToken', jwtToken);
   }
