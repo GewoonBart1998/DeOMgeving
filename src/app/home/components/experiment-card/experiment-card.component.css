@@ -58,7 +58,7 @@
 }
 
 .author {
-  margin: 40px 15px 0 0;
+  margin: 20px 15px 0 0;
   float: bottom;
 }
 
@@ -78,4 +78,10 @@
   top: 5px;
   right: 5px;
 }
+
+.beschrijving{
+  max-height: 50px;
+  min-height: 50px;
+}
+
 
