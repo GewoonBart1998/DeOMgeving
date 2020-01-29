@@ -33,7 +33,7 @@ export class ManageExperimentComponent implements OnInit {
 
   existingExperiment = false;
   isEditingExperiment = true;
-  private experimentId;
+  experimentId;
 
   uploadedFile = null;
   isUploading: boolean = false;

@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./vaste-diensten.component.css']
 })
 export class VasteDienstenComponent implements OnInit {
-  private experimentList: Array<Experiment>;
+  experimentList: Array<Experiment>;
   filterName: String;
 
 
