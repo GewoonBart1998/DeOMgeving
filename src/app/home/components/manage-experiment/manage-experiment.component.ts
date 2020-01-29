@@ -197,7 +197,6 @@ export class ManageExperimentComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(isConfirmed => {
-      console.log(isConfirmed);
       if (isConfirmed) {
         this.updateExperimentModifications();
       }
@@ -211,7 +210,6 @@ export class ManageExperimentComponent implements OnInit {
       var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
         self.isUploading = false;
-        console.log((self.uploadedFile === null && self.existingExperiment) || self.isUploading);
         self.getUploadedAttachment();
 
       });
@@ -284,7 +282,6 @@ export class ManageExperimentComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(isConfirmed => {
-      console.log(isConfirmed);
       if (isConfirmed) {
         this.deleteExperiment();
       }
@@ -334,13 +331,11 @@ export class ManageExperimentComponent implements OnInit {
 
   private updateExperiment() {
     this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
-      console.log(response);
     });
   }
 
   private updateExperimentDetails() {
     this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
-      console.log(response);
     });
   }
 

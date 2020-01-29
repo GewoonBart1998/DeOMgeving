@@ -50,7 +50,6 @@ export class VasteDienstenComponent implements OnInit {
     this.experimentService.searchByDienst(searchvalue).subscribe(
       res => {
         this.experimentList = res;
-        console.log(res);
       });
   }
 
