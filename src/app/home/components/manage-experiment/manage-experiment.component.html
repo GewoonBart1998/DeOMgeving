@@ -16,10 +16,10 @@
             [disabled]="!isFormValid()"color="primary" autofocus>Experiment toevoegen
     </button>
 
+
     <button *ngIf="existingExperiment" (click)="generatePdf()" class="form-button export-experiment" mat-flat-button
             color="primary" autofocus>Exporteer naar PDF
     </button>
-
     <button *ngIf="existingExperiment" (click)="onDeleteExperimentButtonClick()" class="form-button add-experiment bg-danger"
             type="submit" mat-flat-button
             color="primary" autofocus>Experiment verwijderen
