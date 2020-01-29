@@ -43,20 +43,21 @@ export class PdfService {
       });
   }
 
-  getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, doneFunc) {
-    this.getTestlabLogo(function(image) {
-      doneFunc({
-          content: [
-            [
-              image
-            ],
-            {
-              text: 'Experiment',
-              style: 'header'
-            },
-            {
-              text: 'Experiment naam:',
-              style: 'koptext'
+  getDocumentDefinition(experiment: Experiment, experimentDetails: ExperimentDetails, attachment: string, doneFunc){
+      this.getTestlabLogo(function(image) {
+        doneFunc(
+          {
+            content: [
+              [
+                image
+              ],
+              {
+                text: 'Experiment',
+                style: 'header'
+              },
+              {
+                text: 'Experiment naam:',
+                style: 'koptext'
 
             },
             {
@@ -100,7 +101,17 @@ export class PdfService {
               style: 'text'
             },
             {
-              text: 'Experiment details',
+              text: 'Bijlage:',
+                style: 'koptext'
+
+              },
+              {
+                text: (attachment && attachment.trim) ? attachment : '-',
+                style: 'text'
+              },
+
+              {
+                text: 'Experiment details',
               style: 'header'
             },
             {
