@@ -37,7 +37,6 @@ export class ApiService {
 
   get<T>(path: string, queryParameters?: object) {
     const url = this.createURL(path, queryParameters);
-    console.log(url);
     return this.httpClient.get<T>(url);
   }
 

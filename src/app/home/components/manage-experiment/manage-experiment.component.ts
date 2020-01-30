@@ -15,6 +15,7 @@ import {ConfirmActionComponent} from '../../../shared/components/confirm-action.
 import {MatDialog} from '@angular/material/dialog';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ExperimentStatsService} from '../../service/experimentStats.service';
+import {UploadedFile} from '../../../shared/services/UploadedFile';
 
 @Component({
   selector: 'app-manage-experiment',
@@ -33,7 +34,7 @@ export class ManageExperimentComponent implements OnInit {
 
   existingExperiment = false;
   isEditingExperiment = true;
-  private experimentId;
+  experimentId;
 
   uploadedFile = null;
   isUploading: boolean = false;
@@ -197,7 +198,6 @@ export class ManageExperimentComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(isConfirmed => {
-      console.log(isConfirmed);
       if (isConfirmed) {
         this.updateExperimentModifications();
       }
@@ -211,7 +211,6 @@ export class ManageExperimentComponent implements OnInit {
       var self = this;
       this.uploader.handleFileUpload(experimentId, this.bijlage, function(data) {
         self.isUploading = false;
-        console.log((self.uploadedFile === null && self.existingExperiment) || self.isUploading);
         self.getUploadedAttachment();
 
       });
@@ -284,7 +283,6 @@ export class ManageExperimentComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(isConfirmed => {
-      console.log(isConfirmed);
       if (isConfirmed) {
         this.deleteExperiment();
       }
@@ -320,8 +318,10 @@ export class ManageExperimentComponent implements OnInit {
 
   handleFileInput($event: any) {
     const files = $event.target.files;
+    this.uploadedFile = new UploadedFile();
     this.uploadedFile.fileName = '...';
     this.bijlage = files.item(0);
+    this.snackbar.showMessage("Bijlage geupload. Sla de wijzigingen op om de bijlage toe te voegen.", 4000);
   }
 
   private updateExperimentModifications() {
@@ -334,13 +334,11 @@ export class ManageExperimentComponent implements OnInit {
 
   private updateExperiment() {
     this.experimentService.update(this.experiment.experimentId, this.experimentForm.value).subscribe(response => {
-      console.log(response);
     });
   }
 
   private updateExperimentDetails() {
     this.experimentDetailsService.update(this.experiment.experimentId, this.experimentDetailsForm.value).subscribe(response => {
-      console.log(response);
     });
   }
 

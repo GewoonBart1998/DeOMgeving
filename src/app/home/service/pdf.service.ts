@@ -28,13 +28,10 @@ export class PdfService {
 
 
   getBlob(url, doneFunc) {
-    console.log('REQUEST ' + url);
     this.http.get(url, {responseType: 'blob'})
       .subscribe(res => {
-        console.log('resp1 ' + url);
         const reader = new FileReader();
         reader.onloadend = () => {
-          console.log('resp2 ' + url);
           var base64data = reader.result;
           doneFunc(base64data);
         };
@@ -267,8 +264,6 @@ export class PdfService {
       content.push(self.getExperimentPhaseStats(experimentStats));
       content.push(self.getTitle('\n Dit zijn alle vastendiensten'));
       content.push(self.getVastedienstenAantal(experimentStats));
-      console.log(experimentStats);
-      console.log(experimentStats.aantalVasteDienst);
       content.push(self.getTitle('\n Dit zijn alle gewijzigde experimenten'));
 
       experimentStats.gewijzigdeExperimenten.forEach(experiment => {

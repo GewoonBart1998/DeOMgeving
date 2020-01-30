@@ -74,7 +74,6 @@ export class UpdateHistoryComponent implements OnInit {
     setTimeout( () => {
       var element: HTMLElement = document.getElementById("message-list");
       element.scrollTop = element.scrollHeight;
-      console.log("probeer omlaag te scrollen");
     }, 100)
 
   }
