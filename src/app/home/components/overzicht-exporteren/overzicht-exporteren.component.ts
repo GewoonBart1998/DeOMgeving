@@ -46,7 +46,7 @@ export class OverzichtExporterenComponent implements OnInit {
         function(data) {
           pdfMake.vfs = pdfFonts.pdfMake.vfs;
           var pdf = pdfMake.createPdf(data);
-          pdf.download("Experiment Overzicht");
+          pdf.download("Experimenten Overzicht");
         });
     });
   }
