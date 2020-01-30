@@ -25,15 +25,12 @@ export class UserLoginComponent implements OnInit{
 ) {
   }
   ngOnInit() {
-    particlesJS.load('particles-js', 'assets/particles/particlesjs-config.json', function() {
-      console.log('callback - particles.js config loaded');
-    });
-  }
-
-  ngOnInit() {
     if(this.userService.isUserLoggedIn()) {
       this.router.navigate(['/home']);
     }
+    particlesJS.load('particles-js', 'assets/particles/particlesjs-config.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
   }
 
   onLogin() {
@@ -58,7 +55,7 @@ export class UserLoginComponent implements OnInit{
   }
 
   private handleLoginResponse(response) {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home/dashboard']);
   }
 
   isFormValid() {
