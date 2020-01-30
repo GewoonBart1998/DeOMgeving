@@ -48,6 +48,7 @@ export class ExperimentCardComponent implements OnInit {
 
   getExperimentLocalDate() {
     const createDate = new Date(this.experiment.wijziging_datum);
+    createDate.setTime(createDate.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
     return this.formatDate( new Date(createDate.toUTCString()) );
   }
 

@@ -19,6 +19,7 @@ export class UpdateMessageComponent implements OnInit {
 
   convertUTCToLocal(postDate) {
     const createDate = new Date(postDate);
+    createDate.setTime(createDate.getTime() - new Date().getTimezoneOffset() * 60 * 1000);
     return this.formatDate( new Date(createDate.toUTCString()) );
   }
 
