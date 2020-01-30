@@ -27,10 +27,8 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
           return this.refreshToken(req, next);
-
         }
 
-        this.router.navigate(['/login']);
         return throwError(err);
       }));
 
@@ -56,7 +54,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
       }
     ), catchError(err => {
-      console.log('failed to refresh');
+      this.userService.logout();
+      this.router.navigate(['/login']);
       return throwError(err);
 
     }));

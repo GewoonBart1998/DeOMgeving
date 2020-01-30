@@ -10,12 +10,17 @@
   width: 200px;
 }
 
+mat-accordion {
+  overflow-x: hidden;
+}
+
 .experiment-info {
   padding-left: 50px;
   padding-top: 50px;
   padding-bottom: 100px;
   background-color: #F7F5F5;
   height: 85vh;
+  overflow: auto;
 }
 
 .textfields {

@@ -39,11 +39,9 @@ export class OverzichtExporterenComponent implements OnInit {
     const locale = 'en-EU';
     const formattedDate = formatDate(this.date.value, format, locale);
 
-    console.log(formattedDate);
 
     this.api.get<ExperimentStats>('/experimentenStats/' + formattedDate).subscribe( res => {
       this.experimentStats = res;
-      console.log("test");
       const documentDefinition = this.pdfService.getExperimentOverzicht(formattedDate, this.currentDate, this.experimentStats,
         function(data) {
           pdfMake.vfs = pdfFonts.pdfMake.vfs;
