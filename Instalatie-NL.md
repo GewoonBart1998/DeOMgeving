@@ -48,7 +48,9 @@ Deze stap is er voor als het project gebouwd moet worden vanaf de source. De vol
 
 ## Frondend
 
-Er zijn verschillende soorten software nodig om dit te doen. Voor de eerste is `node` nodig. Als `node` geinstalleerd wordt, wordt `npm` ook geinstallerd, dit is nodig om de frontend te compileren. Daarnaast is `angular` nodig. Dit kan geinstallerd worden door dit uit te voeren `npm i angular` in een commandprompt. Nu alles geinstallerd is moet deze github gecloned worden. Vervolgend moeten de volgende commando's uitgevoerd worden:`npm install`, `ng build --prod`. De html, js en css bestanden worden vervolgens gemaakt in de folder /dist/DeOMgeving. Dit moet ten slotte nog in een webserver gekopieërd worden met het `.htaccess` die in de root staat.
+Voordat er gebouwd wordt, moet de backend ip en port eerst ingevult worden. Dit wordt gedaan in `DeOMgeving\src\environments\environment.prod.ts`.
+
+Er zijn verschillende soorten software nodig om te bouwen. Voor de eerste is `node` nodig. Als `node` geinstalleerd wordt, wordt `npm` ook geinstallerd, dit is nodig om de frontend te compileren. Daarnaast is `angular` nodig. Dit kan geinstallerd worden door dit uit te voeren `npm i angular` in een commandprompt. Nu alles geinstallerd is moet deze github gecloned worden. Vervolgend moeten de volgende commando's uitgevoerd worden:`npm install`, `ng build --prod`. De html, js en css bestanden worden vervolgens gemaakt in de folder /dist/DeOMgeving. Dit moet ten slotte nog in een webserver gekopieërd worden met het `.htaccess` die in de root staat.
 
 ## Backend
 
