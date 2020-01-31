@@ -16,7 +16,7 @@ Java 8 is nodig om de backend uit te voeren. Daarnaast moet de port 8080 open wo
 De backend gebruikt deze database. De standaard port waarop de backend verbind is 3306.
 
 #### Node & angular
-Om de frondend te bouwen is node en angular nodig. Meer informatie hierover wordt later verteld.
+Om de frontend te bouwen is node en angular nodig. Meer informatie hierover wordt later verteld.
 
 ## Bestanden
 Er worden 3 mappen geleverd. `DeOMgeving`, `DeOMgeving_backend` en `database`. 
@@ -44,9 +44,9 @@ Hierin staat een standaard gebruiker met de email `verwijder@dit` en wachtwoord 
 
 # Bouwen
 
-Deze stap is er voor als het project gebouwd moet worden vanaf de source. De volgende instructies zijn er om zelf installatie bestanden te maken van de frondend en optioneel van de backend.
+Deze stap is er voor als het project gebouwd moet worden vanaf de source. De volgende instructies zijn er om zelf installatie bestanden te maken van de frontend en optioneel van de backend.
 
-## Frondend
+## Frontend
 
 Voordat er gebouwd wordt, moet de backend ip en port eerst ingevult worden. Dit wordt gedaan in `DeOMgeving\src\environments\environment.prod.ts`.
 
