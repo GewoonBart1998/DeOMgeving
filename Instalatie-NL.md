@@ -31,6 +31,7 @@ Onder de kop Bouwen bevind zich de instructies om van source te bouwen.
 Hierin staat het jar bestand dat de backend opstart. Daarnaast bevind zich de `config.yml`.
 Hier in staat de standaard configuratie voor de backend, zoals de database gegevens, de port en de JWT beveiligings configuratie.
 Wij raden aan om de `secret` hierin aan te passen naar een nieuwe waarde met een lengte van 60 karakters.
+Daarnaast moeten de database gegevens aangepast worden.
 Met de volgende commando wordt de de backend gestart
 
 `java -jar DeOMgeving_backend.jar server config.yml`
