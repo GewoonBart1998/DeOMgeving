@@ -20,7 +20,8 @@ Er worden 3 mappen geleverd. `DeOMgeving`, `DeOMgeving_backend` en `database`.
 
 #### Map `DeOMgeving`
 
-Deze map bevat de html en javascript bestanden. Deze moeten gehost worden op de webserver.
+Deze map bevat de source om de html, js en css bestanden te bouwen.
+Onder de kop Bouwen bevind zich de instructies om de source te bouwen.
 
 #### Map `DeOMgeving_backend`
 
@@ -42,3 +43,20 @@ Hierin staat een standaard gebruiker met de email `verwijder@dit` en wachtwoord 
 Als het alles is uitgevoerd kan er worden ingelogd met de gebruiker hierboven aangegeven.
 Wij raden aan om een nieuwe gebruiker te maken, deze admin rechten te geven en de `verwijder@dit` te verwijderen.
 Daarna kan de admin voortaan inloggen met de nieuwe gemaakte gebruiker met een eigen aangegeven wachtwoord. 
+
+# Bouwen
+
+Deze stap is er voor als het project gebouwd moet worden vanaf de source. De volgende instructies zijn er om zelf installatie bestanden te maken van de frondend en optioneel van de backend.
+
+#### Frondend
+
+Er zijn verschillende soorten software nodig om dit te doen. Voor de eerste is `node` nodig. Als `node` geinstalleerd wordt, wordt `npm` ook geinstallerd, dit is nodig om de frontend te compileren. Daarnaast is `angular` nodig. Dit kan geinstallerd worden door dit uit te voeren `npm i angular` in een commandprompt. Nu alles geinstallerd is moet deze github gecloned worden. Vervolgend moeten de volgende commando's uitgevoerd worden:`npm install`, `ng build --base-href '/' --prod`. De html, js en css bestanden worden vervolgens gemaakt in de folder /dist/DeOMgeving. Dit moet ten slotte nog in een webserver gekopieërd worden.
+
+#### Backend
+
+De backend hoeft niet gebouwd te worden omdat deze al gebouwd geleverd is, maar deze optie is er wel.
+Maven (`mvn`) nodig om het te bouwen. Wanneer dit geinstalleerd is moeten alleen nog de volgende commando's uitgevoerd worden.
+`mvn clean`
+`mvn install`
+`mvn package`
+Nu is het bestand `target/DeOMgeving_backend-1.0-SNAPSHOT.jar` gemaakt. Dit is de uitvoerbare server.
