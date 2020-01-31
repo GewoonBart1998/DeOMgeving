@@ -5,7 +5,8 @@ De volgende software werdt gebruikt tijdens de bouw en productie van de applicat
 Daarom wordt het aangeraden om dit ook te gebruiken. 
 
 #### apache2 webserver
-De `mod_rewrite` module moet aan staan.
+In principe kan elke webserver gebruikt worden, maar deze instructies zijn geschreven voor apache2.
+Na de installatie moet de `mod_rewrite` module nog aan staan.
 Dit is omdat er een `.htaccess` bestand meegeleverd wordt dat elke verzoek omleid naar de `index.html`.
 
 #### java 8
@@ -14,8 +15,10 @@ Java 8 is nodig om de backend uit te voeren. Daarnaast moet de port 8080 open wo
 #### MySQL database
 De backend gebruikt deze database. De standaard port waarop de backen verbind is 3306.
 
-## Bestanden
+#### Node & angular
+Om de frondend te bouwen is node en angular nodig. Meer informatie hierover wordt later verteld.
 
+## Bestanden
 Er worden 3 mappen geleverd. `DeOMgeving`, `DeOMgeving_backend` en `database`. 
 
 #### Map `DeOMgeving`
@@ -50,7 +53,7 @@ Deze stap is er voor als het project gebouwd moet worden vanaf de source. De vol
 
 #### Frondend
 
-Er zijn verschillende soorten software nodig om dit te doen. Voor de eerste is `node` nodig. Als `node` geinstalleerd wordt, wordt `npm` ook geinstallerd, dit is nodig om de frontend te compileren. Daarnaast is `angular` nodig. Dit kan geinstallerd worden door dit uit te voeren `npm i angular` in een commandprompt. Nu alles geinstallerd is moet deze github gecloned worden. Vervolgend moeten de volgende commando's uitgevoerd worden:`npm install`, `ng build --base-href '/' --prod`. De html, js en css bestanden worden vervolgens gemaakt in de folder /dist/DeOMgeving. Dit moet ten slotte nog in een webserver gekopieërd worden.
+Er zijn verschillende soorten software nodig om dit te doen. Voor de eerste is `node` nodig. Als `node` geinstalleerd wordt, wordt `npm` ook geinstallerd, dit is nodig om de frontend te compileren. Daarnaast is `angular` nodig. Dit kan geinstallerd worden door dit uit te voeren `npm i angular` in een commandprompt. Nu alles geinstallerd is moet deze github gecloned worden. Vervolgend moeten de volgende commando's uitgevoerd worden:`npm install`, `ng build --base-href '/' --prod`. De html, js en css bestanden worden vervolgens gemaakt in de folder /dist/DeOMgeving. Dit moet ten slotte nog in een webserver gekopieërd worden met het `.htaccess` in de root.
 
 #### Backend
 
