@@ -53,9 +53,13 @@ Er zijn verschillende soorten software nodig om dit te doen. Voor de eerste is `
 
 De backend hoeft niet gebouwd te worden omdat deze al gebouwd geleverd is, maar deze optie is er wel.
 Maven (`mvn`) nodig om het te bouwen. Wanneer dit geinstalleerd is moeten alleen nog de volgende commando's uitgevoerd worden.
+
 `mvn clean`
+
 `mvn install`
+
 `mvn package`
+
 Nu is het bestand `target/DeOMgeving_backend-1.0-SNAPSHOT.jar` gemaakt. Dit is de uitvoerbare server.
 
 # First boot
